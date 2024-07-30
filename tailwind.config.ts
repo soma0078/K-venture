@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import plugin from 'tailwindcss/plugin'
+import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   content: [
@@ -42,7 +42,7 @@ const config: Config = {
         },
         'kv-primary-blue': {
           DEFAULT: '#3C54D0',
-          light: '#F1EFFD'
+          light: '#E0E5FF',
         },
         'kv-blue': {
           DEFAULT: '#0085ff',
@@ -140,7 +140,7 @@ const config: Config = {
         },
       } as Record<string, { fontSize: string; lineHeight: string }>;
       addUtilities(newUtilities);
-    })
+    }),
   ],
 };
 export default config;
