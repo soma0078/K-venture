@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface HeaderUserProfileProps {
-  profileImageUrl: string;
+  profileImageUrl: string | null;
   nickname: string;
 }
 
@@ -9,7 +9,7 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({
   profileImageUrl,
   nickname,
 }) => {
-  const DEFAULT_IMAGE = '/assets/icons/icon-profile.svg';
+  const DEFAULT_IMAGE = '/assets/icons/icon_profile.svg';
   const [imgSrc, setImgSrc] = useState(profileImageUrl || DEFAULT_IMAGE);
 
   const handleImgError = () => {
