@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import UserProfile from '@/components/userProfile/UploadProfile';
 import { MENU_ITEMS } from '@/constants/lnbMenuItems';
 
 export default function LeftNaviBar() {
@@ -8,7 +9,8 @@ export default function LeftNaviBar() {
 
   return (
     <div className={LNB_STYLES.wrapper}>
-      {/* TODO 프로필 이미지 편집 컴포넌트 */}
+      {/* TODO 프로필 이미지 불러오기 */}
+      <UserProfile initialProfile="" />
       <div className="flex flex-col gap-2">
         {MENU_ITEMS.map((item) => {
           const isActive = router.pathname === item.href;
