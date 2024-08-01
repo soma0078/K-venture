@@ -7,7 +7,7 @@
     font-family: theme('fontFamily.pretendard');
   }
   body {
-    @apply text-kv-black;
+    @apply text-kv-md font-kv-regular text-kv-black;
   }
 }
 
@@ -26,3 +26,41 @@
     @apply flex items-center justify-center;
   }
 }
+
+/* date picker custom styles */
+.react-datepicker__header {
+  @apply !border-b-0 !bg-white !pb-0;
+}
+
+.react-datepicker {
+  @apply !border-kv-gray-600;
+}
+
+.react-datepicker__day--selected {
+  @apply !bg-transparent !text-inherit;
+}
+
+.react-datepicker__day:hover {
+  @apply !bg-inherit text-kv-red;
+}
+
+.react-datepicker__day--keyboard-selected {
+  @apply !animate-fadeIn !bg-inherit;
+}
+
+.react-datepicker__month {
+  @apply !pr-[10px];
+}
+/* date picker styles */
+
+/* DayMarker styles */
+@layer components {
+  .day-marker-today {
+    @apply bg-[#E0E5FF] text-kv-primary-blue;
+  }
+
+  .day-marker-selected {
+    @apply bg-kv-primary-blue text-white;
+  }
+}
+/* DayMarker styles */
