@@ -45,6 +45,8 @@ const config: Config = {
         'kv-primary-blue': {
           DEFAULT: '#3C54D0',
           light: '#E0E5FF',
+          hover: '#2f48c4',
+          active: '#152ead',
         },
         'kv-blue': {
           DEFAULT: '#0085ff',

@@ -37,13 +37,16 @@
   "dependencies": {
     "@tanstack/react-query": "^5.51.16",
     "@tanstack/react-query-devtools": "^5.51.16",
+    "axios": "^1.7.3",
+    "cookies-next": "^4.2.1",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.12",
     "jira-prepare-commit-msg": "^1.7.2",
     "next": "14.2.5",
     "react": "^18",
     "react-datepicker": "^7.3.0",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.52.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
