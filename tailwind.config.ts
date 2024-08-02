@@ -142,7 +142,12 @@ const config: Config = {
           fontSize: theme('fontSize.kv-xs[0]'),
           lineHeight: theme('fontSize.kv-xs[1].lineHeight'),
         },
-      } as Record<string, { fontSize: string; lineHeight: string }>;
+        '.align-center': {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+      } as Record<string, { [key: string]: string }>;
       addUtilities(newUtilities);
     }),
   ],

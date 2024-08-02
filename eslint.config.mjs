@@ -57,10 +57,6 @@ export default defineConfig([
           index: true,
           rules: [
             {
-              case: 'camel',
-              target: '**/components/**/*.ts',
-            },
-            {
               case: 'pascal',
               target: '**/components/**',
             },

@@ -17,7 +17,7 @@ export default function Login() {
   };
 
   return (
-    <main className="align-center h-[600px] w-full">
+    <main className="h-[600px] w-full align-center">
       <form
         className="flex max-w-[640px] flex-col gap-[32px]"
         // NOTE: 테스트를 위해 일단 제가 만든 아이디로 넣었습니다.

@@ -17,7 +17,7 @@
   }
 
   .btn-gray {
-    @apply align-center border-kv-gray-4b bg-kv-gray-100 hover:bg-kv-gray-200 active:bg-kv-gray-300 disabled:bg-kv-gray-400;
+    @apply border-kv-gray-4b bg-kv-gray-100 align-center hover:bg-kv-gray-200 active:bg-kv-gray-300 disabled:bg-kv-gray-400;
   }
 
   .btn-blue {
@@ -75,5 +75,24 @@
 @layer utilities {
   .align-center {
     @apply flex items-center justify-center;
+  }
+}
+
+/* 모달 */
+@layer components {
+  .modal-container {
+    @apply pointer-events-auto relative flex flex-col rounded-lg bg-white shadow-lg;
+  }
+
+  .modal-content {
+    @apply flex flex-grow items-center justify-center px-6;
+  }
+
+  .modal-text {
+    @apply mb-[28px] overflow-hidden text-center font-kv-medium;
+  }
+
+  .modal-button-common {
+    @apply absolute bottom-[28px] h-[38px] w-[80px] rounded-[8px] text-kv-md font-kv-medium;
   }
 }

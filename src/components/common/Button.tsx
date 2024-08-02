@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 function Button({
   type,
   children,
@@ -6,13 +8,13 @@ function Button({
   disabled,
   ...rest
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const buttonStyle =
-    'rounded-md bg-kv-gray-600 py-[11px] font-kv-bold text-white kv-text-lg';
+  const baseClass = 'rounded-md py-[11px] font-kv-bold text-kv-lg';
+  const combinedClassName = classNames(baseClass, className);
 
   return (
     <button
       type={type}
-      className={`${buttonStyle} ${className}`}
+      className={combinedClassName}
       onClick={onClick}
       disabled={disabled}
       {...rest}
