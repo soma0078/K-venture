@@ -6,7 +6,7 @@ import HeaderUserProfile from '@/components/common/HeaderUserProfile';
 
 interface HeaderProps {
   isLoggedIn: boolean;
-  user: {
+  user?: {
     nickname: string;
     profileImageUrl: string | null;
   };
@@ -18,8 +18,8 @@ function Header({ isLoggedIn, user }: HeaderProps) {
   };
 
   return (
-    <header className="flex items-center justify-center border-b border-gray-300 p-4">
-      <div className="mx-5 flex h-[30px] w-full justify-between pc:w-[1200px] tablet:mx-6 tablet:w-full">
+    <header className="align-center h-[70px] border-b border-gray-300 bg-white p-4">
+      <div className="layout-content-container h-[30px] justify-between">
         <Link href="/">
           <div className="mr-10 flex cursor-pointer items-center">
             <Image
@@ -41,12 +41,14 @@ function Header({ isLoggedIn, user }: HeaderProps) {
               />
             </button>
             <div className="mx-4 h-4/5 border-[1px] border-l border-kv-gray-300"></div>
-            <Link href="/profile">
-              <HeaderUserProfile
-                nickname={user.nickname}
-                profileImageUrl={user.profileImageUrl}
-              />
-            </Link>
+            {user && (
+              <Link href="/profile">
+                <HeaderUserProfile
+                  nickname={user.nickname}
+                  profileImageUrl={user.profileImageUrl}
+                />
+              </Link>
+            )}
           </div>
         ) : (
           <div className="flex w-[111px] justify-between">

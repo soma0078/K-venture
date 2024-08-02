@@ -6,8 +6,7 @@ import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import { useState } from 'react';
 
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
+import MainLayout from '@/components/layout/MainLayout';
 
 const pretendard = localFont({
   src: '../../public/static/PretendardVariable.woff2',
@@ -35,9 +34,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <main className={`${pretendard.variable} font-pretendard`}>
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
       </main>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
