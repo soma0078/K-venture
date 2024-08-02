@@ -35,6 +35,8 @@
     "gitRoot": ""
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.51.16",
+    "@tanstack/react-query-devtools": "^5.51.16",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.12",
     "jira-prepare-commit-msg": "^1.7.2",
