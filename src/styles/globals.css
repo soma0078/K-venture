@@ -21,35 +21,38 @@
   }
 }
 
-@layer utilities {
-  .align-center {
-    @apply flex items-center justify-center;
+/* css for my-activity */
+@layer components {
+  .size-my-act-img {
+    @apply size-[167px] pc:size-[180px] tablet:size-[206px];
   }
 }
 
 /* date picker custom styles */
-.react-datepicker__header {
-  @apply !border-b-0 !bg-white !pb-0;
-}
+@layer components {
+  .react-datepicker__header {
+    @apply !border-b-0 !bg-white !pb-0;
+  }
 
-.react-datepicker {
-  @apply !border-kv-gray-600;
-}
+  .react-datepicker {
+    @apply !border-kv-gray-600;
+  }
 
-.react-datepicker__day--selected {
-  @apply !bg-transparent !text-inherit;
-}
+  .react-datepicker__day--selected {
+    @apply !bg-transparent !text-inherit;
+  }
 
-.react-datepicker__day:hover {
-  @apply !bg-inherit text-kv-red;
-}
+  .react-datepicker__day:hover {
+    @apply !bg-inherit text-kv-red;
+  }
 
-.react-datepicker__day--keyboard-selected {
-  @apply !animate-fadeIn !bg-inherit;
-}
+  .react-datepicker__day--keyboard-selected {
+    @apply !animate-fadeIn !bg-inherit;
+  }
 
-.react-datepicker__month {
-  @apply !pr-[10px];
+  .react-datepicker__month {
+    @apply !pr-[10px];
+  }
 }
 /* date picker styles */
 
@@ -64,3 +67,9 @@
   }
 }
 /* DayMarker styles */
+
+@layer utilities {
+  .align-center {
+    @apply flex items-center justify-center;
+  }
+}

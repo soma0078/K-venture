@@ -26,7 +26,7 @@ export default function ImageInput({
     <>
       <label
         htmlFor={name}
-        className="btn-gray size-[167px] flex-col gap-[30px] rounded-2xl border-[1.5px] border-dashed pc:size-[180px] tablet:size-[206px]"
+        className="btn-gray size-my-act-img flex-col gap-[30px] rounded-2xl border-[1.5px] border-dashed"
       >
         <div className="relative size-12">
           <Image src="/assets/icons/icon_plus.svg" alt="이미지 추가" fill />
