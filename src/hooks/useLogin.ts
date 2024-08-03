@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { setCookie } from 'cookies-next';
 
 import { postLogin } from '@/lib/apis/postApis';
-import { LogInForm, LogInResponse } from '@/types/post/Login.interface';
+import { LogInForm, LogInResponse } from '@/types/post/loginTypes';
 
 // NOTE: 로그인 성공시 쿠키에 토큰 저장, 실패시 에러 출력하는 훅
 const useLogIn = () => {
