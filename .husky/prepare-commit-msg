@@ -4,21 +4,54 @@ echo "Running prepare-commit-msg script..."
 echo "Commit message file: $1"
 
 if [ ! -f "$1" ]; then
-  echo "Commit message file not found!"
-  exit 1
+    echo "Commit message file not found!"
+    exit 1
 fi
+
+# MERGE_MSG 파일이 존재하는지 확인 (merge 상황)
+if [ -f .git/MERGE_MSG ]; then
+    echo "Merge in progress, skipping ticket ID processing."
+    exit 0
+fi
+
+# COMMIT_EDITMSG 파일의 내용을 확인 (amend 상황)
+if grep -q '^#' "$1"; then
+    echo "Amend or complex commit in progress, skipping ticket ID processing."
+    exit 0
+fi
+
+echo "Contents of commit message file before processing:"
+cat "$1"
 
 jira-prepare-commit-msg "$1"
 
-TICKET_ID=$(grep -oP 'GN-\d+' "$1")
+# TICKET_ID 추출
+TICKET_ID=$(grep -oE 'GN-[0-9]+' "$1")
 
 if [ -n "$TICKET_ID" ]; then
-   	sed -i 's/\[GN-[0-9]*\]//g' "$1"
-		sed -i "s/^\(.*\): \(.*\)$/\1($TICKET_ID): \2/" "$1"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS에서 sed 사용
+        sed -i '' "s/\[GN-[0-9]*\]//g" "$1" || echo "Warning: sed command failed"
+        sed -i '' "s/^\\(.*\\): \\(.*\\)$/\\1($TICKET_ID): \\2/" "$1" || echo "Warning: sed command failed"
+    else
+        # Linux 및 기타 Unix 시스템에서 sed 사용
+        sed -i "s/\[GN-[0-9]*\]//g" "$1" || echo "Warning: sed command failed"
+        sed -i "s/^\\(.*\\): \\(.*\\)$/\\1($TICKET_ID): \\2/" "$1" || echo "Warning: sed command failed"
+    fi
 else
     echo "No ticket ID found."
 fi
 
-sed -i 's/^[ \t]*//;s/[ \t]*$//' "$1"
+# 앞뒤 공백 제거
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' 's/^[[:space:]]*//' "$1" || echo "Warning: sed command failed"
+    sed -i '' 's/[[:space:]]*$//' "$1" || echo "Warning: sed command failed"
+else
+    sed -i 's/^[[:space:]]*//' "$1" || echo "Warning: sed command failed"
+    sed -i 's/[[:space:]]*$//' "$1" || echo "Warning: sed command failed"
+fi
+
+echo "Contents of commit message file after processing:"
+cat "$1"
 
 echo "Script finished."
