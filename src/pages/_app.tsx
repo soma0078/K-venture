@@ -33,11 +33,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <main className={`${pretendard.variable} font-pretendard`}>
+      <div className={`${pretendard.variable} min-w-[375px] font-pretendard`}>
         <MainLayout>
           <Component {...pageProps} />
         </MainLayout>
-      </main>
+      </div>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

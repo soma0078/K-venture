@@ -17,7 +17,7 @@
   }
 
   .btn-gray {
-    @apply border-kv-gray-4b bg-kv-gray-100 align-center hover:bg-kv-gray-200 active:bg-kv-gray-300 disabled:bg-kv-gray-400;
+    @apply border-kv-gray-4b align-center bg-kv-gray-100 hover:bg-kv-gray-200 active:bg-kv-gray-300 disabled:bg-kv-gray-400;
   }
 
   .btn-blue {
@@ -29,6 +29,10 @@
 @layer components {
   .size-my-act-img {
     @apply size-[167px] pc:size-[180px] tablet:size-[206px];
+  }
+
+  .h2-my-act {
+    @apply mb-3 text-kv-xl font-kv-bold tablet:mb-4 tablet:text-kv-2xl;
   }
 }
 
@@ -72,19 +76,18 @@
 }
 /* DayMarker styles */
 
-
 /* Layout styles */
 @layer components {
-  .layout-content-container{
-    @apply mx-5 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
+  .layout-content-container {
+    @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
   }
-  .footer-link-styles{
+  .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
-  .layout-container{
+  .layout-container {
     @apply flex min-h-screen flex-col;
   }
-  .layout-header-wrapper{
+  .layout-header-wrapper {
     @apply fixed left-0 right-0 top-0 z-10;
   }
   .layout-header-spacer {
@@ -123,4 +126,3 @@
     @apply absolute bottom-[28px] h-[38px] w-[80px] rounded-[8px] text-kv-md font-kv-medium;
   }
 }
-
