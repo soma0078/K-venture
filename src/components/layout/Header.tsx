@@ -1,24 +1,39 @@
+import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
+import useFetchData from '@/hooks/useFetchData';
+import { getUserData } from '@/lib/apis/userApis';
+import { User } from '@/types/userTypes';
 
-interface HeaderProps {
-  isLoggedIn: boolean;
-  user?: {
-    nickname: string;
-    profileImageUrl: string | null;
-  };
-}
+function Header() {
+  const accessToken = getCookie('accessToken');
+  const {
+    data: user,
+    isError,
+    error,
+    isLoading,
+    isSuccess,
+  } = useFetchData<User>(['userInfo'], getUserData, {
+    enabled: !!accessToken,
+  });
+  const isLoggedIn = isSuccess;
 
-function Header({ isLoggedIn, user }: HeaderProps) {
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error loading user data: {error.message}</div>;
+  }
+
   const handleNotificationClick = () => {
     //알림 컴포넌트 나오는 로직
   };
 
   return (
-    <header className="align-center h-[70px] border-b border-gray-300 bg-white p-4">
+    <header className="h-[70px] border-b border-gray-300 bg-white p-4 align-center">
       <div className="layout-content-container h-[30px] justify-between">
         <Link href="/">
           <div className="mr-10 flex cursor-pointer items-center">
@@ -53,10 +68,10 @@ function Header({ isLoggedIn, user }: HeaderProps) {
         ) : (
           <div className="flex w-[111px] justify-between">
             <Link href="/login">
-              <span className={`${LINK_STYLES}`}>로그인</span>
+              <span className="header-link-styles">로그인</span>
             </Link>
             <Link href="/signup">
-              <span className={`${LINK_STYLES}`}>회원가입</span>
+              <span className="header-link-styles">회원가입</span>
             </Link>
           </div>
         )}
@@ -66,6 +81,3 @@ function Header({ isLoggedIn, user }: HeaderProps) {
 }
 
 export default Header;
-
-const LINK_STYLES =
-  'cursor-pointer kv-text-md font-kv-medium text-kv-black hover:text-kv-gray-600 active:text-kv-gray-800 cursor:pointer';

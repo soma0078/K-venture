@@ -16,18 +16,6 @@ function MainLayout({ children }: MainLayoutProps) {
   const isMainPage = router.pathname === '/';
   const isActivityPage = /^\/activity\/[^/]+$/.test(router.pathname);
 
-  //로그인 정보, 유저 정보 받아오는 로직 필요
-  const isLoggedIn = true;
-  const currentUser = {
-    id: 1,
-    email: 'user@example.com',
-    nickname: '김체리',
-    profileImageUrl:
-      'https://i.pinimg.com/564x/2e/79/91/2e79919eb6b27e2e994ccbf51cc4bf41.jpg',
-    createdAt: '2023-01-01T00:00:00.000Z',
-    updatedAt: '2023-01-01T00:00:00.000Z',
-  };
-
   if (isAuthPage) {
     return <main className="flex-1">{children}</main>;
   }
@@ -36,7 +24,7 @@ function MainLayout({ children }: MainLayoutProps) {
     return (
       <div className="layout-container">
         <div className="layout-header-wrapper">
-          <Header isLoggedIn={isLoggedIn} user={currentUser} />
+          <Header />
         </div>
         <div className="layout-header-spacer" />
         <main className="flex-1">{children}</main>
@@ -50,7 +38,7 @@ function MainLayout({ children }: MainLayoutProps) {
     return (
       <div className="layout-container">
         <div className="layout-header-wrapper">
-          <Header isLoggedIn={isLoggedIn} user={currentUser} />
+          <Header />
         </div>
         <div className="layout-header-spacer" />
         <div
@@ -75,7 +63,7 @@ function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="layout-container">
       <div className="layout-header-wrapper">
-        <Header isLoggedIn={isLoggedIn} user={currentUser} />
+        <Header />
       </div>
       <div className="layout-header-spacer" />
       <div

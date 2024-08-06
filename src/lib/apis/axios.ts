@@ -28,7 +28,8 @@ instance.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       originalRequest &&
-      !originalRequest.headers._retry
+      !originalRequest.headers._retry && // 한 번 이상 시도 X
+      originalRequest.url !== '/auth/tokens' // 토큰 재발급 요청 재시도 X
     ) {
       // 인증 에러가 발생했을 때, 처음이면 accessToken 만료되었을 경우를 대비해
       // 토큰 재발급 받고 한 번 더 시도한다.

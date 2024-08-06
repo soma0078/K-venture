@@ -84,6 +84,9 @@
   .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
+  .header-link-styles{
+    @apply cursor-pointer kv-text-md font-kv-medium text-kv-black hover:text-kv-gray-600 active:text-kv-gray-800;
+  }
   .layout-container {
     @apply flex min-h-screen flex-col;
   }
