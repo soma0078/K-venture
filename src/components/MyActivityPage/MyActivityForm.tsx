@@ -3,6 +3,7 @@ import useImagesHandler from '@/hooks/useImagesHandler';
 import { IMAGE_TYPES } from '@/types/page/myActivityPageTypes';
 
 import ImageList from './ImageList';
+import Schedule from './Schedule';
 
 export default function MyActivityForm() {
   const banner = useImagesHandler();
@@ -10,6 +11,15 @@ export default function MyActivityForm() {
 
   return (
     <form className="flex flex-col gap-6">
+      <Schedule
+        schedule={{
+          date: '2023-02-25',
+          startTime: '12:00',
+          endTime: '13:00',
+        }}
+        idx={1}
+        onClickDelete={() => {}}
+      />
       <div>
         <h2 className="h2-my-act">배너 이미지</h2>
         <ImageList

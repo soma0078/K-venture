@@ -32,7 +32,11 @@
   }
 
   .h2-my-act {
-    @apply mb-3 text-kv-xl font-kv-bold tablet:mb-4 tablet:text-kv-2xl;
+    @apply mb-3 text-kv-xl font-kv-bold pc:mb-4 pc:text-kv-2xl tablet:mb-4 tablet:text-kv-2xl;
+  }
+
+  .input-my-act {
+    @apply border-kv-gray-79 rounded border bg-white p-2.5 text-kv-md pc:px-4 pc:py-[15px] pc:text-kv-lg tablet:px-4 tablet:py-[15px] tablet:text-kv-lg;
   }
 }
 
