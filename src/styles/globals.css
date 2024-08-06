@@ -78,17 +78,14 @@
 
 /* Layout styles */
 @layer components {
-  .layout-content-container {
-    @apply mx-5 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
-  .layout-content-container {
-    @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
-  }
   .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
-  .layout-container {
   .header-link-styles{
     @apply cursor-pointer kv-text-md font-kv-medium text-kv-black hover:text-kv-gray-600 active:text-kv-gray-800;
+  }
+  .layout-content-container {
+    @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
   }
   .layout-container {
     @apply flex min-h-screen flex-col;

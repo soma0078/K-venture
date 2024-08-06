@@ -1,7 +1,7 @@
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
 import useFetchData from '@/hooks/useFetchData';
@@ -16,10 +16,21 @@ function Header() {
     error,
     isLoading,
     isSuccess,
-  } = useFetchData<User>(['userInfo'], getUserData, {
+  } = useFetchData<User>(['userInfo', accessToken], getUserData, {
     enabled: !!accessToken,
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 30 * 60 * 1000,
   });
   const isLoggedIn = isSuccess;
+
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;

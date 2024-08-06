@@ -3,6 +3,8 @@ import { QueryKey, UseQueryResult } from '@tanstack/react-query';
 
 interface Options {
   enabled?: boolean;
+  staleTime?: number;
+  cacheTime?: number;
   // 원하는 경우 기타 옵션 추가 가능
 }
 
