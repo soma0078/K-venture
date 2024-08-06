@@ -1,42 +1,21 @@
 import { MAX_IMG_LENGTH } from '@/constants/myActivityPage';
-import useImagesHandler from '@/hooks/useImagesHandler';
+import useImageManager from '@/hooks/useImageManager';
 import { IMAGE_TYPES } from '@/types/page/myActivityPageTypes';
 
-import ImageList from './ImageList';
-import Schedule from './Schedule';
-
 export default function MyActivityForm() {
-  const banner = useImagesHandler();
-  const sub = useImagesHandler();
+  const banner = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.BANNER]);
+  const sub = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.SUB]);
 
   return (
     <form className="flex flex-col gap-6">
-      <Schedule
-        schedule={{
-          date: '2023-02-25',
-          startTime: '12:00',
-          endTime: '13:00',
-        }}
-        idx={1}
-        onClickDelete={() => {}}
-      />
       <div>
         <h2 className="h2-my-act">배너 이미지</h2>
-        <ImageList
-          imageFiles={banner.imageFiles}
-          maxLength={MAX_IMG_LENGTH[IMAGE_TYPES.BANNER]}
-          onAddImage={banner.handleAddImage}
-          onDeleteImage={banner.handleDeleteImage}
-        />
+        {banner.renderImageManager()}
       </div>
+
       <div>
         <h2 className="h2-my-act">소개 이미지</h2>
-        <ImageList
-          imageFiles={sub.imageFiles}
-          maxLength={MAX_IMG_LENGTH[IMAGE_TYPES.SUB]}
-          onAddImage={sub.handleAddImage}
-          onDeleteImage={sub.handleDeleteImage}
-        />
+        {sub.renderImageManager()}
       </div>
       <p className="text-kv-2lg text-kv-gray-4b">
         *이미지는 최대 4개까지 등록 가능합니다.
