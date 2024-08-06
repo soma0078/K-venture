@@ -7,7 +7,7 @@ import {
   MODAL_TYPES,
   ModalProps,
   ModalType,
-} from '@/types/Modaltypes';
+} from '@/types/ModalTypes';
 
 import ModalContainer from './ModalContainer';
 

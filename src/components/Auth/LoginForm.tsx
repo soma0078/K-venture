@@ -37,7 +37,7 @@ export default function LoginForm() {
 
   const mutation = useLogIn();
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<LogInForm> = async (data) => {
     mutation.mutate(data, {
       onSuccess: () => {
         router.push('/'); // 로그인 성공 시 리다이렉트

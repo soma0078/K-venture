@@ -2,7 +2,7 @@ import CheckIcon from 'public/assets/icons/icon_check.svg';
 
 import Button from '@/components/common/Button';
 import { BUTTON_TEXTS, DEFAULT_MESSAGES } from '@/constants/modalConstants';
-import { CustomModalProps } from '@/types/Modaltypes';
+import { CustomModalProps } from '@/types/ModalTypes';
 
 export default function ConfirmModal({ message, onClose }: CustomModalProps) {
   return (

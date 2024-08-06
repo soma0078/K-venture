@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { ModalContainerProps } from '@/types/Modaltypes';
+import { ModalContainerProps } from '@/types/ModalTypes';
 
 export default function ModalContainer({
   children,

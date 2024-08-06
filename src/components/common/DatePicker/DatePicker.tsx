@@ -7,20 +7,29 @@ import { registerLocale } from 'react-datepicker';
 import InlineDateSection from '@/components/common/DatePicker/InlineDateSection';
 import PopupDateSection from '@/components/common/DatePicker/PopupDateSection';
 
-type DatePickerProps = {
+interface DatePickerProps {
   onClick: (value: string) => void;
   variant: 'inline' | 'popup';
-};
+  className?: string;
+}
 
-export default function DatePicker({ onClick, variant }: DatePickerProps) {
+export default function DatePicker({
+  onClick,
+  variant,
+  className,
+}: DatePickerProps) {
   useEffect(() => {
     registerLocale('ko', ko);
   }, []);
 
   return (
     <>
-      {variant === 'inline' && <InlineDateSection onClick={onClick} />}
-      {variant === 'popup' && <PopupDateSection onClick={onClick} />}
+      {variant === 'inline' && (
+        <InlineDateSection onClick={onClick} className={className} />
+      )}
+      {variant === 'popup' && (
+        <PopupDateSection onClick={onClick} className={className} />
+      )}
     </>
   );
 }

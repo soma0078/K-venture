@@ -17,11 +17,11 @@
   }
 
   .btn-gray {
-    @apply border-kv-gray-4b align-center bg-kv-gray-100 hover:bg-kv-gray-200 active:bg-kv-gray-300 disabled:bg-kv-gray-400;
+    @apply border-kv-gray-4b bg-kv-gray-100 align-center hover:bg-kv-gray-200 active:bg-kv-gray-300 disabled:bg-kv-gray-400;
   }
 
   .btn-blue {
-    @apply hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active bg-kv-primary-blue text-white disabled:bg-kv-gray-600;
+    @apply bg-kv-primary-blue text-white hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active disabled:bg-kv-gray-600;
   }
 }
 
@@ -38,30 +38,30 @@
 
 /* date picker custom styles */
 @layer components {
-  .react-datepicker__header {
-    @apply !border-b-0 !bg-white !pb-0;
+  .custom-datepicker .react-datepicker__header {
+    @apply border-b-0 bg-white pb-0;
+  }
+  .custom-datepicker .react-datepicker {
+    @apply border-kv-gray-600;
   }
 
-  .react-datepicker {
-    @apply !border-kv-gray-600;
+  .custom-datepicker .react-datepicker__day--selected {
+    @apply bg-transparent text-inherit;
   }
 
-  .react-datepicker__day--selected {
-    @apply !bg-transparent !text-inherit;
+  .custom-datepicker .react-datepicker__day:hover {
+    @apply bg-inherit text-kv-red;
   }
 
-  .react-datepicker__day:hover {
-    @apply !bg-inherit text-kv-red;
+  .custom-datepicker .react-datepicker__day--keyboard-selected {
+    @apply animate-fadeIn bg-inherit;
   }
 
-  .react-datepicker__day--keyboard-selected {
-    @apply !animate-fadeIn !bg-inherit;
-  }
-
-  .react-datepicker__month {
-    @apply !pr-[10px];
+  .custom-datepicker .react-datepicker__month {
+    @apply pr-[10px];
   }
 }
+
 /* date picker styles */
 
 /* DayMarker styles */
@@ -79,11 +79,14 @@
 /* Layout styles */
 @layer components {
   .layout-content-container {
+    @apply mx-5 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
+  .layout-content-container {
     @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
   }
   .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
+  .layout-container {
   .header-link-styles{
     @apply cursor-pointer kv-text-md font-kv-medium text-kv-black hover:text-kv-gray-600 active:text-kv-gray-800;
   }
