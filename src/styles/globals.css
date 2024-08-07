@@ -30,13 +30,35 @@
   .size-my-act-img {
     @apply size-[167px] pc:size-[180px] tablet:size-[206px];
   }
+  .size-my-act-date {
+    @apply w-[130px] pc:w-[380px] tablet:w-[150px];
+  }
+  .size-my-act-time {
+    @apply w-[80px] pc:w-[140px] tablet:w-[104px];
+  }
 
   .h2-my-act {
     @apply mb-3 text-kv-xl font-kv-bold pc:mb-4 pc:text-kv-2xl tablet:mb-4 tablet:text-kv-2xl;
   }
 
   .input-my-act {
-    @apply rounded border border-kv-gray-79 bg-white p-2.5 text-kv-md pc:px-4 pc:py-[15px] pc:text-kv-lg tablet:px-4 tablet:py-[15px] tablet:text-kv-lg;
+    @apply flex h-11 items-center rounded border border-kv-gray-79 bg-white px-2.5 text-kv-md pc:h-14 pc:px-4 pc:text-kv-lg tablet:h-14 tablet:px-4 tablet:text-kv-lg;
+  }
+
+  .schedule-my-act {
+    @apply flex gap-1 pc:gap-5 tablet:gap-2;
+  }
+
+  .times-my-act {
+    @apply flex h-full gap-1 pc:gap-3 tablet:gap-[5px];
+  }
+
+  .label-my-act-schedule {
+    @apply text-kv-lg font-medium text-kv-gray-4b pc:text-kv-xl tablet:text-kv-xl;
+  }
+
+  .size-my-act-date .input-my-act {
+    @apply flex h-11 items-center rounded border border-kv-gray-79 bg-white px-2.5 text-kv-md pc:h-14 pc:px-4 pc:text-kv-lg tablet:h-14 tablet:px-4 tablet:text-kv-lg;
   }
 }
 
@@ -136,7 +158,7 @@
 /* dropdown styles */
 @layer components {
   .value-dropdown-basic {
-    @apply bg-white p-2.5 hover:bg-kv-gray-100 pc:px-4 pc:py-[15px] tablet:px-4 tablet:py-[15px];
+    @apply h-11 bg-white px-2.5 hover:bg-kv-gray-100 pc:h-14 pc:px-4 tablet:h-14 tablet:px-4;
   }
 
   .value-dropdown-button {
