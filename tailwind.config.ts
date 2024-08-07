@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 

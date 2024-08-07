@@ -7,7 +7,7 @@
     font-family: theme('fontFamily.pretendard');
   }
   body {
-    @apply text-kv-md font-kv-regular text-kv-black;
+    @apply bg-[#FAFBFC] text-kv-lg font-kv-regular text-kv-black;
   }
 }
 
@@ -36,7 +36,7 @@
   }
 
   .input-my-act {
-    @apply border-kv-gray-79 rounded border bg-white p-2.5 text-kv-md pc:px-4 pc:py-[15px] pc:text-kv-lg tablet:px-4 tablet:py-[15px] tablet:text-kv-lg;
+    @apply rounded border border-kv-gray-79 bg-white p-2.5 text-kv-md pc:px-4 pc:py-[15px] pc:text-kv-lg tablet:px-4 tablet:py-[15px] tablet:text-kv-lg;
   }
 }
 
@@ -85,8 +85,8 @@
   .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
-  .header-link-styles{
-    @apply cursor-pointer kv-text-md font-kv-medium text-kv-black hover:text-kv-gray-600 active:text-kv-gray-800;
+  .header-link-styles {
+    @apply cursor-pointer font-kv-medium text-kv-black kv-text-md hover:text-kv-gray-600 active:text-kv-gray-800;
   }
   .layout-content-container {
     @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
@@ -114,7 +114,6 @@
     @apply flex items-center justify-center;
   }
 }
-
 /* 모달 */
 @layer components {
   .modal-container {
@@ -141,7 +140,7 @@
   }
 
   .value-dropdown-button {
-    @apply value-dropdown-basic border-kv-gray-79 rounded border focus:bg-kv-gray-200;
+    @apply value-dropdown-basic rounded border border-kv-gray-79 focus:bg-kv-gray-200;
   }
 
   .pos-value-dropdown-menus {
@@ -150,5 +149,41 @@
 
   .dropdown-menu {
     @apply value-dropdown-basic border-kv-gray-300 active:bg-kv-gray-200;
+  }
+}
+
+/* 프로필 스타일 */
+@layer components {
+  /* 저장하기 버튼 */
+  .save-btn {
+    @apply cursor-pointer rounded bg-kv-primary-blue px-8 py-3 font-kv-semibold text-white hover:bg-[#233CC1];
+  }
+
+  .profile-input-group {
+    @apply mb-8;
+  }
+
+  .profile-label.custom-label-style {
+    @apply mb-4 block text-kv-2xl font-kv-bold;
+  }
+
+  .profile-input {
+    @apply h-14 w-full rounded border border-kv-primary-blue-light px-5 py-4 outline-none focus:border-kv-primary-blue;
+  }
+
+  .profile-input-error {
+    @apply border-kv-red focus:border-kv-red;
+  }
+
+  .profile-input-readonly {
+    @apply cursor-not-allowed border-kv-primary-blue-light focus:border-kv-primary-blue-light;
+  }
+
+  .lnb-link {
+    @apply flex gap-3.5 rounded-xl fill-current px-5 py-2.5 font-kv-semibold text-kv-gray-600 transition ease-in-out hover:bg-kv-primary-blue-light hover:text-kv-primary-blue;
+  }
+
+  .lnb-link-active {
+    @apply bg-kv-primary-blue-light text-kv-primary-blue;
   }
 }

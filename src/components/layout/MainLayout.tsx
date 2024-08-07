@@ -75,10 +75,10 @@ function MainLayout({ children }: MainLayoutProps) {
       />
       <div className="align-center">
         <div className="layout-content-container">
-          <div className="mr-4 hidden pc:block tablet:block">
+          <div className="mr-6 hidden pc:block tablet:block">
             <LeftNavBar />
           </div>
-          <main className={`flex-1`}>{children}</main>
+          <main className={`relative flex-1`}>{children}</main>
         </div>
       </div>
       <div className="layout-content-margin-bottom" />
