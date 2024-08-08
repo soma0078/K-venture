@@ -259,7 +259,7 @@
   }
 
   .dropdown-menu {
-    @apply value-dropdown-basic border-kv-gray-300 active:bg-kv-gray-200;
+    @apply value-dropdown-basic border-kv-gray-300 text-left active:bg-kv-gray-200;
   }
 }
 

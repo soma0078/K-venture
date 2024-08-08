@@ -25,7 +25,7 @@ export default function ImageCard({ image, onClickDelete }: ImageProps) {
       />
       {/* 이미지 삭제 버튼 */}
       <button
-        className="pc:height-40 absolute bottom-[155px] left-[155px] size-6 opacity-80 hover:opacity-90 active:opacity-100 pc:left-40 pc:size-10 tablet:bottom-[190px] tablet:left-[190px] tablet:size-8"
+        className="pc:height-40 absolute bottom-[155px] left-[155px] z-10 size-6 opacity-80 hover:opacity-90 active:opacity-100 pc:left-40 pc:size-10 tablet:bottom-[190px] tablet:left-[190px] tablet:size-8"
         type="button"
         onClick={handleDeleteImage}
       >

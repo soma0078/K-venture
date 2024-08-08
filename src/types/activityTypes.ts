@@ -1,18 +1,44 @@
 export interface MyActivityForm {
   title: string;
-  category: CategoryType;
+  category: string;
   description: string;
   price: number;
   address: string;
   schedules?: Schedule[];
   bannerImageUrl: string;
-  subImages?: string[];
+  subImageUrls?: string[];
+}
+
+export interface ActivityResponse {
+  id: number;
+  userId: number;
+  title: string;
+  category: string;
+  description: string;
+  price: number;
+  address: string;
+  schedules?: ScheduleResponse[];
+  bannerImageUrl: string;
+  subImageUrls?: SubImageResponse[];
+  reviewCount: number;
+  rating: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Schedule {
   date: string;
   startTime: string;
   endTime: string;
+}
+
+export interface ScheduleResponse extends Schedule {
+  id: number;
+}
+
+export interface SubImageResponse {
+  id: number;
+  imageUrl: string;
 }
 
 export const CATEGORIES = {
