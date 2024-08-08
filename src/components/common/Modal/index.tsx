@@ -1,4 +1,4 @@
-import ModalSelector from '@/components/common/Modal/Modal';
+import Modal from '@/components/common/Modal/Modal';
 import useModal from '@/hooks/useModal';
 
-export { ModalSelector, useModal };
+export { Modal, useModal };
