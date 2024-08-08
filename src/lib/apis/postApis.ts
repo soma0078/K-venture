@@ -16,10 +16,15 @@ import {
 
 // access token을 업데이트 하기 위한 요청
 export const updateAccessToken = async () => {
-  const { data } = await instance.post('/auth/tokens');
+  const refreshToken = getCookie('refreshToken');
+  const { data } = await instance.post(
+    '/auth/tokens',
+    {},
+    { headers: { Authorization: `Bearer ${refreshToken}` } },
+  );
 
-  const newAccessToken = data.accessToken;
-  setCookie('accessToken', newAccessToken);
+  setCookie('accessToken', data.accessToken);
+  setCookie('refreshToken', data.refreshToken);
 };
 
 // 로그인

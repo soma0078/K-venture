@@ -18,6 +18,7 @@ const useLogIn = () => {
     },
     onSuccess: (data) => {
       setCookie('accessToken', data.accessToken);
+      setCookie('refreshToken', data.refreshToken);
     },
   });
 };
