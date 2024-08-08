@@ -148,6 +148,12 @@ const config: Config = {
           alignItems: 'center',
           justifyContent: 'center',
         },
+        '.divider': {
+          'margin-bottom': '16px',
+          'margin-top': '24px',
+          'border-bottom-width': '1px',
+          'border-bottom-color': '#CBC9CF',
+        },
       } as Record<string, { [key: string]: string }>;
       addUtilities(newUtilities);
     }),

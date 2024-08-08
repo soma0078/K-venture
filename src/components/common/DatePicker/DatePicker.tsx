@@ -10,6 +10,7 @@ import PopupDateSection from '@/components/common/DatePicker/PopupDateSection';
 interface DatePickerProps {
   onClick: (value: string) => void;
   variant: 'inline' | 'popup';
+  noneToggle?: boolean;
   className?: string;
 }
 
@@ -17,6 +18,7 @@ export default function DatePicker({
   onClick,
   variant,
   className,
+  noneToggle,
 }: DatePickerProps) {
   useEffect(() => {
     registerLocale('ko', ko);
@@ -25,7 +27,11 @@ export default function DatePicker({
   return (
     <>
       {variant === 'inline' && (
-        <InlineDateSection onClick={onClick} className={className} />
+        <InlineDateSection
+          onClick={onClick}
+          className={className}
+          noneToggle={noneToggle}
+        />
       )}
       {variant === 'popup' && (
         <PopupDateSection onClick={onClick} className={className} />

@@ -4,6 +4,10 @@ import { getCookie } from 'cookies-next';
 import { UserProfile } from '@/components/userProfile/EditProfileForm';
 import instance from '@/lib/apis/axios';
 import { LogInForm, LogInResponse } from '@/types/post/loginTypes';
+import {
+  ReservationRequest,
+  ReservationResponse,
+} from '@/types/post/reservationTypes';
 
 // access token을 업데이트 하기 위한 요청
 export const updateAccessToken = async () => {
@@ -35,4 +39,16 @@ export const createPresignedUrl = async (file: File) => {
     },
   });
   return res.data.profileImageUrl;
+};
+
+// 예약 신청
+export const createReservation = async (
+  activityId: number,
+  data: ReservationRequest,
+): Promise<ReservationResponse> => {
+  const response = await instance.post<ReservationResponse>(
+    `/activities/${activityId}/reservations`,
+    data,
+  );
+  return response.data;
 };

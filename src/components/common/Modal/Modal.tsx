@@ -27,7 +27,7 @@ export default function Modal({ isOpen, onClose, message, type }: ModalProps) {
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose}>
       {() => (
-        <div className="pointer-events-none fixed inset-0 align-center">
+        <div className="pointer-events-none fixed inset-0 z-20 align-center">
           <ModalContent onClose={onClose} message={message} />
         </div>
       )}

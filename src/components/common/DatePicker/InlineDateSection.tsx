@@ -9,9 +9,11 @@ import { formatDate } from '@/lib/utils/formatDate';
 export default function InlineDateSection({
   onClick,
   className,
+  noneToggle,
 }: {
   onClick: (value: string) => void;
   className?: string;
+  noneToggle?: boolean;
 }) {
   const {
     selectedDate,
@@ -53,6 +55,8 @@ export default function InlineDateSection({
   };
 
   const currentComponent = isOpen ? 'openCalendar' : 'closedCalendar';
+
+  if (noneToggle) return dateComponents.openCalendar;
 
   return dateComponents[currentComponent];
 }

@@ -1,20 +1,22 @@
 import classNames from 'classnames';
+import React from 'react';
 
-function Button({
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string;
+}
+
+export default function Button({
   type,
   children,
   className = '',
   onClick,
   disabled,
   ...rest
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const baseClass = 'rounded-md py-[11px] font-kv-bold text-kv-lg';
-  const combinedClassName = classNames(baseClass, className);
-
+}: ButtonProps) {
   return (
     <button
       type={type}
-      className={combinedClassName}
+      className={classNames('base-button-default', className)}
       onClick={onClick}
       disabled={disabled}
       {...rest}
@@ -23,5 +25,3 @@ function Button({
     </button>
   );
 }
-
-export default Button;
