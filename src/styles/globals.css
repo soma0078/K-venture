@@ -68,8 +68,8 @@
 
 /* date picker custom styles */
 @layer components {
-  .custom-datepicker .react-datepicker__header {
-    @apply border-b-0 bg-white pb-0;
+  .react-datepicker__header {
+    @apply !border-b-0 !bg-white !pb-0;
   }
 
   .custom-datepicker .react-datepicker__header {
@@ -84,20 +84,20 @@
     @apply border-kv-gray-600;
   }
 
-  .custom-datepicker .react-datepicker__day--selected {
-    @apply bg-transparent text-inherit;
+  .react-datepicker__day--selected {
+    @apply !bg-transparent !text-inherit;
   }
 
-  .custom-datepicker .react-datepicker__day:hover {
-    @apply bg-inherit text-kv-red;
+  .react-datepicker__day:hover {
+    @apply !bg-inherit text-kv-red;
   }
 
-  .custom-datepicker .react-datepicker__day--keyboard-selected {
-    @apply animate-fadeIn bg-inherit;
+  .react-datepicker__day--keyboard-selected {
+    @apply !animate-fadeIn !bg-inherit;
   }
 
-  .custom-datepicker .react-datepicker__month {
-    @apply pr-[10px];
+  .react-datepicker__month {
+    @apply !pr-[10px];
   }
 }
 
@@ -114,6 +114,9 @@
 
 /* Layout styles */
 @layer components {
+  .layout-content-container {
+    @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
+  }
   .footer-link-styles {
     @apply font-sans text-base font-normal;
   }
@@ -296,5 +299,26 @@
 
   .lnb-link-active {
     @apply bg-kv-primary-blue-light text-kv-primary-blue;
+  }
+}
+
+/* 케밥 */
+@layer components {
+  .kebab-menu {
+    @apply cursor-pointer py-4 text-center text-kv-2lg font-kv-medium hover:bg-kv-gray-200;
+  }
+  .kebal-first-menu {
+    @apply border-b border-kv-gray-300;
+  }
+}
+
+/* 체험 상세 */
+@layer components {
+  .top-line {
+    @apply mb-10 border-t border-kv-gray-300 pt-10;
+  }
+
+  .activity-h3 {
+    @apply mb-5 text-kv-xl font-kv-bold;
   }
 }

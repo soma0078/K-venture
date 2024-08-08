@@ -5,12 +5,12 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import PenIcon from '@/assets/icons/icon_pen.svg';
 import DefaultProfile from '@/assets/images/profile_default_img.png';
 import { updateUserData } from '@/lib/apis/patchApis';
-import { createPresignedUrl } from '@/lib/apis/postApis';
+import { postProfileImage } from '@/lib/apis/postApis';
 import { getUserProfile } from '@/lib/apis/userApis';
 
 /**
  * NOTE: 프로필 이미지 입력받는 컴포넌트
- * onImageUpload: 실제 폼에 입력 변화를 반영하기 위한 함수
+ *
  */
 
 export default function EditProfileImage() {
@@ -38,7 +38,7 @@ export default function EditProfileImage() {
     if (file) {
       setIsLoading(true);
       try {
-        const presignedUrl = await createPresignedUrl(file);
+        const presignedUrl = await postProfileImage(file);
 
         if (presignedUrl) {
           const profileUrl = presignedUrl.split('?')[0];

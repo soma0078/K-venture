@@ -49,7 +49,7 @@ export default defineConfig([
       'react/react-in-jsx-scope': 'off',
       'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
       'no-unused-vars': ['warn', { args: 'none' }],
-      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-explicit-any': 'warn', // 다음 주소에 필요
       '@typescript-eslint/no-unused-vars': 'warn',
       'validate-filename/naming-rules': [
         'error',

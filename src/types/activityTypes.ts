@@ -13,13 +13,13 @@ export interface ActivityResponse {
   id: number;
   userId: number;
   title: string;
-  category: string;
   description: string;
+  category: string;
   price: number;
   address: string;
-  schedules?: ScheduleResponse[];
   bannerImageUrl: string;
-  subImageUrls?: SubImageResponse[];
+  subImageUrls: SubImageUrl[];
+  schedules: Schedule[];
   reviewCount: number;
   rating: number;
   createdAt: string;
@@ -27,6 +27,7 @@ export interface ActivityResponse {
 }
 
 export interface Schedule {
+  id?: number;
   date: string;
   startTime: string;
   endTime: string;
@@ -51,3 +52,8 @@ export const CATEGORIES = {
 } as const;
 
 export type CategoryType = (typeof CATEGORIES)[keyof typeof CATEGORIES];
+
+export interface SubImageUrl {
+  id: number;
+  imageUrl: string;
+}
