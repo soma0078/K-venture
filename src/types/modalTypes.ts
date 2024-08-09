@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 export interface CustomModalProps {
   message?: string;
-  onClose: () => void;
+  onClose: (choice?: 'yes' | 'no') => void;
 }
 
 export interface ModalContainerProps {
@@ -22,3 +22,8 @@ export const MODAL_TYPES = {
 } as const;
 
 export type ModalType = (typeof MODAL_TYPES)[keyof typeof MODAL_TYPES];
+
+export interface ModalCallbacks {
+  onConfirm?: () => void;
+  onCancel?: () => void;
+}

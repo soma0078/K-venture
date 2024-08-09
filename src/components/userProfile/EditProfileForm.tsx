@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import ErrorText from '@/components/common/ErrorText';
 import Input from '@/components/common/Input';
 import Label from '@/components/common/Label';
+import { useModal } from '@/components/common/Modal';
 import Modal from '@/components/common/Modal/Modal';
-import useModal from '@/hooks/useModal';
 import { updateUserData } from '@/lib/apis/patchApis';
 import { getUserProfile } from '@/lib/apis/userApis';
 
@@ -20,7 +20,7 @@ export interface UserProfile {
 
 export default function EditProfileForm() {
   const queryClient = useQueryClient();
-  const { modalType, message, isOpen, closeModal, openModal } = useModal();
+  const { modalProps, openModal } = useModal();
 
   // 사용자 프로필 조회
   const {
@@ -191,12 +191,7 @@ export default function EditProfileForm() {
         />
       </form>
 
-      <Modal
-        type={modalType}
-        message={message}
-        isOpen={isOpen}
-        onClose={closeModal}
-      />
+      <Modal {...modalProps} />
     </>
   );
 }

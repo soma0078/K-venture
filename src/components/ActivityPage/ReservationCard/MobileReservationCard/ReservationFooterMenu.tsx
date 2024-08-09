@@ -23,7 +23,7 @@ function ReservationFooterMenu({
 }: ReservationFooterMenuProps) {
   const isValidate = isReservationValid(reservationState);
   const { submitReservation, isSuccess, isError } = useReservation();
-  const { openModal, closeModal, isOpen, modalType, message } = useModal();
+  const { modalProps, openModal } = useModal();
 
   useEffect(() => {
     if (isSuccess) {
@@ -69,12 +69,7 @@ function ReservationFooterMenu({
           className={`h-[48px] w-[106px] text-kv-lg font-kv-bold text-white ${isValidate ? 'bg-kv-primary-blue' : 'bg-kv-gray-600'}`}
         />
       </div>
-      <Modal
-        isOpen={isOpen}
-        onClose={closeModal}
-        type={modalType}
-        message={message}
-      />
+      <Modal {...modalProps} />
     </div>
   );
 }

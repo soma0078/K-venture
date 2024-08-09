@@ -10,7 +10,12 @@ import {
 } from '@/types/modalTypes';
 
 import ModalContainer from './ModalContainer';
-
+/**
+ *
+ * @example
+ * // 사용 예시
+ * <Modal {...modalProps} />
+ */
 export default function Modal({ isOpen, onClose, message, type }: ModalProps) {
   // 조건부 랜더링을 위해 삼항연산자를 사용하지 않은 이유:
   // 모달이 계속 추가될 경우 import하고 객체에 추가하면 확장이 편리함

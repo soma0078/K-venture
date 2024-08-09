@@ -8,12 +8,11 @@ import * as yup from 'yup';
 
 import ValueDropdown from '@/components/common/Dropdown/ValueDropdown';
 import ErrorText from '@/components/common/ErrorText';
-import Modal from '@/components/common/Modal/Modal';
+import { Modal, useModal } from '@/components/common/Modal';
 import ScheduleList from '@/components/MyActivityPage/ScheduleList';
 import { MAX_IMG_LENGTH } from '@/constants/myActivityPage';
 import useDropdown from '@/hooks/useDropdown';
 import useImageManager from '@/hooks/useImageManager';
-import useModal from '@/hooks/useModal';
 import { postActivity, postActivityImage } from '@/lib/apis/postApis';
 import { checkDuplication } from '@/lib/utils/myActivityPage';
 import { CATEGORIES, Schedule } from '@/types/activityTypes';
@@ -53,7 +52,7 @@ export default function MyActivityForm() {
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [activityId, setActivityId] = useState(0);
-  const { modalType, message, isOpen, closeModal, openModal } = useModal();
+  const { modalProps, openModal } = useModal();
   const router = useRouter();
 
   const {
@@ -84,14 +83,6 @@ export default function MyActivityForm() {
 
   const handleClickAddress = () => {
     open({ onComplete: (data) => setAddress(data.address) });
-  };
-
-  // 모달 닫기
-  const handleClickModal = () => {
-    closeModal();
-    if (isSuccess) {
-      router.push(`/activity/${activityId}`);
-    }
   };
 
   // 데이터 검증, 폼데이터 형성, 서버 요청 보내기, 리다이렉션
@@ -136,7 +127,9 @@ export default function MyActivityForm() {
         const formData = await formActivityData();
         setActivityId(await postActivity(formData));
         setIsSuccess(true);
-        openModal('alert', '체험 생성이 완료되었습니다.');
+        openModal('alert', '체험 생성이 완료되었습니다.', {
+          onConfirm: () => router.push(`/activity/${activityId}`),
+        });
       } catch (e) {
         const error = e as AxiosErrorWithMessage;
         if (error.response) {
@@ -248,12 +241,7 @@ export default function MyActivityForm() {
         *이미지는 최대 4개까지 등록 가능합니다.
       </p>
 
-      <Modal
-        type={modalType}
-        message={message}
-        isOpen={isOpen}
-        onClose={handleClickModal}
-      />
+      <Modal {...modalProps} />
     </form>
   );
 }

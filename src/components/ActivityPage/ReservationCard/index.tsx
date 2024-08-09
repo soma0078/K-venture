@@ -18,7 +18,7 @@ export default function ReservationCard() {
   const cardEventHandler = useCardEventHandler(setReservationState);
   const router = useRouter();
   const activityId = Number(router.query.id);
-  const { openModal, closeModal, isOpen, modalType, message } = useModal();
+  const { modalProps, openModal } = useModal();
 
   const { isMobile, isTablet, isDesktop } = useResponsive();
 
@@ -68,12 +68,7 @@ export default function ReservationCard() {
           reservationState={reservationState}
         />
       )}
-      <Modal
-        isOpen={isOpen}
-        onClose={closeModal}
-        type={modalType}
-        message={message}
-      />
+      <Modal {...modalProps} />
     </>
   );
 }

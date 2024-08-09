@@ -6,6 +6,6 @@ export const DEFAULT_MESSAGES = {
 
 export const BUTTON_TEXTS = {
   CONFIRM: '확인',
-  YES: '취소하기',
+  YES: '예',
   NO: '아니오',
 } as const;

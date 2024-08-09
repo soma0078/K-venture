@@ -12,7 +12,7 @@ export default function AlertModal({ message, onClose }: CustomModalProps) {
       </div>
       <Button
         className="absolute inset-x-0 bottom-[28px] m-auto h-[42px] w-[138px] rounded-[8px] bg-kv-primary-blue py-0 text-kv-md font-kv-medium text-white hover:bg-kv-blue pc:right-[28px] pc:mr-0 pc:text-kv-lg tablet:right-[28px] tablet:mr-0 tablet:text-kv-lg"
-        onClick={onClose}
+        onClick={() => onClose('yes')}
       >
         {BUTTON_TEXTS.CONFIRM}
       </Button>

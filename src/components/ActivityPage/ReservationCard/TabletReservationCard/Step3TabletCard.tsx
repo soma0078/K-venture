@@ -23,7 +23,7 @@ export default function Step3TabletCard({
   reservationState,
 }: TabletStep1CardProps) {
   const { submitReservation, isSuccess, isError } = useReservation();
-  const { isOpen, openModal, closeModal, message, modalType } = useModal();
+  const { modalProps, openModal } = useModal();
   const isValidate = isReservationValid(reservationState);
 
   useEffect(() => {
@@ -72,12 +72,7 @@ export default function Step3TabletCard({
         totalAmount={reservationState.price * reservationState.headCount}
         containerClassName="px-[24px] py-[16px]"
       />
-      <Modal
-        isOpen={isOpen}
-        onClose={closeModal}
-        message={message}
-        type={modalType}
-      />
+      <Modal {...modalProps} />
     </div>
   );
 }

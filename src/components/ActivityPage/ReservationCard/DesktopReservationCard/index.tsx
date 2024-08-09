@@ -26,7 +26,7 @@ export default function DesktopReservationCard({
   reservationState,
 }: DesktopReservationCardProps) {
   const { submitReservation, isSuccess, isError } = useReservation();
-  const { openModal, closeModal, isOpen, modalType, message } = useModal();
+  const { modalProps, openModal } = useModal();
   const isValidate = isReservationValid(reservationState);
 
   const handleSubmit = () => {
@@ -52,13 +52,7 @@ export default function DesktopReservationCard({
 
   return (
     <>
-      <button onClick={deleteTokens}>쿠키 삭제</button>
-      <Modal
-        isOpen={isOpen}
-        onClose={closeModal}
-        type={modalType}
-        message={message}
-      />
+      <Modal {...modalProps} />
       <div className="w-[384px] rounded-lg border bg-white p-4 shadow-lg">
         <PriceDisplay
           containerClassName="pt-[20px] pl-0"
@@ -84,8 +78,6 @@ export default function DesktopReservationCard({
             headCount={reservationState.headCount}
             onClick={onClick}
           />
-          {/* api post 요청 보내기  */}
-
           <ReservationButton
             disabled={!isValidate}
             className={`mx-auto my-[24px] block w-full rounded-[4px] ${isValidate ? 'bg-kv-primary-blue' : 'bg-kv-gray-300'}`}
