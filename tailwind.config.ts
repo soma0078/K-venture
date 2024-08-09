@@ -64,6 +64,7 @@ const config: Config = {
         'kv-orange': {
           DEFAULT: '#FF7C1D',
           light: '#FFF4E8',
+          lighter: '#FF472E',
         },
         'kv-yellow': {
           DEFAULT: '#FFC23D',

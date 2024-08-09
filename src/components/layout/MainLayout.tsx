@@ -27,7 +27,7 @@ function MainLayout({ children }: MainLayoutProps) {
           <Header />
         </div>
         <div className="layout-header-spacer" />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 bg-kv-gray-100">{children}</main>
         <div className="layout-content-margin-bottom" />
         <Footer />
       </div>
@@ -50,7 +50,7 @@ function MainLayout({ children }: MainLayoutProps) {
         />
         <div className="align-center">
           <div className="layout-content-container">
-            <main className={`flex-1`}>{children}</main>
+            <main className="flex-1 bg-kv-gray-100">{children}</main>
           </div>
         </div>
         <div className="layout-content-margin-bottom" />
@@ -73,12 +73,12 @@ function MainLayout({ children }: MainLayoutProps) {
         }}
         className="layout-content-margin-top"
       />
-      <div className="align-center">
+      <div className="bg-kv-gray-100 align-center">
         <div className="layout-content-container">
           <div className="mr-6 hidden pc:block tablet:block">
             <LeftNavBar />
           </div>
-          <main className={`relative flex-1`}>{children}</main>
+          <main className="flex-1 bg-kv-gray-100">{children}</main>
         </div>
       </div>
       <div className="layout-content-margin-bottom" />

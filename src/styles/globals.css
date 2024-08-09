@@ -139,15 +139,15 @@
   }
 
   .layout-header-spacer {
-    @apply h-[70px] w-full;
+    @apply h-[70px] w-full bg-kv-gray-100;
   }
 
   .layout-content-margin-top {
-    @apply min-h-6;
+    @apply min-h-6 bg-kv-gray-100;
   }
 
   .layout-content-margin-bottom {
-    @apply h-[120px] w-full;
+    @apply h-[120px] w-full bg-kv-gray-100;
   }
 }
 
@@ -328,5 +328,17 @@
 
   .activity-h3 {
     @apply mb-5 text-kv-xl font-kv-bold;
+  }
+}
+/* 체험 카드 */
+@layer components {
+  .activity-card-title {
+    @apply kv-text-md tablet:kv-text-2lg  pc:kv-text-xl font-kv-bold text-kv-black truncate;
+  }
+  .activity-card-price {
+    @apply kv-text-lg tablet:kv-text-xl pc:kv-text-2xl font-kv-medium;
+  }
+  .activity-reservation-card-button {
+    @apply w-20 h-8 pc:w-[144px] pc:h-[43.08px] tablet:w-[112px] tablet:h-10 pc:text-kv-lg tablet:text-kv-lg text-kv-md font-kv-medium align-center !important;
   }
 }
