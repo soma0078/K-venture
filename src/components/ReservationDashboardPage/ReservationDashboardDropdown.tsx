@@ -1,14 +1,16 @@
 import Image from 'next/image';
-import { MouseEventHandler, MutableRefObject } from 'react';
+import { MouseEventHandler } from 'react';
 
-interface ValueDropdownProps {
+import { AvailableValues } from '@/types/page/ReservationDashboardPageTypes';
+
+interface ReservationDashboardDropdownProps {
   value: string;
   placeholder: string;
-  availableValues: string[];
+  availableValues: AvailableValues[];
   isOpen: boolean;
   onClickButton: MouseEventHandler<HTMLButtonElement>;
   onBlurButton: () => void;
-  onClickMenu: (value: string) => MouseEventHandler<HTMLButtonElement>;
+  onClickMenu: (value: string) => MouseEventHandler;
   label?: string;
 }
 
@@ -19,7 +21,7 @@ interface ValueDropdownProps {
  * onClickButton: 드롭다운 버튼 클릭시 여닫기
  * onClickMenu: 메뉴 클릭 시 값 변경하고 닫기
  */
-export default function ValueDropdown({
+export default function MyReservationsDropdown({
   value,
   placeholder,
   availableValues,
@@ -28,18 +30,20 @@ export default function ValueDropdown({
   onBlurButton,
   onClickMenu,
   label,
-}: ValueDropdownProps) {
+}: ReservationDashboardDropdownProps) {
   return (
     <div className="relative w-full">
       {label && (
-        <label className="absolute -top-3 left-3 z-10 bg-white px-1 text-sm text-kv-gray-600">
-          {label}
-        </label>
+        <div className="absolute left-[11px] z-[1] h-[2px] w-[38px] bg-white">
+          <label className="absolute -top-[10px] z-10 text-sm text-kv-black">
+            {label}
+          </label>
+        </div>
       )}
       {/* 드롭다운 버튼 */}
       <button
         // NOTE: 다른 곳에서 사용시 value-dropdown-button 부분만 필요에 따라 바꾸면 될 것 같습니다.
-        className={`value-dropdown-button flex w-full items-center justify-between ${
+        className={`flex w-full items-center justify-between rounded border border-kv-gray-79 bg-white p-2.5 pc:px-4 pc:py-[15px] tablet:px-4 tablet:py-[15px] ${
           value ? '' : 'text-kv-gray-a1'
         } relative`}
         type="button"
@@ -61,17 +65,20 @@ export default function ValueDropdown({
       {/* 드롭다운 메뉴 */}
       {isOpen && (
         // NOTE: 다른 곳에서 사용시 pos-value-dropdown-menus 부분만 필요에 따라 바꾸면 될 것 같습니다.
-        <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md">
-          {availableValues.map((value, idx) => {
+        <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md scrollbar-custom">
+          {availableValues.map(({ title, id }, idx) => {
             const isFirst = idx === 0;
             const isLast = idx === availableValues.length - 1;
             return (
               <button
-                key={value}
+                key={id}
+                id={`${id}`}
                 className={`dropdown-menu w-full ${isFirst ? 'rounded-t-md' : ''} ${isLast ? 'rounded-b-md' : 'border-b'}`}
-                onMouseDown={(e) => onClickMenu(value)(e)}
+                onMouseDown={(e) => {
+                  onClickMenu(title)(e);
+                }}
               >
-                {value}
+                {title}
               </button>
             );
           })}

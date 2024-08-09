@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
+import { CSSRuleObject } from 'tailwindcss/types/config';
 
 const config: Config = {
   content: [
@@ -112,7 +113,7 @@ const config: Config = {
   },
   plugins: [
     plugin(({ addUtilities, theme }) => {
-      const newUtilities = {
+      const newUtilities: Record<string, CSSRuleObject> = {
         '.kv-text-3xl': {
           fontSize: theme('fontSize.kv-3xl[0]'),
           lineHeight: theme('fontSize.kv-3xl[1].lineHeight'),
@@ -156,7 +157,27 @@ const config: Config = {
           'border-bottom-width': '1px',
           'border-bottom-color': '#CBC9CF',
         },
-      } as Record<string, { [key: string]: string }>;
+
+        '.scrollbar-custom': {
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: '#f1f1f1',
+            borderRadius: '10px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#a1a1a1',
+            borderRadius: '10px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#555',
+          },
+          '&::-webkit-scrollbar-button': {
+            display: 'none',
+          },
+        },
+      };
       addUtilities(newUtilities);
     }),
   ],
