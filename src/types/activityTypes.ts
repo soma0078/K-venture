@@ -18,7 +18,7 @@ export interface ActivityResponse {
   price: number;
   address: string;
   bannerImageUrl: string;
-  subImageUrls: SubImageUrl[];
+  subImages: SubImageUrl[];
   schedules: Schedule[];
   reviewCount: number;
   rating: number;

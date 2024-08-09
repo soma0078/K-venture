@@ -25,7 +25,7 @@
   }
 
   .btn-outline {
-    @apply pc:w-[127px] tablet:w-[120px] pc:h-[53px] tablet:h-[53px] h-[41px] w-[90px] pc:px-5 tablet:px-4 px-3 rounded-[15px] border border-kv-primary-blue-light bg-white pc:kv-text-2lg tablet:kv-text-2lg kv-text-md font-kv-medium text-kv-gray-4b hover:bg-kv-gray-100 active:bg-kv-gray-200
+    @apply h-[41px] w-[90px] rounded-[15px] border border-kv-primary-blue-light bg-white px-3 font-kv-medium text-kv-gray-4b kv-text-md hover:bg-kv-gray-100 active:bg-kv-gray-200 pc:h-[53px] pc:w-[127px] pc:px-5 pc:kv-text-2lg tablet:h-[53px] tablet:w-[120px] tablet:px-4 tablet:kv-text-2lg;
   }
 
   .base-button-default {
@@ -270,7 +270,7 @@
   }
 
   .sort-dropdown-menu {
-    @apply block h-[41px] w-full text-left font-kv-medium text-kv-gray-4b kv-text-md align-center hover:bg-kv-gray-100 active:bg-kv-gray-200 pc:h-[53px] pc:kv-text-2lg tablet:h-[53px] tablet:kv-text-2lg border-kv-primary-blue-light;
+    @apply block h-[41px] w-full border-kv-primary-blue-light text-left font-kv-medium text-kv-gray-4b kv-text-md align-center hover:bg-kv-gray-100 active:bg-kv-gray-200 pc:h-[53px] pc:kv-text-2lg tablet:h-[53px] tablet:kv-text-2lg;
   }
 }
 
@@ -409,16 +409,51 @@
   .activity-h3 {
     @apply mb-5 text-kv-xl font-kv-bold;
   }
+
+  /* Swiper 슬라이드 */
+  .swiper-slide {
+    @apply absolute transition-all;
+  }
+
+  .swiper-container {
+    @apply relative -ml-4 -mr-4 h-[310px] bg-kv-black;
+  }
+
+  .swiper-container .swiper {
+    @apply absolute w-full;
+  }
+
+  .swiper-container .swiper-button-next,
+  .swiper-container .swiper-button-prev {
+    @apply absolute left-2 rounded bg-kv-black;
+  }
+
+  .swiper-container .swiper-button-next:after,
+  .swiper-container .swiper-button-prev:after {
+    @apply text-kv-md font-kv-bold text-white;
+  }
+
+  .swiper-container .swiper-button-next {
+    @apply left-auto right-2;
+  }
+
+  .sub-image-container.custom-grid {
+    @apply grid-cols-2 grid-rows-2;
+  }
+
+  .sub-image-container.custom-grid.custom-grid .sub-image-wrapper:nth-child(3) {
+    @apply col-span-2 row-span-2;
+  }
 }
 /* 체험 카드 */
 @layer components {
   .activity-card-title {
-    @apply kv-text-md tablet:kv-text-2lg  pc:kv-text-xl font-kv-bold text-kv-black truncate;
+    @apply truncate font-kv-bold text-kv-black kv-text-md pc:kv-text-xl tablet:kv-text-2lg;
   }
   .activity-card-price {
-    @apply kv-text-lg tablet:kv-text-xl pc:kv-text-2xl font-kv-medium;
+    @apply font-kv-medium kv-text-lg pc:kv-text-2xl tablet:kv-text-xl;
   }
   .activity-reservation-card-button {
-    @apply w-20 h-8 pc:w-[144px] pc:h-[43.08px] tablet:w-[112px] tablet:h-10 pc:text-kv-lg tablet:text-kv-lg text-kv-md font-kv-medium align-center !important;
+    @apply h-8 w-20 text-kv-md font-kv-medium align-center pc:h-[43.08px] pc:w-[144px] pc:text-kv-lg tablet:h-10 tablet:w-[112px] tablet:text-kv-lg !important;
   }
 }

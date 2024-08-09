@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import CustomKebab from '@/components/activity/CustomKebab';
+import ImageGallery from '@/components/activity/ImageGallery';
 import Location from '@/components/activity/Location';
 import { ReviewRating } from '@/components/activity/Review';
 import useFetchData from '@/hooks/useFetchData';
@@ -41,9 +42,8 @@ export default function ActivityPage() {
           <CustomKebab activityId={activityId} />
         )}
       </div>
-      <div className="mb-20 mt-6 h-[543px] w-full bg-slate-50">
-        {/* TODO 배너 이미지 컴포넌트 */}
-      </div>
+
+      <ImageGallery activityData={activityData} />
       <div className="flex justify-between gap-6">
         <div className="w-4/5">
           <div className="top-line">
