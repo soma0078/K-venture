@@ -1,10 +1,12 @@
+import { useAtom } from 'jotai';
 import { MouseEventHandler, useState } from 'react';
 
+import { reservationDashboardQueryParamsAtom } from '@/state/reservationDashboardAtom';
 // 값 선택 드롭다운 관리를 위한 훅
 const useDropdown = <T>(initValue: T) => {
   const [value, setValue] = useState(initValue);
-  const [id, setId] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [, setCalendarState] = useAtom(reservationDashboardQueryParamsAtom);
 
   // 드롭다운 버튼 클릭 시 열기/닫기
   const handleClickButton: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -17,9 +19,14 @@ const useDropdown = <T>(initValue: T) => {
     const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
       e.preventDefault();
       const target = e.target as HTMLButtonElement;
-      setId(Number(target.id));
+      const newId = Number(target.id);
       setValue(value);
       setIsOpen(false);
+      // ReservationDashboardQueryParams 업데이트
+      setCalendarState((prev) => ({
+        ...prev,
+        activityId: newId,
+      }));
     };
     return handleClick;
   };
@@ -29,7 +36,6 @@ const useDropdown = <T>(initValue: T) => {
 
   return {
     value,
-    id,
     isOpen,
     handleReset,
     onClickButton: handleClickButton,

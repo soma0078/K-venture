@@ -12,3 +12,8 @@ export const convertAPItoSelected = (dateString: string) => {
   const date = new Date(dateString);
   return isValid(date) ? format(date, SELECTED_DATE_FORMAT) : '';
 };
+
+// Date Object -> YYYY-MM-DD
+export const formatDateToYMD = (date: Date) => {
+  return isValid(date) ? format(date, 'yyyy-MM-dd') : '';
+};

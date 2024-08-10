@@ -360,7 +360,7 @@
     @apply pl-[12px] pt-[12px] text-kv-xl;
   }
   /* 이전달 다음달 글자색 */
-  .custom-calendar .previus-month,
+  .custom-calendar .previous-month,
   .custom-calendar .next-month {
     @apply text-gray-300;
   }
@@ -385,7 +385,7 @@
   }
   /* 색점 */
   .custom-calendar .color-dot {
-    @apply absolute -top-[60px] left-[36px] h-[8px] w-[8px] rounded-full;
+    @apply absolute bottom-[130px] left-[36px] h-[8px] w-[8px] rounded-full;
   }
   /*  */
 }
