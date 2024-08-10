@@ -21,17 +21,28 @@ export default function ReviewList({
 }: ReviewListProps) {
   return (
     <>
-      <p>{averageRating.toFixed(1)}</p>
-      <ReviewCount totalCount={totalCount} />
-      {reviews.map((review) => (
-        <ReviewItem
-          key={review.id}
-          createdAt={review.createdAt}
-          content={review.content}
-          nickname={nickname}
-          profileImageUrl={profileImageUrl}
-        />
-      ))}
+      <div className="flex gap-4">
+        <span className="text-5xl font-kv-semibold">
+          {averageRating.toFixed(1)}
+        </span>
+        <div className="flex flex-col">
+          <span className="text-kv-2lg">
+            {averageRating > 4 ? '매우 만족' : '만족'}
+          </span>
+          <ReviewCount totalCount={totalCount} />
+        </div>
+      </div>
+      <div className="min-h-[430px]">
+        {reviews.map((review) => (
+          <ReviewItem
+            key={review.id}
+            createdAt={review.createdAt}
+            content={review.content}
+            nickname={nickname}
+            profileImageUrl={profileImageUrl}
+          />
+        ))}
+      </div>
     </>
   );
 }
