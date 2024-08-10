@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 
+import defaultProfileImage from '@/assets/icons/icon_profile.svg';
 import CustomKebab from '@/components/activity/CustomKebab';
 import ImageGallery from '@/components/activity/ImageGallery';
 import Location from '@/components/activity/Location';
@@ -78,6 +79,10 @@ export default function ActivityPage() {
                 totalCount={reviewData.totalCount}
                 averageRating={reviewData.averageRating}
                 reviews={reviewData.reviews}
+                nickname={userData?.nickname || ''}
+                profileImageUrl={
+                  userData?.profileImageUrl || '/assets/icons/icon_profile.svg'
+                }
               />
             ) : (
               <p>작성된 후기가 없습니다.</p>
