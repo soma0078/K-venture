@@ -403,7 +403,7 @@
 /* 체험 상세 */
 @layer components {
   .top-line {
-    @apply mb-10 border-t border-kv-gray-300 pt-10;
+    @apply mb-10 mt-10 border-t border-kv-gray-300 pt-10;
   }
 
   .activity-h3 {

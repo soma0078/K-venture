@@ -45,8 +45,8 @@ export default function ActivityPage() {
       </div>
 
       <ImageGallery activityData={activityData} />
-      <div className="flex justify-between gap-6">
-        <div className="w-4/5">
+      <div className="flex justify-between gap-6 mobile:gap-0">
+        <div className="w-4/5 mobile:w-full">
           <div className="top-line">
             <h3 className="activity-h3">체험 설명</h3>
             <p>{activityData.description}</p>
@@ -58,7 +58,9 @@ export default function ActivityPage() {
             <div className="h-96 bg-slate-50">{/* TODO 후기 컴포넌트 */}</div>
           </div>
         </div>
-        <div className="h-[746px] min-w-96 bg-slate-50"></div>
+        <div className="mt-10">
+          <ReservationCard />
+        </div>
       </div>
     </>
   );
