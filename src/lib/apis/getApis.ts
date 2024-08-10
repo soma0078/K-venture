@@ -1,5 +1,6 @@
 import instance from '@/lib/apis/axios';
 import { ActivityResponse as ActivityDetailResponse } from '@/types/activityDetailPageTypes';
+import { ActivityReviewsResponse } from '@/types/activityReviewTyes';
 import { ActivityResponse } from '@/types/activityTypes';
 import {
   MyActivitiesResponse,
@@ -43,6 +44,16 @@ export const getActivity = async (
 ): Promise<{ data: ActivityResponse }> => {
   const response = await instance.get<ActivityResponse>(
     `/activities/${activityId}`,
+  );
+  return { data: response.data };
+};
+
+// 체험 상세 리뷰 조회
+export const getActivityReview = async (
+  activityId: number,
+): Promise<{ data: ActivityReviewsResponse }> => {
+  const response = await instance.get<ActivityReviewsResponse>(
+    `/activities/${activityId}/reviews`,
   );
   return { data: response.data };
 };
