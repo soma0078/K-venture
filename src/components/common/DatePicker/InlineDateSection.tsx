@@ -1,8 +1,10 @@
 import classNames from 'classnames';
 import DatePicker from 'react-datepicker';
 
-import { getCommonDatePickerProps } from '@/components/common/DatePicker/getCommonDatePickerProps';
-import { INLINE_DATE_SECTION_PLACEHOLDER_TEXT } from '@/constants/datePickerConstants';
+import {
+  INLINE_DATE_SECTION_PLACEHOLDER_TEXT,
+  SELECTED_DATE_FORMAT,
+} from '@/constants/datePickerConstants';
 import useCalendar from '@/hooks/useCalender';
 import { formatDate } from '@/lib/utils/formatDate';
 
@@ -24,12 +26,6 @@ export default function InlineDateSection({
     isOpen,
   } = useCalendar(onClick);
 
-  const commonProps = getCommonDatePickerProps(
-    selectedDate,
-    today,
-    handleDateClick,
-  );
-
   const dateComponents = {
     closedCalendar: (
       <button
@@ -49,7 +45,17 @@ export default function InlineDateSection({
     ),
     openCalendar: (
       <div className="custom-datepicker">
-        <DatePicker inline onClickOutside={toggleCalendar} {...commonProps} />
+        <DatePicker
+          inline
+          onClickOutside={toggleCalendar}
+          selected={selectedDate}
+          minDate={today}
+          locale="ko"
+          dateFormat={SELECTED_DATE_FORMAT}
+          onSelect={(date: Date | null) => {
+            handleDateClick(date || today);
+          }}
+        />
       </div>
     ),
   };
