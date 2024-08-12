@@ -1,14 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 
-import { postLogin } from '@/lib/apis/postApis';
-import { LogInForm, LogInResponse } from '@/types/AuthTypes';
+import { postSignup } from '@/lib/apis/postApis';
+import { SignUpForm, SignUpResponse } from '@/types/AuthTypes';
 import { ModalCallbacks, ModalType } from '@/types/modalTypes';
 
 // NOTE: 로그인 성공시 쿠키에 토큰 저장, 실패시 에러 출력하는 훅
-const useLogIn = (
+const useSignup = (
   callback: (
     modalType: ModalType,
     newMessage: string,
@@ -16,18 +15,17 @@ const useLogIn = (
   ) => void,
 ) => {
   const router = useRouter();
-
-  return useMutation<LogInResponse, Error, LogInForm, Error>({
-    mutationFn: postLogin,
+  return useMutation<SignUpResponse, Error, SignUpForm, Error>({
+    mutationFn: postSignup,
     onError: (error: Error) => {
       callback('alert', error.message);
     },
-    onSuccess: (data) => {
-      setCookie('accessToken', data.accessToken);
-      setCookie('refreshToken', data.refreshToken);
-      router.push('/');
+    onSuccess: () => {
+      callback('alert', '가입이 완료되었습니다!', {
+        onConfirm: () => router.push('/login'),
+      });
     },
   });
 };
 
-export default useLogIn;
+export default useSignup;

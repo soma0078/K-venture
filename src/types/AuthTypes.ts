@@ -10,3 +10,12 @@ export interface LogInResponse {
   refreshToken: string;
   user: User;
 }
+
+export interface SignUpForm {
+  email: string;
+  nickname: string;
+  password: string;
+  password_confirm: string;
+}
+
+export interface SignUpResponse extends User {}

@@ -16,13 +16,13 @@ export default forwardRef(function PasswordInput(
   { validationCheck, ...rest }: PasswordInputProps,
   ref: React.LegacyRef<HTMLInputElement>,
 ) {
-  const [isShowPassword, toggle] = useToggle(true);
+  const [isShowPassword, toggle] = useToggle(false);
   return (
     <>
       <input
         type={isShowPassword ? 'text' : 'password'}
         autoComplete="off"
-        className={`${PASSWORD_INPUT_STYLE} ${validationCheck ? '"bg-kv-red-light hover:bg-kv-red-light focus:border-kv-red focus:outline-none' : 'bg-white hover:bg-kv-blue-light hover:bg-opacity-[0.4] focus:border-kv-blue focus:outline-none'}`}
+        className={`${PASSWORD_INPUT_STYLE} ${validationCheck ? 'bg-kv-red-light hover:bg-kv-red-light focus:border-kv-red focus:outline-none' : 'bg-white hover:bg-kv-blue-light hover:bg-opacity-[0.4] focus:border-kv-blue focus:outline-none'}`}
         ref={ref}
         {...rest}
       />
