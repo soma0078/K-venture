@@ -15,3 +15,8 @@ export const updateUserData = async (
   });
   return res.data;
 };
+
+export const cancelReservation = async (reservationId: number) => {
+  const url = `/my-reservations/${reservationId}`;
+  return await instance.patch(url, { status: 'canceled' });
+};

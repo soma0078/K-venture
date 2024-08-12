@@ -54,7 +54,7 @@ function MyReservationCard({
           ・ {reservation.headCount}명
         </p>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex w-full items-center justify-between">
         <p className="activity-card-price">
           ₩{reservation.totalPrice.toLocaleString()}
         </p>
