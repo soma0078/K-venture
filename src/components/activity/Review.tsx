@@ -1,27 +1,27 @@
 import StartIcon from '@/assets/icons/icon_star.svg';
-import { ActivityResponse } from '@/types/activityTypes';
 
 interface ReviewProps {
-  activityData: ActivityResponse;
+  reviewCount: number;
+  rating: number;
   className?: string;
 }
 
-export function ReviewRating({ activityData }: ReviewProps) {
+export function ReviewRating({ reviewCount, rating }: ReviewProps) {
   return (
     <div className="flex items-center gap-1">
       <StartIcon alt="별 아이콘" />
       <p>
-        {activityData.rating} ({activityData.reviewCount.toLocaleString()})
+        {rating} ({reviewCount.toLocaleString()})
       </p>
     </div>
   );
 }
 
-export function ReviewCount({ activityData }: ReviewProps) {
+export function ReviewCount({ reviewCount }: ReviewProps) {
   return (
     <div className="flex items-center gap-1">
       <StartIcon alt="별 아이콘" />
-      <p>{activityData.reviewCount.toLocaleString()}개</p>
+      <p>{reviewCount.toLocaleString()}개</p>
     </div>
   );
 }

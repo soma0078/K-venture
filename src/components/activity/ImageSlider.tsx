@@ -7,15 +7,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { getActivityImages } from '@/lib/utils/activityImageUtils';
 import { swiperConfig } from '@/lib/utils/swiperConfig';
-import { ActivityResponse } from '@/types/activityTypes';
 
-interface ImageSwiperProps {
-  activityData: ActivityResponse;
-  className?: string;
-}
+import { BannerImageProps } from './ImageGallery';
 
-export default function ImageSwpier({ activityData }: ImageSwiperProps) {
-  const images = getActivityImages(activityData);
+export default function ImageSwpier({
+  title,
+  bannerImageUrl,
+  subImages,
+}: BannerImageProps) {
+  const images = getActivityImages({ title, bannerImageUrl, subImages });
 
   return (
     <div className="swiper-container">

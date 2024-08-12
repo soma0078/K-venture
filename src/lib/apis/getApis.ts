@@ -46,3 +46,34 @@ export const getActivity = async (
   );
   return { data: response.data };
 };
+
+/**
+ * 주소를 좌표로 변환하는 함수
+ * @param address - 변환할 주소
+ * @returns { lat: number, lng: number } - 좌표 또는 오류 발생 시 null
+ */
+export const geocodeAddress = async (address: string) => {
+  try {
+    // 카카오 주소 검색 API 요청
+    const response = await instance.get(
+      `https://dapi.kakao.com/v2/local/search/address.json?query=${encodeURIComponent(address)}`,
+      {
+        headers: {
+          Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`,
+        },
+      },
+    );
+
+    const data = response.data;
+
+    if (data.documents.length > 0) {
+      // 첫 번째 주소 좌표 추출
+      const { x: lng, y: lat } = data.documents[0].address;
+      return { lat: parseFloat(lat), lng: parseFloat(lng) };
+    }
+  } catch (error) {
+    console.error('주소-좌표 변환 중 에러가 발생했습니다.', error);
+  }
+
+  return null;
+};

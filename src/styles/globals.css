@@ -444,6 +444,10 @@
   .sub-image-container.custom-grid.custom-grid .sub-image-wrapper:nth-child(3) {
     @apply col-span-2 row-span-2;
   }
+
+  .sub-image-container.custom-grid-cols-2 {
+    @apply grid-cols-2;
+  }
 }
 /* 체험 카드 */
 @layer components {

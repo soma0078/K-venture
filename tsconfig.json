@@ -20,7 +20,8 @@
     },
     "checkJs": true,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "types": ["kakao.maps.d.ts"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "commitlint.config.js"],
   "exclude": ["node_modules"]
