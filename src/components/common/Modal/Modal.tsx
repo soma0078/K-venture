@@ -9,6 +9,7 @@ import {
   ModalType,
 } from '@/types/modalTypes';
 
+import ReviewModal from './CustomModals/ReviewModal';
 import ModalContainer from './ModalContainer';
 /**
  *
@@ -16,7 +17,13 @@ import ModalContainer from './ModalContainer';
  * // 사용 예시
  * <Modal {...modalProps} />
  */
-export default function Modal({ isOpen, onClose, message, type }: ModalProps) {
+export default function Modal({
+  isOpen,
+  onClose,
+  message,
+  type,
+  reservation,
+}: ModalProps) {
   // 조건부 랜더링을 위해 삼항연산자를 사용하지 않은 이유:
   // 모달이 계속 추가될 경우 import하고 객체에 추가하면 확장이 편리함
   const modalComponents: Record<
@@ -25,6 +32,7 @@ export default function Modal({ isOpen, onClose, message, type }: ModalProps) {
   > = {
     [MODAL_TYPES.ALERT]: AlertModal,
     [MODAL_TYPES.CONFIRM]: ConfirmModal,
+    [MODAL_TYPES.REVIEW]: ReviewModal,
   };
 
   const ModalContent = modalComponents[type];
@@ -33,7 +41,11 @@ export default function Modal({ isOpen, onClose, message, type }: ModalProps) {
     <ModalContainer isOpen={isOpen} onClose={onClose}>
       {() => (
         <div className="pointer-events-none fixed inset-0 z-10 align-center">
-          <ModalContent onClose={onClose} message={message} />
+          <ModalContent
+            onClose={onClose}
+            message={message}
+            reservation={reservation}
+          />
         </div>
       )}
     </ModalContainer>

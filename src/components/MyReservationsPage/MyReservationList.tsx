@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import MyReservationCard from '@/components/common/ActivityCard/MyReservationCard';
 import SortDropDown from '@/components/common/Dropdown/SortDropdown';
@@ -7,8 +7,9 @@ import { Modal } from '@/components/common/Modal';
 import useInfiniteScrollReservations from '@/hooks/useInfiniteScroll';
 import useModal from '@/hooks/useModal';
 import { cancelReservation } from '@/lib/apis/patchApis';
+import { MyReservation } from '@/types/get/reservationTypes';
 
-const ReservationList = () => {
+export default function ReservationList() {
   const {
     reservations,
     loading,
@@ -18,7 +19,14 @@ const ReservationList = () => {
     fetchReservations,
   } = useInfiniteScrollReservations(null);
 
-  const { modalProps, openModal } = useModal();
+  const { modalProps: cancelModalProps, openModal: openCancelModal } =
+    useModal();
+
+  const { modalProps: reviewModalProps, openModal: openReviewModal } =
+    useModal();
+
+  const [selectedReservation, setSelectedReservation] =
+    useState<MyReservation | null>(null);
 
   const handleFilterSelect = (option: string) => {
     const statusMapping: { [key: string]: string } = {
@@ -42,9 +50,23 @@ const ReservationList = () => {
   };
 
   const handleCancelClick = (reservationId: number) => {
-    openModal('confirm', '예약을 취소하시겠습니까?', {
+    openCancelModal('confirm', '예약을 취소하시겠습니까?', {
       onConfirm: () => handleCancelReservation(reservationId),
     });
+  };
+
+  const handleReviewClick = (reservation: MyReservation) => {
+    setSelectedReservation(reservation);
+    openReviewModal(
+      'review',
+      '',
+      {
+        onConfirm: async () => {
+          await fetchReservations();
+        },
+      },
+      reservation,
+    );
   };
 
   if (error) return <div>Error: {error}</div>;
@@ -84,16 +106,15 @@ const ReservationList = () => {
             <MyReservationCard
               key={reservation.id}
               reservation={reservation}
-              onReviewClick={() => {}}
+              onReviewClick={() => handleReviewClick(reservation)}
               onCancelClick={() => handleCancelClick(reservation.id)}
             />
           ))}
         </div>
       )}
       {loading && <div>Loading more...</div>}
-      <Modal {...modalProps} />
+      <Modal {...cancelModalProps} />
+      <Modal {...reviewModalProps} reservation={selectedReservation} />
     </div>
   );
-};
-
-export default ReservationList;
+}
