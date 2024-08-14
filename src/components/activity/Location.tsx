@@ -7,7 +7,7 @@ interface LocationProps {
 export default function Location({ address }: LocationProps) {
   return (
     <div className="flex items-center gap-1">
-      <LocationIcon alt="위치 아이콘" />
+      <LocationIcon />
       <p>{address}</p>
     </div>
   );

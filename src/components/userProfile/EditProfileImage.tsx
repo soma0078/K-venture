@@ -64,12 +64,17 @@ export default function EditProfileImage() {
   return (
     <form className="relative m-auto mb-6 h-40 w-40">
       <div className="relative h-40 w-40 overflow-hidden rounded-full shadow-lg">
-        <Image src={profileImage} alt="User profile" fill objectFit="cover" />
+        <Image
+          src={profileImage}
+          alt={`${data?.nickname}의 프로필 이미지`}
+          fill
+          objectFit="cover"
+        />
       </div>
 
       <label htmlFor="uploadProfileImage">
         <span className="absolute bottom-0 right-0 z-10 cursor-pointer rounded-full bg-kv-primary-blue p-2.5 transition-all hover:scale-110">
-          <PenIcon alt="편집 아이콘" />
+          <PenIcon />
         </span>
       </label>
 

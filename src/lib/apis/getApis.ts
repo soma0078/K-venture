@@ -1,5 +1,6 @@
 import instance from '@/lib/apis/axios';
 import { ActivityResponse as ActivityDetailResponse } from '@/types/activityDetailPageTypes';
+import { ActivityReviewsResponse } from '@/types/activityReviewTypes';
 import { ActivityResponse } from '@/types/activityTypes';
 import { MyReservation } from '@/types/get/reservationTypes';
 import {
@@ -94,6 +95,15 @@ export const geocodeAddress = async (address: string) => {
   } catch (error) {
     console.error('주소-좌표 변환 중 에러가 발생했습니다.', error);
   }
+};
 
-  return null;
+// 체험 상세 리뷰 조회
+export const getActivityReview = async (activityId: number, page: number) => {
+  const response = await instance.get<ActivityReviewsResponse>(
+    `/activities/${activityId}/reviews`,
+    {
+      params: { page },
+    },
+  );
+  return response.data;
 };

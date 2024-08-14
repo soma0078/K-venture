@@ -403,7 +403,7 @@
 /* 체험 상세 */
 @layer components {
   .top-line {
-    @apply mb-10 border-t border-kv-gray-300 pt-10;
+    @apply mb-10 mt-10 border-t border-kv-gray-300 pt-10;
   }
 
   .activity-h3 {
@@ -459,5 +459,21 @@
   }
   .activity-reservation-card-button {
     @apply h-8 w-20 text-kv-md font-kv-medium align-center pc:h-[43.08px] pc:w-[144px] pc:text-kv-lg tablet:h-10 tablet:w-[112px] tablet:text-kv-lg !important;
+  }
+}
+
+/* 페이지네이션 */
+@layer components {
+  .pagination-btn {
+    @apply flex h-14 w-14 items-center justify-center rounded-2xl border border-kv-primary-blue-light bg-white text-kv-primary-blue mobile:h-10 mobile:w-10;
+  }
+  .pagination-btn.active {
+    @apply border-kv-blue bg-kv-primary-blue text-white;
+  }
+  .arrow-size {
+    @apply h-3 w-3 mobile:h-2.5 mobile:w-2.5;
+  }
+  .pagination-btn:disabled .arrow-size {
+    @apply text-kv-gray-600;
   }
 }
