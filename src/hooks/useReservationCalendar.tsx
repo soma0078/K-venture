@@ -1,21 +1,29 @@
-import { useAtom } from 'jotai';
-import { ReactNode, useEffect, useState } from 'react';
+import { useAtom, useSetAtom } from 'jotai';
+import { ReactNode, useState } from 'react';
 import { CalendarProps, TileArgs } from 'react-calendar';
 
 import { formatDateToYMD } from '@/lib/utils/formatDate';
 import {
   calendarChipAtom,
+  dailyReservationModalAtom,
   reservationDashboardQueryParamsAtom,
 } from '@/state/reservationDashboardAtom';
 
 export default function useReservationCalendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [value, setValue] = useState<CalendarProps['value']>(new Date());
-  const [, setQueryParamsState] = useAtom(reservationDashboardQueryParamsAtom);
+  const setQueryParamsState = useSetAtom(reservationDashboardQueryParamsAtom);
+  const setDailyModalState = useSetAtom(dailyReservationModalAtom);
   const [calendarChip] = useAtom(calendarChipAtom);
 
   const onDateChange: CalendarProps['onChange'] = (nextValue) => {
-    setValue(nextValue);
+    if (nextValue instanceof Date) {
+      setValue(nextValue);
+      setDailyModalState((prev) => ({
+        ...prev,
+        date: formatDateToYMD(new Date(nextValue.toString())),
+      }));
+    }
   };
 
   const onMonthChange: CalendarProps['onActiveStartDateChange'] = ({

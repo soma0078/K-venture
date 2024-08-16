@@ -1,4 +1,4 @@
-import { useAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
 import { getMyActivities, getReservationDashboard } from '@/lib/apis/getApis';
@@ -15,10 +15,10 @@ import {
 import useFetchData from './useFetchData';
 
 const useReservationDashboardData = () => {
-  const [{ activityId, year, month }] = useAtom(
+  const { activityId, year, month } = useAtomValue(
     reservationDashboardQueryParamsAtom,
   );
-  const [, setCalendarChip] = useAtom(calendarChipAtom);
+  const setCalendarChip = useSetAtom(calendarChipAtom);
   const [availableActivities, setAvailableActivities] = useState<
     AvailableValues[]
   >([]);

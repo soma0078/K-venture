@@ -1,13 +1,26 @@
 import { Calendar } from 'react-calendar';
 
+import DailyReservationModal from '@/components/ReservationDashboardPage/DailyReservationModal';
 import ReservationDashboardDropdown from '@/components/ReservationDashboardPage/ReservationDashboardDropdown';
 import useDropdown from '@/hooks/useDropdown';
 import useReservationCalendar from '@/hooks/useReservationCalendar';
 import useReservationDashboardData from '@/hooks/useReservationDashboardData';
 
 export default function ReservationDashboard() {
-  const dropdown = useDropdown('');
-  const calendar = useReservationCalendar();
+  const {
+    value: dropdownValue,
+    isOpen,
+    onClickButton,
+    onBlurButton,
+    onClickMenu,
+  } = useDropdown('');
+  const {
+    tileContent,
+    tileClassName,
+    onDateChange,
+    onMonthChange,
+    value: calendarValue,
+  } = useReservationCalendar();
   const { availableActivities } = useReservationDashboardData();
 
   return (
@@ -18,29 +31,30 @@ export default function ReservationDashboard() {
       <div className="mb-[24px] h-[56px]">
         <ReservationDashboardDropdown
           label="체험명"
-          value={dropdown.value}
+          value={dropdownValue}
           availableValues={availableActivities}
           placeholder="체험명을 선택해주세요"
-          isOpen={dropdown.isOpen}
-          onClickButton={dropdown.onClickButton}
-          onBlurButton={dropdown.onBlurButton}
-          onClickMenu={dropdown.onClickMenu}
+          isOpen={isOpen}
+          onClickButton={onClickButton}
+          onBlurButton={onBlurButton}
+          onClickMenu={onClickMenu}
         />
       </div>
       <div className="h-[872px]">
         <Calendar
           locale="ko-KR"
           calendarType="gregory"
-          tileContent={calendar.tileContent}
-          tileClassName={calendar.tileClassName}
+          tileContent={tileContent}
+          tileClassName={tileClassName}
           formatDay={(_, date) => date.getDate().toString()}
-          onChange={calendar.onDateChange}
-          onActiveStartDateChange={calendar.onMonthChange}
-          value={calendar.value}
+          onChange={onDateChange}
+          onActiveStartDateChange={onMonthChange}
+          value={calendarValue}
           minDetail={'month'}
           className="custom-calendar"
         />
       </div>
+      <DailyReservationModal />
     </div>
   );
 }

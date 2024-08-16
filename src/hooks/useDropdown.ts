@@ -1,4 +1,4 @@
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { MouseEventHandler, useState } from 'react';
 
 import { reservationDashboardQueryParamsAtom } from '@/state/reservationDashboardAtom';
@@ -6,7 +6,7 @@ import { reservationDashboardQueryParamsAtom } from '@/state/reservationDashboar
 const useDropdown = <T>(initValue: T) => {
   const [value, setValue] = useState(initValue);
   const [isOpen, setIsOpen] = useState(false);
-  const [, setCalendarState] = useAtom(reservationDashboardQueryParamsAtom);
+  const setCalendarState = useSetAtom(reservationDashboardQueryParamsAtom);
 
   // 드롭다운 버튼 클릭 시 열기/닫기
   const handleClickButton: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -16,16 +16,15 @@ const useDropdown = <T>(initValue: T) => {
 
   // 드롭다운 메뉴 클릭 시 닫기
   const handleClickMenu = (value: T) => {
-    const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-      e.preventDefault();
-      const target = e.target as HTMLButtonElement;
-      const newId = Number(target.id);
+    const handleClick: MouseEventHandler<HTMLButtonElement> = ({
+      currentTarget,
+    }) => {
       setValue(value);
       setIsOpen(false);
       // ReservationDashboardQueryParams 업데이트
       setCalendarState((prev) => ({
         ...prev,
-        activityId: newId,
+        activityId: Number(currentTarget.id),
       }));
     };
     return handleClick;

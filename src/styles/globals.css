@@ -320,7 +320,7 @@
   .custom-calendar .react-calendar__navigation {
     @apply flex h-[60px] w-full max-w-[342px] gap-[38px] bg-none text-kv-xl font-kv-bold text-kv-black;
   }
-  /*  */
+  /* 2024년 8월 화살표 제외한 가운데 글자 */
   .custom-calendar .react-calendar__navigation__label {
     @apply w-[140px];
   }
@@ -342,12 +342,15 @@
     .react-calendar__month-view__weekdays__weekday:not(:last-child) {
     @apply border-r;
   }
+  .custom-calendar .react-calendar__month-view__weekdays__weekday abbr {
+    @apply !no-underline;
+  }
   .custom-calendar .react-calendar__month-view__weekdays__weekday {
     @apply pl-[12px];
   }
   /* 1일, 2일...숫자 컨테이너 */
   .custom-calendar .react-calendar__tile {
-    @apply flex h-[154px] max-w-[114px] flex-col justify-between border border-kv-gray-300 bg-white hover:border-kv-green;
+    @apply flex h-[154px] max-w-[114px] flex-col justify-between border border-kv-gray-300 bg-white hover:border-kv-primary-blue;
   }
   .custom-calendar .react-calendar__tile:nth-last-child(7) {
     @apply rounded-bl-lg;
@@ -387,7 +390,16 @@
   .custom-calendar .color-dot {
     @apply absolute bottom-[130px] left-[36px] h-[8px] w-[8px] rounded-full;
   }
-  /*  */
+}
+
+/* 예약 정보 모달 */
+@layer components {
+  .status-tap-base {
+    @apply h-[42px] w-[72px] align-center;
+  }
+  .status-active {
+    @apply border-b-[4px] border-kv-primary-blue text-kv-primary-blue;
+  }
 }
 
 /* 케밥 */

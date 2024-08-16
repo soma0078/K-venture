@@ -2,6 +2,10 @@ import instance from '@/lib/apis/axios';
 import { ActivityResponse as ActivityDetailResponse } from '@/types/activityDetailPageTypes';
 import { ActivityReviewsResponse } from '@/types/activityReviewTypes';
 import { ActivityResponse } from '@/types/activityTypes';
+import {
+  ReservationDetailsResponse,
+  ReservationStatusResponse,
+} from '@/types/get/ReservationDashboardPageGetTypes';
 import { MyReservation } from '@/types/get/reservationTypes';
 import {
   MyActivitiesResponse,
@@ -45,6 +49,42 @@ export const getActivity = async (
 ): Promise<{ data: ActivityResponse }> => {
   const response = await instance.get<ActivityResponse>(
     `/activities/${activityId}`,
+  );
+  return { data: response.data };
+};
+
+// 특정 날짜에 등록된 예약 상태를 조회한다. 신청, 승인, 거절...
+export const getReservationStatus = async (
+  activityId: number,
+  date: string,
+): Promise<{ data: ReservationStatusResponse[] }> => {
+  const response = await instance.get<ReservationStatusResponse[]>(
+    `/my-activities/${activityId}/reserved-schedule`,
+    {
+      params: { date },
+    },
+  );
+  return { data: response.data };
+};
+
+// 특정 날짜의 예약자 정보를 조회한다. 닉네임, 인원수...
+export const getReservationDetails = async (
+  activityId: number,
+  scheduleId: number,
+  status: string,
+  cursorId?: number,
+  size?: number,
+): Promise<{ data: ReservationDetailsResponse }> => {
+  const response = await instance.get<ReservationDetailsResponse>(
+    `/my-activities/${activityId}/reservations`,
+    {
+      params: {
+        cursorId: cursorId || null,
+        size: size || 10,
+        scheduleId,
+        status,
+      },
+    },
   );
   return { data: response.data };
 };

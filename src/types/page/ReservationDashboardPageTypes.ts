@@ -35,3 +35,18 @@ export interface ReservationDashboardResponse {
     pending: number;
   };
 }
+
+// 달력에 표시할 정보 요청에 필요한 params를 전역 상태로 종합
+export interface ReservationDashboardQueryParamsType {
+  activityId: number;
+  year: string;
+  month: string;
+}
+
+// 예약 정보 모달 정보 요청 params를 전역 상태로 종합
+export interface DailyReservationModalType {
+  activityId: number;
+  date: string;
+  status: 'pending' | 'confirmed' | 'declined';
+  scheduleId: number;
+}
