@@ -9,7 +9,13 @@ import {
   reservationDashboardQueryParamsAtom,
 } from '@/state/reservationDashboardAtom';
 
-export default function useReservationCalendar() {
+interface useReservationCalendarProps {
+  onOpen: () => void;
+}
+
+export default function useReservationCalendar({
+  onOpen,
+}: useReservationCalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [value, setValue] = useState<CalendarProps['value']>(new Date());
   const setQueryParamsState = useSetAtom(reservationDashboardQueryParamsAtom);
@@ -23,6 +29,7 @@ export default function useReservationCalendar() {
         ...prev,
         date: formatDateToYMD(new Date(nextValue.toString())),
       }));
+      onOpen();
     }
   };
 

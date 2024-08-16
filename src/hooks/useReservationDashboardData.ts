@@ -13,6 +13,7 @@ import {
 } from '@/types/page/ReservationDashboardPageTypes';
 
 import useFetchData from './useFetchData';
+import useResponsive from './useResponsive';
 
 const useReservationDashboardData = () => {
   const { activityId, year, month } = useAtomValue(
@@ -22,6 +23,8 @@ const useReservationDashboardData = () => {
   const [availableActivities, setAvailableActivities] = useState<
     AvailableValues[]
   >([]);
+  const [isOpenInfo, setIsOpenInfo] = useState(false);
+  const { isMobile } = useResponsive();
 
   // GET 등록한 체험 전체 데이터
   const { data: myActivitiesData } = useFetchData(
@@ -65,7 +68,28 @@ const useReservationDashboardData = () => {
     }
   }, [reservationDashboardData]);
 
-  return { availableActivities };
+  // 모달 오픈 시 배경 스크롤 방지
+  useEffect(() => {
+    if (isOpenInfo && isMobile) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpenInfo]);
+
+  const handleCloseClick = () => {
+    setIsOpenInfo(false);
+  };
+
+  const handleOpenClick = () => {
+    setIsOpenInfo(true);
+  };
+
+  return { availableActivities, isOpenInfo, handleCloseClick, handleOpenClick };
 };
 
 export default useReservationDashboardData;

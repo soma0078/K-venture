@@ -400,6 +400,9 @@
   .status-active {
     @apply border-b-[4px] border-kv-primary-blue text-kv-primary-blue;
   }
+  .sub-title {
+    @apply text-kv-xl font-kv-semibold;
+  }
 }
 
 /* 케밥 */
