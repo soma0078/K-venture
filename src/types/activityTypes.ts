@@ -43,7 +43,7 @@ export interface SubImageResponse {
 }
 
 export const CATEGORIES = {
-  ART: '문화 예술',
+  ART: '문화 · 예술',
   'F&B': '식음료',
   SPORT: '스포츠',
   TOUR: '투어',

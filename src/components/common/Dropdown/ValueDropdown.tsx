@@ -61,7 +61,7 @@ export default function ValueDropdown({
       {/* 드롭다운 메뉴 */}
       {isOpen && (
         // NOTE: 다른 곳에서 사용시 pos-value-dropdown-menus 부분만 필요에 따라 바꾸면 될 것 같습니다.
-        <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md">
+        <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md scrollbar-custom">
           {availableValues.map((value, idx) => {
             const isFirst = idx === 0;
             const isLast = idx === availableValues.length - 1;

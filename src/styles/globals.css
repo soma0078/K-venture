@@ -38,8 +38,12 @@
   .size-my-act-img {
     @apply size-[167px] pc:size-[180px] tablet:size-[206px];
   }
-  .size-my-act-date {
-    @apply w-[130px] pc:w-[380px] tablet:w-[150px];
+  .size-my-act-date,
+  .size-my-act-date input {
+    @apply w-full min-w-[377px] tablet:min-w-[149px] mobile:min-w-[130px];
+  }
+  .size-my-act-date .react-datepicker-wrapper {
+    @apply w-full;
   }
   .size-my-act-time {
     @apply w-[80px] pc:w-[140px] tablet:w-[104px];
@@ -54,11 +58,11 @@
   }
 
   .schedule-my-act {
-    @apply flex gap-1 pc:gap-5 tablet:gap-2;
+    @apply flex gap-5 mobile:gap-1;
   }
 
   .times-my-act {
-    @apply flex h-full gap-1 pc:gap-3 tablet:gap-[5px];
+    @apply flex h-full gap-5 mobile:gap-1;
   }
 
   .label-my-act-schedule {
@@ -67,6 +71,14 @@
 
   .size-my-act-date .input-my-act {
     @apply flex h-11 items-center rounded border border-kv-gray-79 bg-white px-2.5 text-kv-md pc:h-14 pc:px-4 pc:text-kv-lg tablet:h-14 tablet:px-4 tablet:text-kv-lg;
+  }
+
+  .category .pos-value-dropdown-menus {
+    @apply bg-white p-2;
+  }
+
+  .category .pos-value-dropdown-menus .dropdown-menu {
+    @apply rounded-md border-none pl-2 before:pr-1 before:text-kv-xl before:text-white before:content-['_✓'] hover:bg-kv-primary-blue hover:text-white;
   }
 }
 
@@ -135,7 +147,7 @@
   }
 
   .layout-header-wrapper {
-    @apply fixed left-0 right-0 top-0 z-10;
+    @apply fixed left-0 right-0 top-0 z-30;
   }
 
   .layout-header-spacer {

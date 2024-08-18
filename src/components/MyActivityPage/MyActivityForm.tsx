@@ -125,10 +125,11 @@ export default function MyActivityForm() {
     const postActivityAndMove = async () => {
       try {
         const formData = await formActivityData();
-        setActivityId(await postActivity(formData));
+        const newActivityId = await postActivity(formData);
+        setActivityId(newActivityId);
         setIsSuccess(true);
         openModal('alert', '체험 생성이 완료되었습니다.', {
-          onConfirm: () => router.push(`/activity/${activityId}`),
+          onConfirm: () => router.push(`/activity/${newActivityId}`),
         });
       } catch (e) {
         const error = e as AxiosErrorWithMessage;
@@ -168,11 +169,13 @@ export default function MyActivityForm() {
         {errors.title?.message && <ErrorText>{errors.title.message}</ErrorText>}
       </div>
 
-      <ValueDropdown
-        placeholder={'*카테고리'}
-        availableValues={Object.values(CATEGORIES)}
-        {...category}
-      />
+      <div className="category">
+        <ValueDropdown
+          placeholder={'*카테고리'}
+          availableValues={Object.values(CATEGORIES)}
+          {...category}
+        />
+      </div>
 
       <div className="flex flex-col gap-2">
         <textarea
@@ -188,12 +191,12 @@ export default function MyActivityForm() {
 
       <div className="flex flex-col gap-2">
         <div className="flex flex-col">
-          <h2 className="h2-my-act">*가격</h2>
+          <h2 className="h2-my-act">가격</h2>
           <input
             className="input-my-act"
             id="price"
             type="number"
-            placeholder="가격"
+            placeholder="*가격"
             {...register('price')}
           />
         </div>
@@ -202,14 +205,14 @@ export default function MyActivityForm() {
 
       <div className="flex flex-col gap-2">
         <div className="flex flex-col">
-          <h2 className="h2-my-act">*주소</h2>
+          <h2 className="h2-my-act">주소</h2>
           <input
             className="input-my-act cursor-pointer"
             id="address"
             type="string"
             value={address}
             readOnly
-            placeholder="주소를 입력해주세요."
+            placeholder="*주소"
             onClick={handleClickAddress}
             {...register('address')}
           />
@@ -219,7 +222,7 @@ export default function MyActivityForm() {
         )}
       </div>
 
-      <div className="w-fit">
+      <div>
         <h2 className="h2-my-act">예약 가능한 시간대</h2>
         <ScheduleList
           schedules={schedules}
@@ -229,7 +232,7 @@ export default function MyActivityForm() {
       </div>
 
       <div>
-        <h2 className="h2-my-act">*배너 이미지</h2>
+        <h2 className="h2-my-act">배너 이미지</h2>
         {banner.renderImageManager()}
       </div>
 

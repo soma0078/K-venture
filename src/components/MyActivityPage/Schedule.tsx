@@ -26,13 +26,15 @@ export default function Schedule({ schedule, onClickDelete }: DateProps) {
       </div>
 
       {/* 삭제버튼 */}
-      <button
-        className="relative size-11 hover:brightness-95 active:brightness-90 pc:size-14 tablet:size-14"
-        type="button"
-        onClick={onClickDelete}
-      >
-        <Image src="/assets/icons/icon_minus.svg" alt="날짜 제거" fill />
-      </button>
+      <div>
+        <button
+          className="relative size-11 hover:brightness-95 active:brightness-90 pc:size-14 tablet:size-14"
+          type="button"
+          onClick={onClickDelete}
+        >
+          <Image src="/assets/icons/icon_minus.svg" alt="날짜 제거" fill />
+        </button>
+      </div>
     </div>
   );
 }
