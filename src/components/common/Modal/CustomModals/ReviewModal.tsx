@@ -1,9 +1,10 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CloseIcon from '@/assets/icons/iocn_x_lg.svg';
 import Button from '@/components/common/Button';
 import StarRating from '@/components/MyReservationsPage/StarRating';
+import { getActivity } from '@/lib/apis/getApis';
 import { postReview } from '@/lib/apis/postApis';
 import { CustomModalProps } from '@/types/modalTypes';
 
@@ -18,6 +19,22 @@ export default function ReviewModal({
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [activityExists, setActivityExists] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchActivity = async () => {
+      try {
+        await getActivity(reservation.activity.id);
+      } catch (error) {
+        setActivityExists(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchActivity();
+  }, [reservation.activity.id]);
 
   const handleReviewChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
@@ -42,8 +59,41 @@ export default function ReviewModal({
     }
   };
 
+  if (loading) {
+    return (
+      <div className="review-modal-container">
+        <div className="flex h-[686px] w-[432px] flex-col items-center justify-center">
+          <h2 className="font-kv-bold text-kv-gray-600 kv-text-xl">
+            로딩 중...
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (!activityExists) {
+    return (
+      <div className="review-modal-container">
+        <div className="flex h-[686px] w-[432px] flex-col items-center justify-center">
+          <h2 className="mb-4 font-kv-bold kv-text-2xl">체험을 찾을 수 없음</h2>
+          <p className="mb-10 mt-3 text-center font-kv-regular kv-text-md">
+            이 체험은 삭제되었거나 더 이상 존재하지 않아 리뷰를 남길 수
+            없습니다.
+          </p>
+          <Button
+            type="button"
+            className="btn-blue mt-6 h-[56px] w-full"
+            onClick={() => onClose()}
+          >
+            닫기
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="modal-container h-[750px] w-[480px] rounded-[24px] align-center">
+    <div className="review-modal-container">
       <div className="h-[686px] w-[432px]">
         <div className="flex h-10 w-full items-center justify-between">
           <h2 className="font-kv-bold kv-text-2xl">후기 작성</h2>

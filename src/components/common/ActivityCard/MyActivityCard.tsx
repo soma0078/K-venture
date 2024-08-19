@@ -39,7 +39,7 @@ function MyActivityCard({ activity, onDelete }: MyActivityCardProps) {
           </span>
         </p>
         <KebabContainer>
-          <KebabLink href={`/activity/${activity.id}`}>수정하기</KebabLink>
+          <KebabLink href={`/my-activity/${activity.id}`}>수정하기</KebabLink>
           <KebabDelete onClick={onDelete}>삭제하기</KebabDelete>
         </KebabContainer>
       </div>

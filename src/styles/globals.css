@@ -520,3 +520,10 @@
     @apply text-kv-gray-600;
   }
 }
+
+/* 후기 모달 */
+@layer components {
+  .review-modal-container {
+    @apply modal-container h-[750px] w-[480px] rounded-[24px] align-center;
+  }
+}

@@ -6,7 +6,8 @@ import {
   ReservationDetailsResponse,
   ReservationStatusResponse,
 } from '@/types/get/ReservationDashboardPageGetTypes';
-import { MyReservation } from '@/types/get/reservationTypes';
+import { MyReservationsResponse } from '@/types/get/reservationTypes';
+import { MyActivityListResponse } from '@/types/myActivitiesTypes';
 import {
   MyActivitiesResponse,
   ReservationDashboardResponse,
@@ -95,25 +96,6 @@ export const getReservationDetails = async ({
   return { data: response.data };
 };
 
-// 내 예약 리스트 조회
-export const getMyReservations = async (
-  nextCursorId: string | null,
-  status: string | null,
-  isFirstFetch: boolean,
-): Promise<{ reservations: MyReservation[]; cursorId: string | null }> => {
-  let url = `/my-reservations?size=10`;
-
-  if (nextCursorId && !isFirstFetch) {
-    url += `&cursorId=${nextCursorId}`;
-  }
-  if (status) {
-    url += `&status=${status}`;
-  }
-
-  const { data } = await instance.get(url);
-  return data;
-};
-
 /**
  * 주소를 좌표로 변환하는 함수
  * @param address - 변환할 주소
@@ -151,5 +133,31 @@ export const getActivityReview = async (activityId: number, page: number) => {
       params: { page },
     },
   );
+  return response.data;
+};
+
+export const getActivities = async (
+  cursorId: string | null = null,
+): Promise<MyActivityListResponse> => {
+  const response = await instance.get('/my-activities', {
+    params: {
+      size: 10,
+      cursorId,
+    },
+  });
+  return response.data;
+};
+
+export const getMyReservations = async (
+  cursorId: string | null = null,
+  status: string | null = null,
+): Promise<MyReservationsResponse> => {
+  const response = await instance.get('/my-reservations', {
+    params: {
+      size: 10,
+      status,
+      cursorId,
+    },
+  });
   return response.data;
 };

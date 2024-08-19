@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import MyReservationCard from '@/components/common/ActivityCard/MyReservationCard';
 import SortDropDown from '@/components/common/Dropdown/SortDropdown';
 import { Modal } from '@/components/common/Modal';
-import useInfiniteScrollReservations from '@/hooks/useInfiniteScroll';
+import useInfiniteScrollReservation from '@/hooks/useInfiniteScrollReservation';
 import useModal from '@/hooks/useModal';
 import { cancelReservation } from '@/lib/apis/patchApis';
 import { MyReservation } from '@/types/get/reservationTypes';
@@ -17,11 +17,10 @@ export default function ReservationList() {
     setError,
     updateStatus,
     fetchReservations,
-  } = useInfiniteScrollReservations(null);
+  } = useInfiniteScrollReservation(null);
 
   const { modalProps: cancelModalProps, openModal: openCancelModal } =
     useModal();
-
   const { modalProps: reviewModalProps, openModal: openReviewModal } =
     useModal();
 
@@ -43,7 +42,7 @@ export default function ReservationList() {
   const handleCancelReservation = async (reservationId: number) => {
     try {
       await cancelReservation(reservationId);
-      await fetchReservations();
+      await fetchReservations(true);
     } catch (error) {
       setError('예약 취소 중 오류가 발생했습니다.');
     }
@@ -62,7 +61,7 @@ export default function ReservationList() {
       '',
       {
         onConfirm: async () => {
-          await fetchReservations();
+          await fetchReservations(true);
         },
       },
       reservation,
