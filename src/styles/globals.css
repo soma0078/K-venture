@@ -362,7 +362,7 @@
   }
   /* 1일, 2일...숫자 컨테이너 */
   .custom-calendar .react-calendar__tile {
-    @apply flex h-[154px] max-w-[114px] flex-col justify-between border border-kv-gray-300 bg-white hover:border-kv-primary-blue;
+    @apply flex h-[154px] max-w-[114px] cursor-auto flex-col justify-between border border-kv-gray-300 bg-white;
   }
   .custom-calendar .react-calendar__tile:nth-last-child(7) {
     @apply rounded-bl-lg;
@@ -381,14 +381,14 @@
   }
   /* 예약 현황 칩 */
   .custom-calendar .reservation-chip {
-    @apply z-[1] mt-[2px] flex h-[23px] w-full rounded-md pl-[4px] text-kv-xs pc:text-kv-md tablet:text-kv-md;
+    @apply z-[1] mt-[2px] flex h-[23px] w-full cursor-pointer items-center rounded-md pl-[4px] text-kv-xs pc:text-kv-md tablet:text-kv-md;
   }
   .custom-calendar .chip-container {
     @apply relative w-full px-[2px] py-[2px];
   }
   /* 완료 칩 */
   .custom-calendar .complete-chip {
-    @apply bg-kv-gray-300 text-kv-black;
+    @apply cursor-auto bg-kv-gray-300 text-kv-black;
   }
   /* 예약 칩 */
   .custom-calendar .reserve-chip {
@@ -402,18 +402,34 @@
   .custom-calendar .color-dot {
     @apply absolute bottom-[130px] left-[36px] h-[8px] w-[8px] rounded-full;
   }
+  .custom-calendar .completeStatus {
+    @apply bg-kv-gray-900;
+  }
 }
 
 /* 예약 정보 모달 */
 @layer components {
-  .status-tap-base {
-    @apply h-[42px] w-[72px] align-center;
+  .daily-modal-status-tap-base {
+    @apply h-[42px] w-[72px] cursor-pointer text-kv-xl font-kv-regular align-center;
   }
-  .status-active {
-    @apply border-b-[4px] border-kv-primary-blue text-kv-primary-blue;
+  .daily-modal-status-active {
+    @apply border-b-[4px] border-kv-primary-blue font-kv-semibold text-kv-primary-blue;
   }
-  .sub-title {
+  .daily-modal-sub-title {
     @apply text-kv-xl font-kv-semibold;
+  }
+  .daily-modal-list-sub-title {
+    @apply mx-[10px] text-kv-lg font-kv-semibold text-kv-gray-600;
+  }
+  .daily-modal-list-content {
+    @apply h-[19px] font-kv-medium;
+  }
+  .daily-modal-button-base {
+    @apply h-[38px] w-[82px] rounded-md border text-kv-md font-kv-bold align-center;
+  }
+  /* 예약 내역 뱃지 */
+  .reservation-list-badge-base {
+    @apply h-[44px] w-[82px] rounded-[26.5px] text-kv-md font-kv-bold text-kv-red align-center;
   }
 }
 

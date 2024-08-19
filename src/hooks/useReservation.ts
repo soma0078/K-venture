@@ -17,7 +17,7 @@ export const useReservation = () => {
     onSettled: () => {
       setTimeout(() => {
         mutation.reset();
-      }, 1000);
+      }, 100);
     },
   });
 

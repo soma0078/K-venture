@@ -68,19 +68,25 @@ export const getReservationStatus = async (
 };
 
 // 특정 날짜의 예약자 정보를 조회한다. 닉네임, 인원수...
-export const getReservationDetails = async (
-  activityId: number,
-  scheduleId: number,
-  status: string,
-  cursorId?: number,
-  size?: number,
-): Promise<{ data: ReservationDetailsResponse }> => {
+export const getReservationDetails = async ({
+  activityId,
+  scheduleId,
+  status,
+  cursorId,
+  size = 10,
+}: {
+  activityId: number;
+  scheduleId: number;
+  status: string;
+  cursorId?: number;
+  size?: number;
+}): Promise<{ data: ReservationDetailsResponse }> => {
   const response = await instance.get<ReservationDetailsResponse>(
     `/my-activities/${activityId}/reservations`,
     {
       params: {
-        cursorId: cursorId || null,
-        size: size || 10,
+        cursorId: cursorId,
+        size: size,
         scheduleId,
         status,
       },

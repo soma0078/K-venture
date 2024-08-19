@@ -1,9 +1,11 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
+import { INITIAL_DAILY_RESERVATION_MODAL_STATE } from '@/constants/dailyReservationModalConstants';
 import { getMyActivities, getReservationDashboard } from '@/lib/apis/getApis';
 import {
   calendarChipAtom,
+  dailyReservationModalAtom,
   reservationDashboardQueryParamsAtom,
 } from '@/state/reservationDashboardAtom';
 import {
@@ -25,6 +27,7 @@ const useReservationDashboardData = () => {
   >([]);
   const [isOpenInfo, setIsOpenInfo] = useState(false);
   const { isMobile } = useResponsive();
+  const setDailyModalState = useSetAtom(dailyReservationModalAtom);
 
   // GET 등록한 체험 전체 데이터
   const { data: myActivitiesData } = useFetchData(
@@ -83,6 +86,7 @@ const useReservationDashboardData = () => {
 
   const handleCloseClick = () => {
     setIsOpenInfo(false);
+    setDailyModalState(INITIAL_DAILY_RESERVATION_MODAL_STATE);
   };
 
   const handleOpenClick = () => {

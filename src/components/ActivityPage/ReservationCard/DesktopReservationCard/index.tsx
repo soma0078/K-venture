@@ -1,4 +1,3 @@
-import { deleteCookie } from 'cookies-next';
 import React, { useEffect } from 'react';
 
 import ContentTitle from '@/components/ActivityPage/ReservationCard/ReservationCommon/ContentTitle';
@@ -31,11 +30,6 @@ export default function DesktopReservationCard({
 
   const handleSubmit = () => {
     submitReservation(reservationState);
-  };
-
-  const deleteTokens = () => {
-    deleteCookie('accessToken');
-    deleteCookie('refreshToken');
   };
 
   useEffect(() => {

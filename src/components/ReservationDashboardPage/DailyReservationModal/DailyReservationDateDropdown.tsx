@@ -12,9 +12,8 @@ interface DailyReservationDateDropdownProps {
 export default function DailyReservationDateDropdown({
   reservationStatus,
 }: DailyReservationDateDropdownProps) {
-  const [isLoading, setIsLoading] = useState(true);
   const [selected, setSelected] = useState({
-    value: `${reservationStatus[0]?.startTime} ~ ${reservationStatus[0]?.endTime}`,
+    value: '시간을 선택해주세요.',
     id: '',
   });
   const [isOpen, setIsOpen] = useState(false);
@@ -33,20 +32,34 @@ export default function DailyReservationDateDropdown({
   };
 
   useEffect(() => {
-    setIsLoading(false);
-  }, [reservationStatus]);
+    const validReservations = reservationStatus.filter(
+      ({ count }) => count[dailyModalState.status] > 0,
+    );
 
-  if (isLoading) return <div>Loading...</div>;
+    if (validReservations.length > 0) {
+      const initialReservation = validReservations[0];
+      setSelected({
+        value: `${initialReservation.startTime} ~ ${initialReservation.endTime}`,
+        id: `${initialReservation.scheduleId}`,
+      });
+      setDailyModalState((prev) => ({
+        ...prev,
+        scheduleId: initialReservation.scheduleId,
+      }));
+    }
+  }, [dailyModalState.date, dailyModalState.status]);
+
+  if (reservationStatus.length === 0) return null;
 
   return (
     <div className="mx-auto mt-[27px] h-[130px] w-[332px]">
-      <p className="sub-title mb-[16px]">예약 날짜</p>
+      <p className="daily-modal-sub-title mb-[16px]">예약 날짜</p>
       <p className="text-kv-xl font-kv-regular">{dailyModalState.date}</p>
       <button
         onClick={() => setIsOpen(!isOpen)}
         onBlur={() => setIsOpen(false)}
         type="button"
-        className="flex h-[56px] w-full items-center justify-between rounded-lg border border-kv-black px-[16px]"
+        className="flex h-[56px] w-full items-center justify-between rounded border border-kv-black px-[16px]"
       >
         <p>{selected.value}</p>
         <ArrowIcon
@@ -55,21 +68,23 @@ export default function DailyReservationDateDropdown({
       </button>
       <ul className="relative z-10 mt-1 max-h-[220px] overflow-auto rounded shadow-md scrollbar-custom">
         {isOpen &&
-          reservationStatus.map(({ startTime, endTime, scheduleId }, idx) => {
-            const id = scheduleId.toString();
-            const isFirst = idx === 0;
-            const isLast = idx === reservationStatus.length - 1;
-            return (
-              <li
-                className={`${isFirst ? 'rounded-t-md' : ''} ${isLast ? 'rounded-b-md' : 'border-b'} flex h-[56px] w-full cursor-pointer items-center border border-kv-gray-300 bg-white px-[16px]`}
-                key={id}
-                id={id}
-                onMouseDown={handleMenuClick}
-              >
-                {startTime} ~ {endTime}
-              </li>
-            );
-          })}
+          reservationStatus
+            .filter(({ count }) => count[dailyModalState.status] > 0)
+            .map(({ startTime, endTime, scheduleId }, idx) => {
+              const id = scheduleId.toString();
+              const isFirst = idx === 0;
+              const isLast = idx === reservationStatus.length - 1;
+              return (
+                <li
+                  className={`${isFirst ? 'rounded-t-md' : ''} ${isLast ? 'rounded-b-md' : 'border-b'} flex h-[56px] w-full cursor-pointer items-center border border-kv-gray-300 bg-white px-[16px]`}
+                  key={id}
+                  id={id}
+                  onMouseDown={handleMenuClick}
+                >
+                  {startTime} ~ {endTime}
+                </li>
+              );
+            })}
       </ul>
     </div>
   );

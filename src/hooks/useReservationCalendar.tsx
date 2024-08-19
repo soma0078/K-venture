@@ -13,6 +13,52 @@ interface useReservationCalendarProps {
   onOpen: () => void;
 }
 
+// calendar chip을 구성하는 컴포넌트들
+const CompletedChip = () => (
+  <div className="reservation-chip complete-chip" data-status="completed">
+    완료
+  </div>
+);
+
+const ConfirmedChip = ({ count }: { count: number }) => (
+  <div className="reservation-chip approve-chip" data-status="confirmed">
+    승인 {count}
+  </div>
+);
+
+const PendingChip = ({ count }: { count: number }) => (
+  <div className="reservation-chip reserve-chip" data-status="pending">
+    예약 {count}
+  </div>
+);
+
+const ColorDot = ({ completed }: { completed: number }) => (
+  <div
+    className={`color-dot ${completed === 0 ? 'bg-kv-primary-blue' : 'completeStatus'}`}
+  />
+);
+
+const ReservationChips = ({
+  completed,
+  confirmed,
+  pending,
+}: {
+  completed: number;
+  confirmed: number;
+  pending: number;
+}) => {
+  if (completed !== 0) {
+    return <CompletedChip />;
+  }
+
+  return (
+    <>
+      {confirmed !== 0 && <ConfirmedChip count={confirmed} />}
+      {pending !== 0 && <PendingChip count={pending} />}
+    </>
+  );
+};
+
 export default function useReservationCalendar({
   onOpen,
 }: useReservationCalendarProps) {
@@ -22,13 +68,18 @@ export default function useReservationCalendar({
   const setDailyModalState = useSetAtom(dailyReservationModalAtom);
   const [calendarChip] = useAtom(calendarChipAtom);
 
-  const onDateChange: CalendarProps['onChange'] = (nextValue) => {
-    if (nextValue instanceof Date) {
+  const onDateChange: CalendarProps['onChange'] = (nextValue, { target }) => {
+    if (nextValue instanceof Date && target instanceof HTMLDivElement) {
+      if (target.dataset.status === 'completed') return;
+
       setValue(nextValue);
       setDailyModalState((prev) => ({
         ...prev,
         date: formatDateToYMD(new Date(nextValue.toString())),
+        status:
+          (target.dataset.status as 'pending' | 'confirmed') || prev.status,
       }));
+
       onOpen();
     }
   };
@@ -72,18 +123,12 @@ export default function useReservationCalendar({
     const { completed, confirmed, pending } = chipData.reservations;
     return (
       <div className="chip-container">
-        {completed !== 0 && (
-          <div className="reservation-chip complete-chip">완료 {completed}</div>
-        )}
-        {confirmed !== 0 && (
-          <div className="reservation-chip reserve-chip">예약 {confirmed}</div>
-        )}
-        {pending !== 0 && (
-          <div className="reservation-chip approve-chip">승인 {pending}</div>
-        )}
-        <div
-          className={`color-dot ${completed === 0 ? 'bg-kv-primary-blue' : 'bg-kv-gray-900'}`}
+        <ReservationChips
+          completed={completed}
+          confirmed={confirmed}
+          pending={pending}
         />
+        <ColorDot completed={completed} />
       </div>
     );
   };

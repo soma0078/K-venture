@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-import { formatDateToYMD } from '@/lib/utils/formatDate';
+import { INITIAL_DAILY_RESERVATION_MODAL_STATE } from '@/constants/dailyReservationModalConstants';
 import {
   DailyReservationModalType,
   ReservationDashboardQueryParamsType,
@@ -19,9 +19,6 @@ export const reservationDashboardQueryParamsAtom =
 export const calendarChipAtom = atom<ReservationDashboardResponse[]>([]);
 
 // 예약 정보 모달 데이터
-export const dailyReservationModalAtom = atom<DailyReservationModalType>({
-  activityId: 0,
-  date: formatDateToYMD(new Date()),
-  status: 'pending',
-  scheduleId: 0,
-});
+export const dailyReservationModalAtom = atom<DailyReservationModalType>(
+  INITIAL_DAILY_RESERVATION_MODAL_STATE,
+);

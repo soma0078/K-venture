@@ -51,13 +51,13 @@ export default function useDailyReservationData() {
   // scheduleId 값이 추가된 것을 감지하여 getReservationDetails 실행
   // 반환 값은 예약 내역 리스트
   const { data: reservationDetails } = useFetchData(
-    ['reservationDetails', dailyModalState.scheduleId],
+    ['reservationDetails', dailyModalState.scheduleId, dailyModalState.status],
     () =>
-      getReservationDetails(
-        dailyModalState.activityId,
-        dailyModalState.scheduleId,
-        dailyModalState.status,
-      ),
+      getReservationDetails({
+        activityId: dailyModalState.activityId,
+        scheduleId: dailyModalState.scheduleId,
+        status: dailyModalState.status,
+      }),
     {
       enabled: !!dailyModalState.scheduleId,
     },

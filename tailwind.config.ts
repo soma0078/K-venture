@@ -177,6 +177,12 @@ const config: Config = {
             display: 'none',
           },
         },
+
+        '.scrollbar-none-custom': {
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
       };
       addUtilities(newUtilities);
     }),
