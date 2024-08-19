@@ -17,6 +17,7 @@ export default function DailyReservationTaps({
   }: React.MouseEvent<HTMLDivElement>) => {
     setSelectedStatus((prev) => ({
       ...prev,
+      scheduleId: 0,
       status: currentTarget.dataset.status as
         | 'pending'
         | 'confirmed'

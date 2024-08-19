@@ -1,7 +1,11 @@
 import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
-import ArrowIcon from '@/assets/icons/icon-arrow-down.svg';
+import ArrowIcon from '@/assets/icons/icon_arrow_down.svg';
+import {
+  INITIAL_DAILY_RESERVATION_MODAL_STATE,
+  INITIAL_RESERVATION_DATE_DROPDOWN_STATE,
+} from '@/constants/dailyReservationModalConstants';
 import { dailyReservationModalAtom } from '@/state/reservationDashboardAtom';
 import { ReservationStatusResponse } from '@/types/get/ReservationDashboardPageGetTypes';
 
@@ -12,10 +16,9 @@ interface DailyReservationDateDropdownProps {
 export default function DailyReservationDateDropdown({
   reservationStatus,
 }: DailyReservationDateDropdownProps) {
-  const [selected, setSelected] = useState({
-    value: '시간을 선택해주세요.',
-    id: '',
-  });
+  const [selected, setSelected] = useState(
+    INITIAL_RESERVATION_DATE_DROPDOWN_STATE,
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [dailyModalState, setDailyModalState] = useAtom(
     dailyReservationModalAtom,
@@ -32,28 +35,17 @@ export default function DailyReservationDateDropdown({
   };
 
   useEffect(() => {
-    const validReservations = reservationStatus.filter(
-      ({ count }) => count[dailyModalState.status] > 0,
-    );
-
-    if (validReservations.length > 0) {
-      const initialReservation = validReservations[0];
-      setSelected({
-        value: `${initialReservation.startTime} ~ ${initialReservation.endTime}`,
-        id: `${initialReservation.scheduleId}`,
-      });
-      setDailyModalState((prev) => ({
-        ...prev,
-        scheduleId: initialReservation.scheduleId,
-      }));
+    if (
+      dailyModalState.scheduleId ===
+      INITIAL_DAILY_RESERVATION_MODAL_STATE.scheduleId
+    ) {
+      setSelected(INITIAL_RESERVATION_DATE_DROPDOWN_STATE);
     }
-  }, [dailyModalState.date, dailyModalState.status]);
-
-  if (reservationStatus.length === 0) return null;
+  }, [dailyModalState.status]);
 
   return (
     <div className="mx-auto mt-[27px] h-[130px] w-[332px]">
-      <p className="daily-modal-sub-title mb-[16px]">예약 날짜</p>
+      <p className="daily-modal-sub-title">예약 날짜</p>
       <p className="text-kv-xl font-kv-regular">{dailyModalState.date}</p>
       <button
         onClick={() => setIsOpen(!isOpen)}

@@ -2,6 +2,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { ReactNode, useState } from 'react';
 import { CalendarProps, TileArgs } from 'react-calendar';
 
+import { getReservationStatus } from '@/lib/apis/getApis';
 import { formatDateToYMD } from '@/lib/utils/formatDate';
 import {
   calendarChipAtom,
@@ -9,9 +10,13 @@ import {
   reservationDashboardQueryParamsAtom,
 } from '@/state/reservationDashboardAtom';
 
+import useFetchData from './useFetchData';
+
 interface useReservationCalendarProps {
   onOpen: () => void;
 }
+
+type ValidStatus = 'pending' | 'confirmed';
 
 // calendar chip을 구성하는 컴포넌트들
 const CompletedChip = () => (
@@ -65,22 +70,34 @@ export default function useReservationCalendar({
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [value, setValue] = useState<CalendarProps['value']>(new Date());
   const setQueryParamsState = useSetAtom(reservationDashboardQueryParamsAtom);
-  const setDailyModalState = useSetAtom(dailyReservationModalAtom);
+  const [dailyModalState, setDailyModalState] = useAtom(
+    dailyReservationModalAtom,
+  );
   const [calendarChip] = useAtom(calendarChipAtom);
+
+  const updateStateForDate = (date: Date, status: ValidStatus) => {
+    setValue(date);
+    setDailyModalState((prev) => ({
+      ...prev,
+      date: formatDateToYMD(new Date(date)),
+      status: status || prev.status,
+    }));
+  };
+
+  const handleDateSelection = (date: Date, status: ValidStatus) => {
+    updateStateForDate(date, status);
+    onOpen();
+  };
 
   const onDateChange: CalendarProps['onChange'] = (nextValue, { target }) => {
     if (nextValue instanceof Date && target instanceof HTMLDivElement) {
-      if (target.dataset.status === 'completed') return;
+      const status = target.dataset.status;
 
-      setValue(nextValue);
-      setDailyModalState((prev) => ({
-        ...prev,
-        date: formatDateToYMD(new Date(nextValue.toString())),
-        status:
-          (target.dataset.status as 'pending' | 'confirmed') || prev.status,
-      }));
+      if (status === 'completed') return;
 
-      onOpen();
+      if (status === 'pending' || status === 'confirmed') {
+        handleDateSelection(nextValue, status);
+      }
     }
   };
 
@@ -133,11 +150,21 @@ export default function useReservationCalendar({
     );
   };
 
+  const { data: reservationStatus } = useFetchData(
+    ['reservationStatus', dailyModalState.activityId, dailyModalState.date],
+    () =>
+      getReservationStatus(dailyModalState.activityId, dailyModalState.date),
+    {
+      enabled: !!dailyModalState.activityId && !!dailyModalState.date,
+    },
+  );
+
   return {
     tileContent,
     tileClassName,
     onDateChange,
     onMonthChange,
     value,
+    reservationStatus,
   };
 }

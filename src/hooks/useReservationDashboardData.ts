@@ -2,6 +2,9 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
 import { INITIAL_DAILY_RESERVATION_MODAL_STATE } from '@/constants/dailyReservationModalConstants';
+import useFetchData from '@/hooks/useFetchData';
+import useResponsive from '@/hooks/useResponsive';
+import useScrollLock from '@/hooks/useScrollLock';
 import { getMyActivities, getReservationDashboard } from '@/lib/apis/getApis';
 import {
   calendarChipAtom,
@@ -14,9 +17,6 @@ import {
   ReservationDashboardResponse,
 } from '@/types/page/ReservationDashboardPageTypes';
 
-import useFetchData from './useFetchData';
-import useResponsive from './useResponsive';
-
 const useReservationDashboardData = () => {
   const { activityId, year, month } = useAtomValue(
     reservationDashboardQueryParamsAtom,
@@ -28,6 +28,8 @@ const useReservationDashboardData = () => {
   const [isOpenInfo, setIsOpenInfo] = useState(false);
   const { isMobile } = useResponsive();
   const setDailyModalState = useSetAtom(dailyReservationModalAtom);
+
+  useScrollLock({ isOpen: isOpenInfo, additionalCondition: isMobile });
 
   // GET 등록한 체험 전체 데이터
   const { data: myActivitiesData } = useFetchData(
@@ -71,22 +73,14 @@ const useReservationDashboardData = () => {
     }
   }, [reservationDashboardData]);
 
-  // 모달 오픈 시 배경 스크롤 방지
-  useEffect(() => {
-    if (isOpenInfo && isMobile) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpenInfo]);
-
   const handleCloseClick = () => {
     setIsOpenInfo(false);
-    setDailyModalState(INITIAL_DAILY_RESERVATION_MODAL_STATE);
+    setDailyModalState((prev) => ({
+      ...prev,
+      date: INITIAL_DAILY_RESERVATION_MODAL_STATE.date,
+      scheduleId: INITIAL_DAILY_RESERVATION_MODAL_STATE.scheduleId,
+      status: INITIAL_DAILY_RESERVATION_MODAL_STATE.status,
+    }));
   };
 
   const handleOpenClick = () => {

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-import CloseIcon from '@/assets/icons/iocn_x_lg.svg';
+import CloseIcon from '@/assets/icons/icon_x_lg.svg';
 import Button from '@/components/common/Button';
 import StarRating from '@/components/MyReservationsPage/StarRating';
 import { getActivity } from '@/lib/apis/getApis';

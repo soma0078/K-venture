@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import IconClose from '@/assets/icons/iocn_x_lg.svg';
+import IconClose from '@/assets/icons/icon_x_lg.svg';
 import {
   RESERVATION_TITLE,
   ReservationTitleKey,
