@@ -548,3 +548,22 @@
     @apply modal-container h-[750px] w-[480px] rounded-[24px] align-center;
   }
 }
+
+/* 알림 */
+@layer components {
+  .notification-modal-base {
+    @apply bg-kv-primary-blue-light px-5 py-6;
+  }
+  .notification-modal-pc {
+    @apply absolute right-0 max-h-[494px] w-[368px] rounded-[10px] border border-kv-gray-400 shadow-sm tablet:right-28;
+  }
+  .notification-modal-mobile {
+    @apply h-full w-full rounded-none;
+  }
+  .overflow-y-scroll-custom {
+    @apply overflow-y-scroll;
+  }
+  .notification-ul {
+    @apply h-full max-h-[inherit];
+  }
+}

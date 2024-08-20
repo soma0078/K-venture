@@ -1,3 +1,5 @@
+import { number } from 'yup';
+
 import instance from '@/lib/apis/axios';
 import { ActivityResponse as ActivityDetailResponse } from '@/types/activityDetailPageTypes';
 import { ActivityReviewsResponse } from '@/types/activityReviewTypes';
@@ -8,6 +10,10 @@ import {
 } from '@/types/get/ReservationDashboardPageGetTypes';
 import { MyReservationsResponse } from '@/types/get/reservationTypes';
 import { MyActivityListResponse } from '@/types/myActivitiesTypes';
+import {
+  NotificationResponse,
+  NotificationsType,
+} from '@/types/NotificationTypes';
 import {
   MyActivitiesResponse,
   ReservationDashboardResponse,
@@ -159,5 +165,24 @@ export const getMyReservations = async (
       cursorId,
     },
   });
+  return response.data;
+};
+
+export const getMyNotifications = async ({
+  cursorId,
+  size,
+}: {
+  cursorId?: number;
+  size?: number;
+}): Promise<NotificationResponse> => {
+  const response = await instance.get<NotificationResponse>(
+    '/my-notifications',
+    {
+      params: {
+        size,
+        cursorId,
+      },
+    },
+  );
   return response.data;
 };
