@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -13,10 +13,15 @@ import ScheduleList from '@/components/MyActivityPage/ScheduleList';
 import { MAX_IMG_LENGTH } from '@/constants/myActivityPage';
 import useDropdown from '@/hooks/useDropdown';
 import useImageManager from '@/hooks/useImageManager';
-import { postActivity, postActivityImage } from '@/lib/apis/postApis';
-import { convertYYMMDDtoYMD } from '@/lib/utils/formatDate';
+import { updateActivity } from '@/lib/apis/patchApis';
+import { postActivityImage } from '@/lib/apis/postApis';
+import {
+  convertAPItoSelected,
+  convertYYMMDDtoYMD,
+} from '@/lib/utils/formatDate';
 import { checkDuplication } from '@/lib/utils/myActivityPage';
 import { CATEGORIES, Schedule } from '@/types/activityTypes';
+import { ActivityDetailResponse } from '@/types/page/myActivityEditPageTypes';
 import { IMAGE_TYPES } from '@/types/page/myActivityPageTypes';
 
 interface ErrorResponse {
@@ -44,26 +49,91 @@ const schema = yup.object().shape({
   address: yup.string().required('주소를 입력해주세요.'),
 });
 
-export default function MyActivityForm() {
-  const category = useDropdown('');
-  const [address, setAddress] = useState('');
-  const [schedules, setSchedules] = useState<Schedule[]>([]);
+export default function MyActivityEditForm({
+  initialData,
+}: {
+  initialData: ActivityDetailResponse;
+}) {
+  const router = useRouter();
+
+  const category = useDropdown(initialData.category || '');
+  const [address, setAddress] = useState(initialData.address || '');
+  const [schedules, setSchedules] = useState<Schedule[]>(
+    initialData.schedules || [],
+  );
   const banner = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.BANNER]);
   const sub = useImageManager(MAX_IMG_LENGTH[IMAGE_TYPES.SUB]);
 
   const [isSuccess, setIsSuccess] = useState(false);
-  const [activityId, setActivityId] = useState(0);
   const { modalProps, openModal } = useModal();
-  const router = useRouter();
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid },
+    trigger,
   } = useForm<InputForm>({
     resolver: yupResolver(schema),
-    mode: 'onBlur',
+    mode: 'onChange',
   });
+
+  useEffect(() => {
+    trigger();
+  }, [trigger]);
+
+  useEffect(() => {
+    const createFileFromUrl = async (url: string, filename: string) => {
+      const response = await fetch(url);
+      const data = await response.blob();
+      return new File([data], filename, { type: data.type });
+    };
+
+    const initializeActivityData = async () => {
+      if (initialData) {
+        // 폼 필드 초기화
+        setValue('title', initialData.title);
+        setValue('description', initialData.description);
+        setValue('price', initialData.price);
+        setValue('address', initialData.address);
+
+        // 상태 값 초기화
+        setAddress(initialData.address);
+        category.setValue(initialData.category);
+
+        const formattedSchedules = initialData.schedules.map((schedule) => {
+          const formattedDate = convertAPItoSelected(schedule.date);
+
+          return {
+            ...schedule,
+            date: formattedDate,
+          };
+        });
+
+        setSchedules(formattedSchedules);
+
+        // 이미지 초기화
+        if (initialData.bannerImageUrl) {
+          const bannerFile = await createFileFromUrl(
+            initialData.bannerImageUrl,
+            'banner.jpg',
+          );
+          banner.setFiles([bannerFile]);
+        }
+
+        if (initialData.subImages) {
+          const subFiles = await Promise.all(
+            initialData.subImages.map((image, index) =>
+              createFileFromUrl(image.imageUrl, `subImage_${index + 1}.jpg`),
+            ),
+          );
+          sub.setFiles(subFiles);
+        }
+      }
+    };
+
+    initializeActivityData();
+  }, []);
 
   // 스케줄 추가 / 삭제
   const handleAddSchedule = (schedule: Schedule) => {
@@ -88,8 +158,6 @@ export default function MyActivityForm() {
 
   // 데이터 검증, 폼데이터 형성, 서버 요청 보내기, 리다이렉션
   const onSubmit = async (data: InputForm) => {
-    // 필수항목 중 제목, 설명, 가격, 주소는 hook-form으로 처리하고,
-    // 카테고리, 배너이미지 값이 있는지 확인합니다.
     const validateInput = () => {
       if (!category.value) {
         openModal('alert', '카테고리를 선택해주세요');
@@ -102,15 +170,31 @@ export default function MyActivityForm() {
       return true;
     };
 
-    // 이미지를 서버에 업로드하고, formData를 형성합니다.
     const formActivityData = async () => {
-      const bannerImageUrl = await postActivityImage({
-        image: banner.imageFiles[0],
-      });
-      const subImageUrls = await Promise.all(
+      // 새로운 이미지 업로드
+      const bannerImageUrl = banner.imageFiles[0]
+        ? await postActivityImage({ image: banner.imageFiles[0] })
+        : initialData.bannerImageUrl;
+      const subImageUrlsToAdd = await Promise.all(
         sub.imageFiles.map((file) => postActivityImage({ image: file })),
       );
 
+      //삭제할 서브 이미지 id
+      const subImageIdsToRemove = initialData.subImages
+        .filter(
+          (img) =>
+            !sub.imageFiles.some(
+              (file) => file.name === img.imageUrl.split('/').pop(),
+            ),
+        )
+        .map((img) => img.id);
+
+      //삭제할 스케줄 id
+      const scheduleIdsToRemove = initialData.schedules
+        .filter((schedule) => !schedules.some((s) => s.id === schedule.id))
+        .map((schedule) => schedule.id);
+
+      //추가할 스케줄 데이터
       const schedulesToAdd = schedules
         .filter((s) => !s.id)
         .map((schedule) => {
@@ -126,23 +210,23 @@ export default function MyActivityForm() {
       const formData = {
         ...data,
         category: category.value,
-        schedules: schedulesToAdd,
         bannerImageUrl,
-        subImageUrls,
+        subImageUrlsToAdd,
+        subImageIdsToRemove,
+        scheduleIdsToRemove,
+        schedulesToAdd,
       };
 
       return formData;
     };
 
-    // 데이터를 생성, 서버에 전송하고, 새로 생성된 액티비티 페이지로 이동합니다.
-    const postActivityAndMove = async () => {
+    const updateActivityAndMove = async () => {
       try {
         const formData = await formActivityData();
-        const newActivityId = await postActivity(formData);
-        setActivityId(newActivityId);
+        await updateActivity(initialData.id, formData);
         setIsSuccess(true);
-        openModal('alert', '체험 생성이 완료되었습니다.', {
-          onConfirm: () => router.push(`/activity/${newActivityId}`),
+        openModal('alert', '체험 수정이 완료되었습니다.', {
+          onConfirm: () => router.push(`/activity/${initialData.id}`),
         });
       } catch (e) {
         const error = e as AxiosErrorWithMessage;
@@ -155,19 +239,20 @@ export default function MyActivityForm() {
     };
 
     if (!validateInput()) return;
-    postActivityAndMove();
+
+    updateActivityAndMove();
   };
 
   return (
     <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
       <header className="flex items-center justify-between font-kv-bold">
-        <h1 className="text-kv-3xl">내 체험 등록</h1>
+        <h1 className="text-kv-3xl">내 체험 수정</h1>
         <button
           className="btn-blue h-12 w-[120px] rounded text-kv-lg"
           type="submit"
           disabled={!isValid}
         >
-          등록하기
+          수정하기
         </button>
       </header>
 

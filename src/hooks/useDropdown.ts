@@ -54,6 +54,7 @@ const useDropdown = <T>(initValue: T) => {
 
   return {
     value,
+    setValue,
     isOpen,
     handleReset,
     onClickButton: handleClickButton,
