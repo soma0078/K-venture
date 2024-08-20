@@ -10,7 +10,10 @@ import useScrollLock from '@/hooks/useScrollLock';
 import { getUserData } from '@/lib/apis/userApis';
 import { User } from '@/types/userTypes';
 
+import { ProfileMenu } from './ProfileMenu';
+
 function Header() {
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   useScrollLock({ isOpen: isNotificationModalOpen });
 
@@ -43,6 +46,12 @@ function Header() {
   if (isError) {
     return <div>Error loading user data: {error.message}</div>;
   }
+  const handleProfileClick = () => {
+    setIsProfileMenuOpen((prev) => !prev);
+  };
+  const handleProfileMenuClose = () => {
+    setIsProfileMenuOpen(false);
+  };
 
   const handleNotificationClick = () => {
     setIsNotificationModalOpen((prev) => !prev);
@@ -80,12 +89,15 @@ function Header() {
             </button>
             <div className="mx-4 h-4/5 border-[1px] border-l border-kv-gray-300"></div>
             {user && (
-              <Link href="/profile">
+              <button
+                onClick={handleProfileClick}
+                onBlur={handleProfileMenuClose}
+              >
                 <HeaderUserProfile
                   nickname={user.nickname}
                   profileImageUrl={user.profileImageUrl}
                 />
-              </Link>
+              </button>
             )}
           </div>
         ) : (
@@ -103,6 +115,9 @@ function Header() {
         <NotificationModal
           closeNotificationModal={handleNotificationModalClose}
         />
+      )}
+      {isProfileMenuOpen && (
+        <ProfileMenu closeProfileMenu={handleProfileMenuClose} />
       )}
     </header>
   );

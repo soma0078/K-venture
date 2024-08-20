@@ -8,7 +8,8 @@ interface NotificationProps {
   closeNotificationModal: () => void;
 }
 
-const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => e.preventDefault();
+export const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) =>
+  e.preventDefault();
 
 export default function NotificationModal({
   closeNotificationModal,

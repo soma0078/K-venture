@@ -8,8 +8,7 @@ export default function LeftNaviBar() {
   const router = useRouter();
 
   return (
-    <div className="w-full min-w-64 rounded-3xl border border-kv-gray-300 p-6 shadow-lg pc:min-w-96">
-      {/* 프로필 이미지 컴포넌트 */}
+    <div className="w-full min-w-64 rounded-3xl border border-kv-gray-300 bg-white p-6 shadow-lg pc:min-w-96">
       <EditProfileImage />
 
       {/* 네비게이션 메뉴 */}

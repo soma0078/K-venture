@@ -567,3 +567,10 @@
     @apply h-full max-h-[inherit];
   }
 }
+
+/* GNB */
+@layer components {
+  .gnb-link {
+    @apply border-b border-kv-gray-400 px-10 py-2 text-center text-kv-md font-kv-medium text-kv-gray-700 last:border-none hover:bg-kv-primary-blue-light hover:text-kv-primary-blue active:bg-kv-primary-blue-light active:text-kv-primary-blue;
+  }
+}
