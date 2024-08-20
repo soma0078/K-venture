@@ -1,0 +1,569 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: theme('fontFamily.pretendard');
+  }
+  body {
+    @apply bg-[#FAFBFC] text-kv-lg font-kv-regular text-kv-black;
+  }
+}
+
+@layer components {
+  .icon-size {
+    @apply h-6 w-6; /* width: 24px, hegiht: 24px */
+  }
+
+  .btn-gray {
+    @apply border-kv-gray-4b bg-kv-gray-100 align-center hover:bg-kv-gray-200 active:bg-kv-gray-300 disabled:bg-kv-gray-400;
+  }
+
+  .btn-blue {
+    @apply bg-kv-primary-blue text-white hover:bg-kv-primary-blue-hover active:bg-kv-primary-blue-active disabled:bg-kv-gray-600;
+  }
+
+  .btn-outline {
+    @apply h-[41px] w-[90px] rounded-[15px] border border-kv-primary-blue-light bg-white px-3 font-kv-medium text-kv-gray-4b kv-text-md hover:bg-kv-gray-100 active:bg-kv-gray-200 pc:h-[53px] pc:w-[127px] pc:px-5 pc:kv-text-2lg tablet:h-[53px] tablet:w-[120px] tablet:px-4 tablet:kv-text-2lg;
+  }
+
+  .base-button-default {
+    @apply rounded-md py-[11px] text-kv-lg font-kv-bold;
+  }
+}
+
+/* my-activity page styles */
+@layer components {
+  .size-my-act-img {
+    @apply size-[167px] pc:size-[180px] tablet:size-[206px];
+  }
+  .size-my-act-date,
+  .size-my-act-date input {
+    @apply w-full min-w-[377px] tablet:min-w-[149px] mobile:min-w-[130px];
+  }
+  .size-my-act-date .react-datepicker-wrapper {
+    @apply w-full;
+  }
+  .size-my-act-time {
+    @apply w-[80px] pc:w-[140px] tablet:w-[104px];
+  }
+
+  .h2-my-act {
+    @apply mb-3 text-kv-xl font-kv-bold pc:mb-4 pc:text-kv-2xl tablet:mb-4 tablet:text-kv-2xl;
+  }
+
+  .input-my-act {
+    @apply flex h-11 items-center rounded border border-kv-gray-79 bg-white px-2.5 text-kv-md pc:h-14 pc:px-4 pc:text-kv-lg tablet:h-14 tablet:px-4 tablet:text-kv-lg;
+  }
+
+  .schedule-my-act {
+    @apply flex gap-5 mobile:gap-1;
+  }
+
+  .times-my-act {
+    @apply flex h-full gap-5 mobile:gap-1;
+  }
+
+  .label-my-act-schedule {
+    @apply text-kv-lg font-medium text-kv-gray-4b pc:text-kv-xl tablet:text-kv-xl;
+  }
+
+  .size-my-act-date .input-my-act {
+    @apply flex h-11 items-center rounded border border-kv-gray-79 bg-white px-2.5 text-kv-md pc:h-14 pc:px-4 pc:text-kv-lg tablet:h-14 tablet:px-4 tablet:text-kv-lg;
+  }
+
+  .category .pos-value-dropdown-menus {
+    @apply bg-white p-2;
+  }
+
+  .category .pos-value-dropdown-menus .dropdown-menu {
+    @apply rounded-md border-none pl-2 before:pr-1 before:text-kv-xl before:text-white before:content-['_✓'] hover:bg-kv-primary-blue hover:text-white;
+  }
+}
+
+/* date picker custom styles */
+@layer components {
+  .react-datepicker__header {
+    @apply !border-b-0 !bg-white !pb-0;
+  }
+
+  .custom-datepicker .react-datepicker__header {
+    @apply border-b-0 bg-white pb-0;
+  }
+
+  .custom-datepicker .react-datepicker {
+    @apply border-kv-gray-600;
+  }
+
+  .custom-datepicker .react-datepicker {
+    @apply border-kv-gray-600;
+  }
+
+  .react-datepicker__day--selected {
+    @apply !bg-transparent !text-inherit;
+  }
+
+  .react-datepicker__day:hover {
+    @apply !bg-inherit text-kv-red;
+  }
+
+  .react-datepicker__day--keyboard-selected {
+    @apply !animate-fadeIn !bg-inherit;
+  }
+
+  .react-datepicker__month {
+    @apply !pr-[10px];
+  }
+}
+
+/* DayMarker styles */
+@layer components {
+  .day-marker-today {
+    @apply bg-[#E0E5FF] text-kv-primary-blue;
+  }
+
+  .day-marker-selected {
+    @apply bg-kv-primary-blue text-white;
+  }
+}
+
+/* Layout styles */
+@layer components {
+  .layout-content-container {
+    @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
+  }
+  .footer-link-styles {
+    @apply font-sans text-base font-normal;
+  }
+  .header-link-styles {
+    @apply cursor-pointer font-kv-medium text-kv-black kv-text-md hover:text-kv-gray-600 active:text-kv-gray-800;
+  }
+  .layout-content-container {
+    @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
+  }
+  .layout-container {
+    @apply flex min-h-screen flex-col;
+  }
+
+  .layout-header-wrapper {
+    @apply fixed left-0 right-0 top-0 z-30;
+  }
+
+  .layout-header-spacer {
+    @apply h-[70px] w-full bg-kv-gray-100;
+  }
+
+  .layout-content-margin-top {
+    @apply min-h-6 bg-kv-gray-100;
+  }
+
+  .layout-content-margin-bottom {
+    @apply h-[120px] w-full bg-kv-gray-100;
+  }
+}
+
+/* Layout styles */
+@layer utilities {
+  .align-center {
+    @apply flex items-center justify-center;
+  }
+}
+/* 모달 */
+@layer components {
+  .modal-container {
+    @apply pointer-events-auto relative flex flex-col rounded-lg bg-white shadow-lg;
+  }
+
+  .modal-content {
+    @apply flex flex-grow items-center justify-center px-6;
+  }
+
+  .modal-text {
+    @apply mb-[28px] overflow-hidden text-center font-kv-medium;
+  }
+
+  .modal-button-common {
+    @apply absolute bottom-[28px] h-[38px] w-[80px] rounded-[8px] text-kv-md font-kv-medium;
+  }
+}
+
+/* 예약카드 */
+@layer components {
+  .container-header-reservation {
+    @apply mx-6 mb-7 flex h-12 w-[327px] items-center justify-between;
+  }
+
+  .title-header-reservation {
+    @apply text-kv-2xl font-kv-bold;
+  }
+
+  .icon-header-reservation {
+    @apply size-10 hover:cursor-pointer;
+  }
+
+  .base-title-content {
+    @apply mb-4 text-kv-xl font-kv-bold;
+  }
+
+  .button-reservation-default {
+    @apply my-6 w-full bg-kv-primary-blue text-white;
+  }
+
+  .container-summary-total-default {
+    @apply flex justify-between;
+  }
+
+  .label-summary-total-default {
+    @apply text-kv-xl font-kv-bold;
+  }
+
+  .amount-summary-total-default {
+    @apply text-kv-xl font-kv-bold text-kv-primary-blue;
+  }
+
+  .container-counter-participant-default {
+    @apply mt-3 flex w-[327px] flex-col gap-6 pc:gap-[5px] tablet:gap-[5px];
+  }
+
+  .title-counter-participant-default {
+    @apply text-kv-xl font-kv-medium pc:text-kv-2lg pc:font-kv-bold tablet:text-kv-2lg tablet:font-kv-bold;
+  }
+
+  .counter-participant-default {
+    @apply flex h-10 w-[120px] items-center justify-between gap-2 rounded-[6px] border-2;
+  }
+
+  .button-counter-participant-default {
+    @apply flex size-10 align-center hover:cursor-pointer;
+  }
+
+  .icon-button-counter-participant-default {
+    @apply size-5 text-kv-primary-blue;
+  }
+
+  .text-button-counter-participant-default {
+    @apply text-kv-primary-blue;
+  }
+
+  .container-display-price-default {
+    @apply flex items-center gap-[5px] pl-6 pt-6;
+  }
+
+  .price-display-price-default {
+    @apply text-kv-2xl font-kv-bold;
+  }
+
+  .unit-display-price-default {
+    @apply text-kv-lg font-kv-regular;
+  }
+
+  .base-button-date-select-default {
+    @apply mt-[5px] py-0 text-kv-primary-blue;
+  }
+}
+
+/* dropdown styles */
+@layer components {
+  .value-dropdown-basic {
+    @apply h-11 bg-white px-2.5 hover:bg-kv-gray-100 pc:h-14 pc:px-4 tablet:h-14 tablet:px-4;
+  }
+
+  .value-dropdown-button {
+    @apply value-dropdown-basic rounded border border-kv-gray-79 focus:bg-kv-gray-200;
+  }
+
+  .pos-value-dropdown-menus {
+    @apply top-12 max-h-[220px] overflow-y-auto border border-kv-gray-300 pc:top-16 pc:max-h-[300px] tablet:top-16;
+  }
+
+  .dropdown-menu {
+    @apply value-dropdown-basic border-kv-gray-300 text-left active:bg-kv-gray-200;
+  }
+
+  .sort-dropdown-menu {
+    @apply block h-[41px] w-full border-kv-primary-blue-light text-left font-kv-medium text-kv-gray-4b kv-text-md align-center hover:bg-kv-gray-100 active:bg-kv-gray-200 pc:h-[53px] pc:kv-text-2lg tablet:h-[53px] tablet:kv-text-2lg;
+  }
+}
+
+/* 프로필 스타일 */
+@layer components {
+  /* 저장하기 버튼 */
+  .save-btn {
+    @apply cursor-pointer rounded bg-kv-primary-blue px-8 py-3 font-kv-semibold text-white hover:bg-[#233CC1];
+  }
+
+  .profile-input-group {
+    @apply mb-8;
+  }
+
+  .profile-label.custom-label-style {
+    @apply mb-4 block text-kv-2xl font-kv-bold;
+  }
+
+  .profile-input {
+    @apply h-14 w-full rounded border border-kv-primary-blue-light px-5 py-4 outline-none focus:border-kv-primary-blue;
+  }
+
+  .profile-input-error {
+    @apply border-kv-red focus:border-kv-red;
+  }
+
+  .profile-input-readonly {
+    @apply cursor-not-allowed border-kv-primary-blue-light focus:border-kv-primary-blue-light;
+  }
+
+  .lnb-link {
+    @apply flex gap-3.5 rounded-xl fill-current px-5 py-2.5 font-kv-semibold text-kv-gray-600 transition ease-in-out hover:bg-kv-primary-blue-light hover:text-kv-primary-blue;
+  }
+
+  .lnb-link-active {
+    @apply bg-kv-primary-blue-light text-kv-primary-blue;
+  }
+}
+
+/* 예약 현황의 달력 */
+@layer components {
+  /* 달력 최상단 컨테이너 */
+  .custom-calendar.react-calendar {
+    @apply flex w-full flex-col items-center rounded-xl text-kv-xl font-kv-medium;
+  }
+  /* 2024년 8월 네비게이션 컨테이너 */
+  .custom-calendar .react-calendar__navigation {
+    @apply flex h-[60px] w-full max-w-[342px] gap-[38px] bg-none text-kv-xl font-kv-bold text-kv-black;
+  }
+  /* 달력 컨테이너 */
+  .custom-calendar .react-calendar__viewContainer {
+    @apply relative rounded-md shadow-lg;
+  }
+  /* 2024년 8월 화살표 제외한 가운데 글자 */
+  .custom-calendar .react-calendar__navigation__label {
+    @apply w-[140px];
+  }
+  /* month 이동 화살표 */
+  .custom-calendar .react-calendar__navigation__arrow {
+    @apply w-[60px];
+  }
+  /* 연도 이동 화살표 */
+  .custom-calendar .react-calendar__navigation__next2-button,
+  .custom-calendar .react-calendar__navigation__prev2-button {
+    @apply hidden;
+  }
+  /* 월화수목금토일 컨테이너 */
+  .custom-calendar .react-calendar__month-view__weekdays {
+    @apply rounded-t-lg border bg-white;
+  }
+  /* 월화수목금토일 글자 */
+  .custom-calendar
+    .react-calendar__month-view__weekdays__weekday:not(:last-child) {
+    @apply border-r;
+  }
+  .custom-calendar .react-calendar__month-view__weekdays__weekday abbr {
+    @apply !no-underline;
+  }
+  .custom-calendar .react-calendar__month-view__weekdays__weekday {
+    @apply pl-[12px];
+  }
+  /* 1일, 2일...숫자 컨테이너 */
+  .custom-calendar .react-calendar__tile {
+    @apply flex h-[154px] max-w-[114px] cursor-auto flex-col justify-between border border-kv-gray-300 bg-white;
+  }
+  .custom-calendar .react-calendar__tile:nth-last-child(7) {
+    @apply rounded-bl-lg;
+  }
+  .custom-calendar .react-calendar__tile:last-child {
+    @apply rounded-br-lg;
+  }
+  /* 1일, 2일...숫자 */
+  .custom-calendar .react-calendar__tile abbr {
+    @apply pl-[12px] pt-[12px] text-kv-xl;
+  }
+  /* 이전달 다음달 글자색 */
+  .custom-calendar .previous-month,
+  .custom-calendar .next-month {
+    @apply text-gray-300;
+  }
+  /* 예약 현황 칩 */
+  .custom-calendar .reservation-chip {
+    @apply z-[1] my-[2px] flex h-[26px] w-full cursor-pointer items-center rounded-md pl-[4px] text-kv-xs pc:text-kv-md tablet:text-kv-md;
+  }
+  .custom-calendar .chip-container {
+    @apply relative w-full px-[2px] py-[2px];
+  }
+  /* 완료 칩 */
+  .custom-calendar .complete-chip {
+    @apply cursor-auto bg-kv-gray-300 text-kv-black;
+  }
+  /* 예약 칩 */
+  .custom-calendar .reserve-chip {
+    @apply bg-kv-primary-blue text-white;
+  }
+  /* 승인 칩 */
+  .custom-calendar .approve-chip {
+    @apply bg-kv-orange-light text-kv-orange;
+  }
+  /* 색점 */
+  .custom-calendar .color-dot {
+    @apply absolute bottom-[130px] left-[36px] h-[8px] w-[8px] rounded-full;
+  }
+  .custom-calendar .completeStatus {
+    @apply bg-kv-gray-900;
+  }
+}
+
+/* 예약 정보 모달 */
+@layer components {
+  .daily-modal-status-tap-base {
+    @apply h-[42px] w-[72px] cursor-pointer text-kv-xl font-kv-regular align-center;
+  }
+  .daily-modal-status-active {
+    @apply border-b-[4px] border-kv-primary-blue font-kv-semibold text-kv-primary-blue;
+  }
+  .daily-modal-sub-title {
+    @apply mb-[16px] text-kv-xl font-kv-semibold;
+  }
+  .daily-modal-list-sub-title {
+    @apply mx-[10px] text-kv-lg font-kv-semibold text-kv-gray-600;
+  }
+  .daily-modal-list-content {
+    @apply h-[19px] font-kv-medium;
+  }
+  .daily-modal-button-base {
+    @apply h-[38px] w-[82px] rounded-md border text-kv-md font-kv-bold align-center;
+  }
+  /* 예약 내역 뱃지 */
+  .reservation-list-badge-base {
+    @apply h-[44px] w-[82px] rounded-[26.5px] text-kv-md font-kv-bold text-kv-red align-center;
+  }
+  /* 백드롭 */
+  .backdrop {
+    @apply fixed left-0 top-0 z-[1] h-full w-full;
+  }
+  .daily-modal-list-sub-title {
+    @apply mx-[10px] text-kv-lg font-kv-semibold text-kv-gray-600;
+  }
+  .daily-modal-list-content {
+    @apply h-[19px] font-kv-medium;
+  }
+  .daily-modal-button-base {
+    @apply h-[38px] w-[82px] rounded-md border text-kv-md font-kv-bold align-center;
+  }
+  /* 예약 내역 뱃지 */
+  .reservation-list-badge-base {
+    @apply h-[44px] w-[82px] rounded-[26.5px] text-kv-md font-kv-bold text-kv-red align-center;
+  }
+}
+
+/* 케밥 */
+@layer components {
+  .kebab-menu {
+    @apply cursor-pointer py-4 text-center text-kv-2lg font-kv-medium hover:bg-kv-gray-200;
+  }
+  .kebal-first-menu {
+    @apply border-b border-kv-gray-300;
+  }
+}
+
+/* 체험 상세 */
+@layer components {
+  .top-line {
+    @apply mb-10 mt-10 border-t border-kv-gray-300 pt-10;
+  }
+
+  .activity-h3 {
+    @apply mb-5 text-kv-xl font-kv-bold;
+  }
+
+  /* Swiper 슬라이드 */
+  .swiper-slide {
+    @apply absolute transition-all;
+  }
+
+  .swiper-container {
+    @apply relative -ml-4 -mr-4 h-[310px] bg-kv-black;
+  }
+
+  .swiper-container .swiper {
+    @apply absolute w-full;
+  }
+
+  .swiper-container .swiper-button-next,
+  .swiper-container .swiper-button-prev {
+    @apply absolute left-2 rounded bg-kv-black;
+  }
+
+  .swiper-container .swiper-button-next:after,
+  .swiper-container .swiper-button-prev:after {
+    @apply text-kv-md font-kv-bold text-white;
+  }
+
+  .swiper-container .swiper-button-next {
+    @apply left-auto right-2;
+  }
+
+  .sub-image-container.custom-grid {
+    @apply grid-cols-2 grid-rows-2;
+  }
+
+  .sub-image-container.custom-grid.custom-grid .sub-image-wrapper:nth-child(3) {
+    @apply col-span-2 row-span-2;
+  }
+
+  .sub-image-container.custom-grid-cols-2 {
+    @apply grid-cols-2;
+  }
+}
+/* 체험 카드 */
+@layer components {
+  .activity-card-title {
+    @apply truncate font-kv-bold text-kv-black kv-text-md pc:kv-text-xl tablet:kv-text-2lg;
+  }
+  .activity-card-price {
+    @apply font-kv-medium kv-text-lg pc:kv-text-2xl tablet:kv-text-xl;
+  }
+  .activity-reservation-card-button {
+    @apply h-8 w-20 text-kv-md font-kv-medium align-center pc:h-[43.08px] pc:w-[144px] pc:text-kv-lg tablet:h-10 tablet:w-[112px] tablet:text-kv-lg !important;
+  }
+}
+
+/* 페이지네이션 */
+@layer components {
+  .pagination-btn {
+    @apply flex h-14 w-14 items-center justify-center rounded-2xl border border-kv-primary-blue-light bg-white text-kv-primary-blue mobile:h-10 mobile:w-10;
+  }
+  .pagination-btn.active {
+    @apply border-kv-blue bg-kv-primary-blue text-white;
+  }
+  .arrow-size {
+    @apply h-3 w-3 mobile:h-2.5 mobile:w-2.5;
+  }
+  .pagination-btn:disabled .arrow-size {
+    @apply text-kv-gray-600;
+  }
+}
+
+/* 후기 모달 */
+@layer components {
+  .review-modal-container {
+    @apply modal-container h-[750px] w-[480px] rounded-[24px] align-center;
+  }
+}
+
+/* 알림 */
+@layer components {
+  .notification-modal-base {
+    @apply bg-kv-primary-blue-light px-5 py-6;
+  }
+  .notification-modal-pc {
+    @apply absolute right-0 max-h-[494px] w-[368px] rounded-[10px] border border-kv-gray-400 shadow-sm tablet:right-28;
+  }
+  .notification-modal-mobile {
+    @apply h-full w-full rounded-none;
+  }
+  .overflow-y-scroll-custom {
+    @apply overflow-y-scroll;
+  }
+  .notification-ul {
+    @apply h-full max-h-[inherit];
+  }
+}

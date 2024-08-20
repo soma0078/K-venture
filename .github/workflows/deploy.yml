@@ -1,0 +1,43 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mustache (to update the date)
+        run: apk add ruby && gem install mustache
+
+      - name: Creates output
+        run: sh ./build.sh
+
+      - name: Set target branch
+        id: set_target
+        run: |
+          if [ ${{ github.ref }} = 'refs/heads/main' ]; then
+            echo "TARGET_BRANCH=main" >> $GITHUB_OUTPUT
+          else
+            echo "TARGET_BRANCH=develop" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.AUTO_ACTIONS }}
+        with:
+          source-directory: "output"
+          destination-github-username: wch2208
+          destination-repository-name: K-venture
+          user-email: ${{ secrets.EMAIL }}
+          commit-message: ${{ github.event.commits[0].message }}
+          target-branch: ${{ steps.set_target.outputs.TARGET_BRANCH }}
+
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
