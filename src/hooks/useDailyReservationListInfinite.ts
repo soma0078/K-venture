@@ -18,6 +18,7 @@ const useDailyReservationListInfinite = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteQuery({
     queryKey: [
       'reservationsList',
@@ -50,6 +51,7 @@ const useDailyReservationListInfinite = () => {
     ref,
     hasNextPage,
     isFetchingNextPage,
+    refetch,
   };
 };
 

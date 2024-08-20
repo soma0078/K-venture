@@ -13,7 +13,7 @@ export default function DailyReservationList() {
     dailyReservationModalAtom,
   );
   const patchReservationStatus = usePatchReservationStatus();
-  const { reservationList, ref, hasNextPage, isFetchingNextPage } =
+  const { reservationList, ref, hasNextPage, isFetchingNextPage, refetch } =
     useDailyReservationListInfinite();
 
   const handleReservationActionClick = ({
@@ -35,7 +35,11 @@ export default function DailyReservationList() {
       activityId,
     };
 
-    patchReservationStatus.mutate(params);
+    patchReservationStatus.mutate(params, {
+      onSuccess: () => {
+        refetch();
+      },
+    });
   };
 
   return (
