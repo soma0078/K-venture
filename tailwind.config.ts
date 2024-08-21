@@ -101,6 +101,14 @@ const config: Config = {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-20px)' },
         },
+        slideTop: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideDown: {
+          '0%': { transform: 'translateY(-20px)' },
+          '100%': { transform: 'translateY(0)' },
+        },
       },
       animation: {
         fadeIn: 'fadeIn 0.5s ease-out',
@@ -108,6 +116,9 @@ const config: Config = {
         spin: 'spin 1s linear infinite',
         'spin-slow': 'spin 10s linear infinite',
         float: 'float 3s ease-in-out infinite',
+        slideTop: 'slideTop 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        slideDown:
+          'slideDown 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
       },
     },
   },

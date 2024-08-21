@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
 import NotificationModal from '@/components/myNotificatons/NotificationModal';
 import useFetchData from '@/hooks/useFetchData';
+import useResponsive from '@/hooks/useResponsive';
 import useScrollLock from '@/hooks/useScrollLock';
 import { getUserData } from '@/lib/apis/userApis';
 import { User } from '@/types/userTypes';
@@ -15,7 +16,11 @@ import { ProfileMenu } from './ProfileMenu';
 function Header() {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
-  useScrollLock({ isOpen: isNotificationModalOpen });
+  const { isMobile } = useResponsive();
+  useScrollLock({
+    isOpen: isNotificationModalOpen,
+    additionalCondition: isMobile,
+  });
 
   const accessToken = getCookie('accessToken');
   const {

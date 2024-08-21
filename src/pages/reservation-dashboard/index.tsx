@@ -59,6 +59,7 @@ export default function ReservationDashboard() {
         />
         {isOpenInfo && (
           <DailyReservationModal
+            isOpenInfo={isOpenInfo}
             onClose={handleCloseClick}
             reservationStatus={reservationStatus}
           />

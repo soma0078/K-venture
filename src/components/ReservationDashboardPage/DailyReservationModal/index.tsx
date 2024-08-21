@@ -6,16 +6,20 @@ import { ReservationStatusResponse } from '@/types/get/ReservationDashboardPageG
 
 interface DailyReservationModalProps {
   onClose: () => void;
+  isOpenInfo: Boolean;
   reservationStatus?: ReservationStatusResponse[];
 }
 
 export default function DailyReservationModal({
   onClose,
+  isOpenInfo,
   reservationStatus,
 }: DailyReservationModalProps) {
   return (
     <>
-      <div className="fixed z-[2] h-full w-full bg-white shadow-lg pc:absolute pc:right-0 pc:top-[60px] pc:h-[697px] pc:w-[429px] pc:rounded-3xl pc:border pc:border-kv-gray-400 tablet:absolute tablet:right-0 tablet:top-[60px] tablet:h-[697px] tablet:w-[429px] tablet:rounded-3xl tablet:border tablet:border-kv-gray-400 mobile:left-0 mobile:top-0 mobile:z-10">
+      <div
+        className={`${isOpenInfo && 'animate-slideTop'} fixed z-[2] h-full w-full bg-white shadow-lg pc:absolute pc:right-0 pc:top-[60px] pc:h-[697px] pc:w-[429px] pc:rounded-3xl pc:border pc:border-kv-gray-400 tablet:absolute tablet:right-0 tablet:top-[60px] tablet:h-[697px] tablet:w-[429px] tablet:rounded-3xl tablet:border tablet:border-kv-gray-400 mobile:left-0 mobile:top-0 mobile:z-10`}
+      >
         <DailyReservationModalHeader onClose={onClose} />
         {reservationStatus && (
           <>
