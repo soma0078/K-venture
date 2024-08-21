@@ -31,6 +31,12 @@
   .base-button-default {
     @apply rounded-md py-[11px] text-kv-lg font-kv-bold;
   }
+  .base-input {
+    @apply relative rounded-md border border-kv-gray-600 px-5 py-4 font-kv-medium outline-none kv-text-lg;
+  }
+  .password-icon {
+    @apply absolute right-5 top-[60px] cursor-pointer;
+  }
 }
 
 /* my-activity page styles */

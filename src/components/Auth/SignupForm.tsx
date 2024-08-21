@@ -1,7 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import * as yup from 'yup';
 
 import Button from '@/components/common/Button';
 import ErrorText from '@/components/common/ErrorText';
@@ -10,37 +8,20 @@ import Label from '@/components/common/Label';
 import Modal from '@/components/common/Modal/Modal';
 import useModal from '@/hooks/useModal';
 import useSignup from '@/hooks/useSignup';
+import { signupSchema } from '@/lib/utils/authSchema';
 import { SignUpForm } from '@/types/AuthTypes';
 
 import PasswordInput from './PasswordInput';
-
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .trim()
-    .matches(
-      /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i,
-      '잘못된 이메일입니다.',
-    )
-    .required('이메일을 입력해주세요'),
-  nickname: yup.string().required('닉네임을 입력해주세요'),
-  password: yup
-    .string()
-    .min(8, '8자 이상 입력해주세요')
-    .required('비밀번호를 입력해주세요'),
-  password_confirm: yup
-    .string()
-    .min(8, '8자 이상 입력해주세요')
-    .oneOf([yup.ref('password')], '비밀번호가 일치하지 않습니다.')
-    .required('비밀번호를 입력해주세요'),
-});
 
 export default function LoginForm() {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<SignUpForm>({ mode: 'onChange', resolver: yupResolver(schema) });
+  } = useForm<SignUpForm>({
+    mode: 'onChange',
+    resolver: yupResolver(signupSchema),
+  });
 
   const { modalProps, openModal } = useModal();
 
