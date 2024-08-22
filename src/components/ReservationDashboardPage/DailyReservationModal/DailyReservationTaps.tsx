@@ -41,8 +41,8 @@ export default function DailyReservationTaps({
   ];
 
   return (
-    <div className="mx-auto mt-[27px] flex h-[42px] w-full items-center border-b border-b-kv-gray-300 pl-[21px]">
-      <div className="mx-auto flex w-[343px]">
+    <div className="mt-[27px] flex h-[42px] w-full items-center border-b border-b-kv-gray-300 pl-[16px]">
+      <div className="mx-auto flex w-full min-w-[374px]">
         {taps.map((tap) => (
           <div
             className={`daily-modal-status-tap-base ${status === tap.status && 'daily-modal-status-active'} ${tap.count === 0 && 'cursor-default'}`}

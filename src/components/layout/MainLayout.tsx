@@ -22,21 +22,55 @@ function MainLayout({ children }: MainLayoutProps) {
 
   if (isMainPage) {
     return (
-      <div className="layout-container">
-        <div className="layout-header-wrapper">
-          <Header />
+      <div className="kv-layout-root">
+        <div className="layout-content-wrapper">
+          <div className="layout-header-wrapper">
+            <Header />
+          </div>
+          <div className="layout-header-spacer" />
+          <main className="min-h-[1060px] flex-1 bg-kv-gray-100">
+            {children}
+          </main>
+          <div className="layout-content-margin-bottom" />
+          <Footer />
         </div>
-        <div className="layout-header-spacer" />
-        <main className="min-h-[1060px] flex-1 bg-kv-gray-100">{children}</main>
-        <div className="layout-content-margin-bottom" />
-        <Footer />
       </div>
     );
   }
 
   if (isActivityPage) {
     return (
-      <div className="layout-container">
+      <div className="kv-layout-root">
+        <div className="layout-content-wrapper">
+          <div className="layout-header-wrapper">
+            <Header />
+          </div>
+          <div className="layout-header-spacer" />
+          <div
+            style={{
+              height:
+                'min(72px, calc(24px + (72 - 24) * ((100vw - 1200px) / (1920 - 1200))))',
+            }}
+            className="layout-content-margin-top"
+          />
+          <div className="align-center">
+            <div className="layout-content-container">
+              <main className="min-h-[1060px] flex-1 bg-kv-gray-100">
+                {children}
+              </main>
+            </div>
+          </div>
+          <div className="layout-content-margin-bottom" />
+          <Footer />
+        </div>
+      </div>
+    );
+  }
+
+  /* myPage */
+  return (
+    <div className="kv-layout-root">
+      <div className="layout-content-wrapper">
         <div className="layout-header-wrapper">
           <Header />
         </div>
@@ -48,8 +82,11 @@ function MainLayout({ children }: MainLayoutProps) {
           }}
           className="layout-content-margin-top"
         />
-        <div className="align-center">
+        <div className="bg-kv-gray-100 align-center">
           <div className="layout-content-container">
+            <div className="mr-6 hidden pc:block tablet:block">
+              <LeftNavBar />
+            </div>
             <main className="min-h-[1060px] flex-1 bg-kv-gray-100">
               {children}
             </main>
@@ -58,35 +95,6 @@ function MainLayout({ children }: MainLayoutProps) {
         <div className="layout-content-margin-bottom" />
         <Footer />
       </div>
-    );
-  }
-
-  /* myPage */
-  return (
-    <div className="layout-container">
-      <div className="layout-header-wrapper">
-        <Header />
-      </div>
-      <div className="layout-header-spacer" />
-      <div
-        style={{
-          height:
-            'min(72px, calc(24px + (72 - 24) * ((100vw - 1200px) / (1920 - 1200))))',
-        }}
-        className="layout-content-margin-top"
-      />
-      <div className="bg-kv-gray-100 align-center">
-        <div className="layout-content-container">
-          <div className="mr-6 hidden pc:block tablet:block">
-            <LeftNavBar />
-          </div>
-          <main className="min-h-[1060px] flex-1 bg-kv-gray-100">
-            {children}
-          </main>
-        </div>
-      </div>
-      <div className="layout-content-margin-bottom" />
-      <Footer />
     </div>
   );
 }

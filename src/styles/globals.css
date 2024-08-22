@@ -136,6 +136,17 @@
 
 /* Layout styles */
 @layer components {
+  /* z-index */
+  .kv-layout-root {
+    @apply relative;
+  }
+  .layout-content-wrapper {
+    @apply relative z-0 flex min-h-screen flex-col;
+  }
+  .layout-header-wrapper {
+    @apply fixed left-0 right-0 top-0 z-30;
+  }
+
   .layout-content-container {
     @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
   }
@@ -147,13 +158,6 @@
   }
   .layout-content-container {
     @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
-  }
-  .layout-container {
-    @apply flex min-h-screen flex-col;
-  }
-
-  .layout-header-wrapper {
-    @apply fixed left-0 right-0 top-0 z-30;
   }
 
   .layout-header-spacer {
@@ -443,7 +447,7 @@
   }
   /* 백드롭 */
   .backdrop {
-    @apply fixed left-0 top-0 z-[1] h-full w-full;
+    @apply fixed left-0 top-0 z-10 h-full w-full;
   }
   .daily-modal-list-sub-title {
     @apply mx-[10px] text-kv-lg font-kv-semibold text-kv-gray-600;

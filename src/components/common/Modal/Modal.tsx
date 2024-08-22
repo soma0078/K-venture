@@ -41,7 +41,7 @@ export default function Modal({
     <ModalContainer isOpen={isOpen} onClose={onClose}>
       {() => (
         <div
-          className={`${isOpen && `animate-slideTop`} pointer-events-none fixed inset-0 z-10 align-center`}
+          className={`${isOpen && `animate-slideTop`} pointer-events-none fixed inset-0 z-50 align-center`}
         >
           <ModalContent
             onClose={onClose}

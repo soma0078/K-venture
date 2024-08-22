@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import Button from '@/components/common/Button';
+import useScrollLock from '@/hooks/useScrollLock';
 import {
   CardEventHandlerType,
   ReservationStateType,
@@ -24,9 +25,11 @@ function ReservationModal({
       onClick.handleModalToggle();
     }
   }, [reservationState.step]);
+  const { isToggleModal } = reservationState;
+  useScrollLock({ isOpen: isToggleModal });
 
   return (
-    <div className="fixed inset-0 z-10 flex h-full w-full flex-col items-center bg-white pt-6">
+    <div className="fixed inset-0 z-10 flex h-full w-full flex-col items-center bg-white pt-6 mobile:z-30">
       {reservationState.step === 1 && (
         <Step1MobileCard
           onClick={onClick}

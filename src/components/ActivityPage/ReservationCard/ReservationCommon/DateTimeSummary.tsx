@@ -20,7 +20,7 @@ export default function DateTimeSummary({
   return (
     <div
       className={classNames(
-        'mb-[27px] w-[200px] text-kv-md font-kv-semibold hover:cursor-pointer',
+        'w-[200px] text-kv-md font-kv-semibold hover:cursor-pointer hover:text-kv-primary-blue hover:underline',
         className,
       )}
       onClick={onClick}

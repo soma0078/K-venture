@@ -43,7 +43,7 @@ export default function DailyReservationList() {
   };
 
   return (
-    <div className="mx-auto mt-[27px] h-[294px] w-[332px]">
+    <div className="mx-auto mt-[27px] h-[294px] w-full min-w-[332px] px-[16px]">
       <p className="daily-modal-sub-title">예약 내역</p>
       <div className="h-[248px] overflow-auto scrollbar-none-custom">
         {reservationList?.pages.map((page, pageIndex) => (
@@ -55,7 +55,7 @@ export default function DailyReservationList() {
                   index === page.data.reservations.length - 1;
                 return (
                   <div
-                    className="mb-[16px] flex h-[116px] w-[343px] flex-col gap-[6px] rounded border px-[16px] pt-[16px]"
+                    className="mb-[16px] flex h-[116px] w-full flex-col gap-[6px] rounded border px-[16px] pt-[16px]"
                     key={index}
                     ref={isLastItem ? ref : undefined}
                   >
