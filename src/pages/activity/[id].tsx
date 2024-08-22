@@ -56,7 +56,7 @@ export default function ActivityPage() {
           <h2 className="mb-4 mt-2 text-kv-3xl font-kv-bold mobile:text-kv-2xl">
             {activityData.title}
           </h2>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <ReviewRating
               reviewCount={activityData.reviewCount}
               rating={activityData.rating}

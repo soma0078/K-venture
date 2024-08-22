@@ -8,7 +8,7 @@ export default function Location({ address }: LocationProps) {
   return (
     <div className="flex items-center gap-1">
       <LocationIcon />
-      <p>{address}</p>
+      <p className="text-kv-lg mobile:text-kv-md">{address}</p>
     </div>
   );
 }

@@ -14,8 +14,8 @@ export function ReviewRating({ reviewCount, rating }: ReviewProps) {
   return (
     <div className="flex items-center gap-1">
       <StartIcon />
-      <p>
-        {rating} ({reviewCount.toLocaleString()})
+      <p className="text-kv-lg mobile:text-kv-md">
+        {rating.toFixed(1)} ({reviewCount.toLocaleString()})
       </p>
     </div>
   );
