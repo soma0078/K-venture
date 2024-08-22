@@ -319,10 +319,6 @@
     @apply border-kv-red focus:border-kv-red;
   }
 
-  .profile-input-readonly {
-    @apply cursor-not-allowed border-kv-primary-blue-light focus:border-kv-primary-blue-light;
-  }
-
   .lnb-link {
     @apply flex gap-3.5 rounded-xl fill-current px-5 py-2.5 font-kv-semibold text-kv-gray-600 transition ease-in-out hover:bg-kv-primary-blue-light hover:text-kv-primary-blue;
   }

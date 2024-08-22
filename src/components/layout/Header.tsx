@@ -1,4 +1,5 @@
 import { getCookie } from 'cookies-next';
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -9,11 +10,13 @@ import useFetchData from '@/hooks/useFetchData';
 import useResponsive from '@/hooks/useResponsive';
 import useScrollLock from '@/hooks/useScrollLock';
 import { getUserData } from '@/lib/apis/userApis';
+import { profileImageAtom } from '@/state/profileImageAtom';
 import { User } from '@/types/userTypes';
 
 import { ProfileMenu } from './ProfileMenu';
 
 function Header() {
+  const [profileImage, setProfileImage] = useAtom(profileImageAtom);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const { isMobile } = useResponsive();
@@ -36,6 +39,12 @@ function Header() {
   });
   const isLoggedIn = isSuccess;
 
+  useEffect(() => {
+    if (user && user.profileImageUrl) {
+      setProfileImage(user.profileImageUrl);
+    }
+  }, [user]);
+
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
@@ -49,8 +58,9 @@ function Header() {
     return <div>Loading...</div>;
   }
   if (isError) {
-    return <div>Error loading user data: {error.message}</div>;
+    return <div>Err or loading user data: {error.message}</div>;
   }
+
   const handleProfileClick = () => {
     setIsProfileMenuOpen((prev) => !prev);
   };
@@ -100,7 +110,7 @@ function Header() {
               >
                 <HeaderUserProfile
                   nickname={user.nickname}
-                  profileImageUrl={user.profileImageUrl}
+                  profileImageUrl={profileImage}
                 />
               </button>
             )}
