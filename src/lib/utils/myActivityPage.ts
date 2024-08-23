@@ -12,7 +12,9 @@ export const checkDuplication = (schedules: Schedule[], schedule: Schedule) => {
 
     const isSameDate = s.date === schedule.date;
     const doesTimeOverlap =
-      (si <= startIdx && startIdx < ei) || (si < endIdx && endIdx <= ei);
+      (si <= startIdx && startIdx < ei) ||
+      (si < endIdx && endIdx <= ei) ||
+      (startIdx <= si && ei <= endIdx);
 
     return isSameDate && doesTimeOverlap;
   });

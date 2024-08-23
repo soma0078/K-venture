@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 
 import ValueDropdown from '@/components/common/Dropdown/ValueDropdown';
 import ErrorText from '@/components/common/ErrorText';
@@ -14,6 +13,7 @@ import { MAX_IMG_LENGTH } from '@/constants/myActivityPage';
 import useDropdown from '@/hooks/useDropdown';
 import useImageManager from '@/hooks/useImageManager';
 import { postActivity, postActivityImage } from '@/lib/apis/postApis';
+import { activityFormSchema } from '@/lib/utils/activityFormSchema';
 import { convertYYMMDDtoYMD } from '@/lib/utils/formatDate';
 import { checkDuplication } from '@/lib/utils/myActivityPage';
 import { CATEGORIES, Schedule } from '@/types/activityTypes';
@@ -33,17 +33,6 @@ interface InputForm {
   address: string;
 }
 
-const schema = yup.object().shape({
-  title: yup.string().required('제목을 입력해주세요.'),
-  description: yup.string().required('설명을 입력해주세요.'),
-  price: yup
-    .number()
-    .positive('가격은 양수여야 합니다.')
-    .integer('가격은 정수여야 합니다.')
-    .required('가격을 입력해주세요.'),
-  address: yup.string().required('주소를 입력해주세요.'),
-});
-
 export default function MyActivityForm() {
   const category = useDropdown('');
   const [address, setAddress] = useState('');
@@ -61,7 +50,7 @@ export default function MyActivityForm() {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<InputForm>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(activityFormSchema),
     mode: 'onBlur',
   });
 
@@ -206,7 +195,7 @@ export default function MyActivityForm() {
         <div className="flex flex-col">
           <h2 className="h2-my-act">가격</h2>
           <input
-            className="input-my-act"
+            className="input-my-act no-spinner"
             id="price"
             type="number"
             placeholder="*가격"
