@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
+import { DEFAULT_ACTIVITY_IMAGE } from '@/constants/defaultAssets';
 import useResponsive from '@/hooks/useResponsive';
 import { getGridCols } from '@/lib/utils/gridUtils';
 import { SubImageUrl } from '@/types/activityTypes';
@@ -19,6 +21,22 @@ export default function ImageGallery({
 }: BannerImageProps) {
   const { isMobile } = useResponsive();
 
+  const [mainBannerUrl, setMainBannerUrl] = useState(bannerImageUrl);
+  const [subBannerUrl, setSubBannerUrl] = useState(
+    subImages.map((image) => image.imageUrl),
+  );
+
+  const handleMainImageError = () => {
+    setMainBannerUrl(DEFAULT_ACTIVITY_IMAGE);
+  };
+  const handleSubImageError = (index: number) => {
+    setSubBannerUrl((prev) => {
+      const newSubBannerUrls = [...prev];
+      newSubBannerUrls[index] = DEFAULT_ACTIVITY_IMAGE;
+      return newSubBannerUrls;
+    });
+  };
+
   return (
     <>
       {isMobile ? (
@@ -33,10 +51,11 @@ export default function ImageGallery({
             <div className={`${subImages.length === 0 ? 'w-full' : 'w-1/2'}`}>
               <div className="relative h-[543px] w-full tablet:h-[310px]">
                 <Image
-                  src={bannerImageUrl}
+                  src={mainBannerUrl}
                   alt={`${title} 배너 이미지`}
                   fill
                   objectFit="cover"
+                  onError={handleMainImageError}
                 />
               </div>
             </div>
@@ -52,10 +71,11 @@ export default function ImageGallery({
                       className="sub-image-wrapper relative h-full w-full"
                     >
                       <Image
-                        src={subImage.imageUrl}
+                        src={subBannerUrl[idx]}
                         alt={`${title} 서브 이미지 ${idx + 1}`}
                         fill
                         objectFit="cover"
+                        onError={() => handleSubImageError(idx)}
                       />
                     </div>
                   ),

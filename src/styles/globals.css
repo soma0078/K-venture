@@ -7,7 +7,7 @@
     font-family: theme('fontFamily.pretendard');
   }
   body {
-    @apply bg-[#FAFBFC] text-kv-lg font-kv-regular text-kv-black;
+    @apply overflow-x-hidden bg-[#FAFBFC] text-kv-lg font-kv-regular text-kv-black;
   }
 }
 
@@ -68,7 +68,7 @@
   }
   .no-spinner::-webkit-outer-spin-button,
   .no-spinner::-webkit-inner-spin-button {
-    @apply appearance-none m-0;
+    @apply m-0 appearance-none;
   }
   .no-spinner {
     @apply appearance-none;
@@ -180,7 +180,7 @@
     @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
   }
   .footer-link-styles {
-    @apply font-sans kv-text-lg font-normal;
+    @apply font-sans font-normal kv-text-lg;
   }
   .header-link-styles {
     @apply cursor-pointer font-kv-medium text-kv-black kv-text-md hover:text-kv-gray-600 active:text-kv-gray-800;
@@ -521,7 +521,7 @@
   }
 
   .swiper-container {
-    @apply relative -ml-4 -mr-4 h-[310px] bg-kv-black;
+    @apply relative -ml-4 -mr-4 h-[310px];
   }
 
   .swiper-container .swiper {
@@ -557,7 +557,7 @@
 /* 체험 카드 */
 @layer components {
   .activity-card-title {
-    @apply truncate font-kv-bold text-kv-black kv-text-md pc:kv-text-xl tablet:kv-text-2lg w-[171px] tablet:w-[219px] pc:w-[491px];
+    @apply w-[171px] truncate font-kv-bold text-kv-black kv-text-md pc:w-[491px] pc:kv-text-xl tablet:w-[219px] tablet:kv-text-2lg;
   }
   .activity-card-price {
     @apply font-kv-medium kv-text-lg pc:kv-text-2xl tablet:kv-text-xl;
@@ -586,7 +586,7 @@
 /* 후기 모달 */
 @layer components {
   .review-modal-container {
-    @apply modal-container h-full w-full rounded-none pc:h-[680px] pc:w-[480px] pc:rounded-[24px] tablet:h-[680px] tablet:w-[480px] tablet:rounded-[24px] align-center;
+    @apply modal-container h-full w-full rounded-none align-center pc:h-[680px] pc:w-[480px] pc:rounded-[24px] tablet:h-[680px] tablet:w-[480px] tablet:rounded-[24px];
   }
 }
 

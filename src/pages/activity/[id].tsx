@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import CustomKebab from '@/components/activity/CustomKebab';
@@ -7,7 +8,9 @@ import Location from '@/components/activity/Location';
 import ReservationCard from '@/components/activity/ReservationCard';
 import { ReviewRating } from '@/components/activity/Review';
 import ReviewList from '@/components/activity/ReviewList';
+import EmptyState from '@/components/common/EmptyState';
 import Pagination from '@/components/common/Pagination';
+import ActivityPageSkeleton from '@/components/skeletons/ActivityPageSkeleton';
 import useFetchData from '@/hooks/useFetchData';
 import { usePagination } from '@/hooks/usePagination';
 import { getActivity, getActivityReview } from '@/lib/apis/getApis';
@@ -21,16 +24,30 @@ export default function ActivityPage() {
   const activityId = Number(router.query.id);
 
   // 체험 상세 데이터 가져오기
-  const { data: activityData } = useFetchData<ActivityResponse>(
-    ['activity', activityId],
-    () => getActivity(activityId),
-    {
-      enabled: !!activityId,
-    },
-  );
+  const { data: activityData, isLoading: isActivityLoading } =
+    useFetchData<ActivityResponse>(
+      ['activity', activityId],
+      () => getActivity(activityId),
+      {
+        enabled: !!activityId,
+        staleTime: 5 * 60 * 1000,
+        cacheTime: 10 * 60 * 1000,
+        refetchOnWindowFocus: false,
+        retry: 1,
+      },
+    );
 
   // 유저 데이터 가져오기
-  const { data: userData, isLoading } = useFetchData(['user'], getUserData, {});
+  const { data: userData, isLoading: isUserLoading } = useFetchData(
+    ['user'],
+    getUserData,
+    {
+      staleTime: 5 * 60 * 1000,
+      cacheTime: 10 * 60 * 1000,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    },
+  );
 
   // 후기 데이터 가져오기
   const {
@@ -45,9 +62,23 @@ export default function ActivityPage() {
     initialPage: 1,
   });
 
-  if (isLoading) return <div>로딩중</div>;
-  if (!activityData) return <div>존재하지 않는 체험입니다.</div>;
+  const isLoading = isActivityLoading || isUserLoading;
 
+  if (isLoading) return <ActivityPageSkeleton />;
+
+  if (!activityData) {
+    return (
+      <div>
+        <EmptyState message="존재하지 않는 체험입니다." />
+        <Link
+          href="/"
+          className="m-auto mt-6 w-40 rounded-lg bg-kv-primary-blue py-3 font-kv-medium text-white align-center hover:bg-kv-primary-blue-hover"
+        >
+          메인으로
+        </Link>
+      </div>
+    );
+  }
   return (
     <>
       <div className="flex items-center justify-between">
@@ -109,8 +140,10 @@ export default function ActivityPage() {
             )}
           </div>
         </div>
-        <div className="mt-10">
-          <ReservationCard />
+        <div className="relative mt-10">
+          <div className="sticky top-24 z-10 tablet:min-w-[251px]">
+            <ReservationCard />
+          </div>
         </div>
       </div>
     </>

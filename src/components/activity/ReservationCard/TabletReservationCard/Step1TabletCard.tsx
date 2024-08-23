@@ -19,7 +19,7 @@ export default function Step1TabletCard({
   reservationState,
 }: TabletStep1CardProps) {
   return (
-    <div className="w-[251px] rounded-xl border-[1px] shadow-md">
+    <div className="w-[251px] rounded-xl border-[1px] bg-white shadow-md">
       <PriceDisplay
         price={reservationState.price}
         headCount={reservationState.headCount}
