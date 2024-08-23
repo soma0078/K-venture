@@ -100,8 +100,15 @@
   }
 }
 
-/* date picker custom styles */
+/* 예약 모달의 달력 */
 @layer components {
+  /* 팝업 달력의 위치 */
+  .custom-datepicker .react-datepicker__tab-loop {
+    @apply relative;
+  }
+  .custom-datepicker .react-datepicker-popper {
+    @apply !-top-[3px] right-0;
+  }
   .react-datepicker__header {
     @apply !border-b-0 !bg-white !pb-0;
   }

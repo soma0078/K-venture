@@ -26,6 +26,7 @@ export default function PopupDateSection({
   return (
     <div className="custom-datepicker">
       <DatePicker
+        showPopperArrow={false}
         placeholderText={POPUP_DATE_SECTION_PLACEHOLDER_TEXT}
         selected={selectedDate}
         minDate={today}
