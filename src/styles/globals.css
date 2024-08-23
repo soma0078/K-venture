@@ -123,14 +123,24 @@
   }
 }
 
-/* DayMarker styles */
+/* 인라인 달력 */
 @layer components {
-  .day-marker-today {
-    @apply bg-[#E0E5FF] text-kv-primary-blue;
+  .custom-datepicker .react-datepicker__day--today {
+    @apply rounded-[8px] bg-kv-primary-blue-light text-kv-primary-blue;
   }
-
-  .day-marker-selected {
-    @apply bg-kv-primary-blue text-white;
+  .custom-datepicker .react-datepicker__day--selected {
+    @apply rounded-[8px] bg-kv-primary-blue;
+  }
+  .custom-datepicker
+    .react-datepicker__day--today.react-datepicker__day--selected {
+    @apply text-white;
+  }
+  .custom-datepicker .react-datepicker__day:hover {
+    @apply rounded-[8px];
+  }
+  .custom-datepicker
+    .react-datepicker__day--today.react-datepicker__day:hover.react-datepicker__day--keyboard-selected {
+    @apply text-white;
   }
 }
 
@@ -249,11 +259,11 @@
   }
 
   .icon-button-counter-participant-default {
-    @apply size-5 text-kv-primary-blue;
+    @apply size-5 text-kv-gray-4b hover:font-kv-bold;
   }
 
   .text-button-counter-participant-default {
-    @apply text-kv-primary-blue;
+    @apply text-kv-gray-4b;
   }
 
   .container-display-price-default {

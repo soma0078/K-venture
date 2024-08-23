@@ -1,5 +1,5 @@
-import ParticipantCounter from '@/components/ActivityPage/ReservationCard/ReservationCommon/ParticipantCounter';
-import ReservationHeader from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationHeader';
+import ParticipantCounter from '@/components/activity/ReservationCard/ReservationCommon/ParticipantCounter';
+import ReservationHeader from '@/components/activity/ReservationCard/ReservationCommon/ReservationHeader';
 import { CardEventHandlerType } from '@/types/activityDetailPageTypes';
 
 interface Step2MobileCardProps {

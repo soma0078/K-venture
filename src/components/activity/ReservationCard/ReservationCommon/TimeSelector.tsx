@@ -34,12 +34,12 @@ function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
   }, [reservationState.date]);
 
   return (
-    <div className="w-[327px]">
+    <>
       <p className="text-kv-2lg font-kv-bold">
         {RESERVATION_TIMESELECTOR_PLACEHOLDER.title}
       </p>
       {date === '' ? (
-        <p className="mt-[24px] text-center text-kv-lg font-kv-medium">
+        <p className="mt-[24px] text-center text-kv-lg font-kv-medium text-kv-black">
           {RESERVATION_TIMESELECTOR_PLACEHOLDER.noDate}
         </p>
       ) : (
@@ -47,10 +47,10 @@ function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
           {filteredSchedules.map(({ startTime, endTime, id }) => (
             <Button
               key={id}
-              className={`h-[46px] w-[117px] ${
+              className={`h-[46px] w-[117px] font-kv-medium ${
                 selectedId === id
                   ? 'bg-kv-primary-blue text-white'
-                  : 'border-[2px] border-kv-primary-blue text-kv-primary-blue'
+                  : 'border border-kv-primary-blue text-kv-primary-blue'
               }`}
               onClick={() => {
                 handleTimeClick(startTime, endTime, id);
@@ -62,7 +62,7 @@ function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 }
 

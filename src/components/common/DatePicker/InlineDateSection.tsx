@@ -1,21 +1,25 @@
 import classNames from 'classnames';
 import DatePicker from 'react-datepicker';
 
+import { BookingDot } from '@/components/common/DatePicker/BookingDot';
 import {
   INLINE_DATE_SECTION_PLACEHOLDER_TEXT,
   SELECTED_DATE_FORMAT,
 } from '@/constants/datePickerConstants';
 import useCalendar from '@/hooks/useCalender';
 import { formatDate } from '@/lib/utils/formatDate';
+import { ReservationStateType } from '@/types/activityDetailPageTypes';
 
 export default function InlineDateSection({
   onClick,
   className,
   noneToggle,
+  reservationState,
 }: {
   onClick: (value: string) => void;
   className?: string;
   noneToggle?: boolean;
+  reservationState?: ReservationStateType;
 }) {
   const {
     selectedDate,
@@ -55,6 +59,13 @@ export default function InlineDateSection({
           onSelect={(date: Date | null) => {
             handleDateClick(date || today);
           }}
+          renderDayContents={(day, date) => (
+            <BookingDot
+              day={day}
+              date={date}
+              reservationState={reservationState}
+            />
+          )}
         />
       </div>
     ),

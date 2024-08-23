@@ -1,12 +1,10 @@
-import { useEffect } from 'react';
-
-import ContentTitle from '@/components/ActivityPage/ReservationCard/ReservationCommon/ContentTitle';
-import DateTimeSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/DateTimeSummary';
-import ParticipantCounter from '@/components/ActivityPage/ReservationCard/ReservationCommon/ParticipantCounter';
-import PriceDisplay from '@/components/ActivityPage/ReservationCard/ReservationCommon/PriceDisplay';
-import ReservationButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationButton';
-import TotalSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/TotalSummary';
-import { Modal, useModal } from '@/components/common/Modal';
+import ContentTitle from '@/components/activity/ReservationCard/ReservationCommon/ContentTitle';
+import DateTimeSummary from '@/components/activity/ReservationCard/ReservationCommon/DateTimeSummary';
+import ParticipantCounter from '@/components/activity/ReservationCard/ReservationCommon/ParticipantCounter';
+import PriceDisplay from '@/components/activity/ReservationCard/ReservationCommon/PriceDisplay';
+import ReservationButton from '@/components/activity/ReservationCard/ReservationCommon/ReservationButton';
+import TotalSummary from '@/components/activity/ReservationCard/ReservationCommon/TotalSummary';
+import { Modal } from '@/components/common/Modal';
 import { useReservation } from '@/hooks/useReservation';
 import { isReservationValid } from '@/lib/utils/isReservationValid';
 import {
@@ -22,21 +20,8 @@ export default function Step3TabletCard({
   onClick,
   reservationState,
 }: TabletStep1CardProps) {
-  const { submitReservation, isSuccess, isError } = useReservation();
-  const { modalProps, openModal } = useModal();
+  const { submitReservation, modalProps } = useReservation();
   const isValidate = isReservationValid(reservationState);
-
-  useEffect(() => {
-    if (isSuccess) {
-      openModal('alert', `예약이 성공적으로 완료되었습니다.`);
-    }
-    if (isError) {
-      openModal(
-        'alert',
-        `요청하신 날짜에는 예약이 불가능합니다. 다른 날짜를 선택해 주세요.`,
-      );
-    }
-  }, [isSuccess, isError, openModal]);
 
   return (
     <div className="w-[251px] rounded-xl border-[1px] shadow-md">

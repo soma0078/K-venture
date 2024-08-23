@@ -29,7 +29,7 @@ function ReservationModal({
   useScrollLock({ isOpen: isToggleModal });
 
   return (
-    <div className="fixed inset-0 z-10 flex h-full w-full flex-col items-center bg-white pt-6 mobile:z-30">
+    <div className="fixed inset-0 z-30 flex h-full w-full animate-slideTop flex-col items-center bg-white pt-6">
       {reservationState.step === 1 && (
         <Step1MobileCard
           onClick={onClick}
@@ -42,12 +42,14 @@ function ReservationModal({
           headCount={reservationState.headCount}
         />
       )}
-      <Button
-        className="my-[16px] h-[56px] w-[327px] rounded-[4px] bg-kv-primary-blue text-white"
-        onClick={onClick.handleNextStepClick}
-      >
-        확인
-      </Button>
+      <div className="w-full max-w-[432px] px-[16px]">
+        <Button
+          className="my-[16px] h-[56px] w-full rounded-[4px] bg-kv-primary-blue text-white"
+          onClick={onClick.handleNextStepClick}
+        >
+          확인
+        </Button>
+      </div>
     </div>
   );
 }

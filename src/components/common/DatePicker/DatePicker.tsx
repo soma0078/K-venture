@@ -6,12 +6,14 @@ import { registerLocale } from 'react-datepicker';
 
 import InlineDateSection from '@/components/common/DatePicker/InlineDateSection';
 import PopupDateSection from '@/components/common/DatePicker/PopupDateSection';
+import { ReservationStateType } from '@/types/activityDetailPageTypes';
 
 interface DatePickerProps {
   onClick: (value: string) => void;
   variant: 'inline' | 'popup';
   noneToggle?: boolean;
   className?: string;
+  reservationState?: ReservationStateType;
 }
 
 export default function DatePicker({
@@ -19,6 +21,7 @@ export default function DatePicker({
   variant,
   className,
   noneToggle,
+  reservationState,
 }: DatePickerProps) {
   useEffect(() => {
     registerLocale('ko', ko);
@@ -31,10 +34,15 @@ export default function DatePicker({
           onClick={onClick}
           className={className}
           noneToggle={noneToggle}
+          reservationState={reservationState}
         />
       )}
       {variant === 'popup' && (
-        <PopupDateSection onClick={onClick} className={className} />
+        <PopupDateSection
+          onClick={onClick}
+          className={className}
+          reservationState={reservationState}
+        />
       )}
     </>
   );

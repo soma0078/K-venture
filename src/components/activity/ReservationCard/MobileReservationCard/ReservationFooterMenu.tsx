@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
-
-import DateTimeSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/DateTimeSummary';
-import PriceDisplay from '@/components/ActivityPage/ReservationCard/ReservationCommon/PriceDisplay';
-import ReservationButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationButton';
-import SelectDateTextButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/SelectDateTextButton';
-import { Modal, useModal } from '@/components/common/Modal';
+import DateTimeSummary from '@/components/activity/ReservationCard/ReservationCommon/DateTimeSummary';
+import PriceDisplay from '@/components/activity/ReservationCard/ReservationCommon/PriceDisplay';
+import ReservationButton from '@/components/activity/ReservationCard/ReservationCommon/ReservationButton';
+import SelectDateTextButton from '@/components/activity/ReservationCard/ReservationCommon/SelectDateTextButton';
+import { Modal } from '@/components/common/Modal';
 import { useReservation } from '@/hooks/useReservation';
 import { isReservationValid } from '@/lib/utils/isReservationValid';
 import {
@@ -22,20 +20,7 @@ function ReservationFooterMenu({
   reservationState,
 }: ReservationFooterMenuProps) {
   const isValidate = isReservationValid(reservationState);
-  const { submitReservation, isSuccess, isError } = useReservation();
-  const { modalProps, openModal } = useModal();
-
-  useEffect(() => {
-    if (isSuccess) {
-      openModal('alert', `예약이 성공적으로 완료되었습니다.`);
-    }
-    if (isError) {
-      openModal(
-        'alert',
-        `요청하신 날짜에는 예약이 불가능합니다. 다른 날짜를 선택해 주세요.`,
-      );
-    }
-  }, [isSuccess, isError, openModal]);
+  const { submitReservation, modalProps } = useReservation();
 
   return (
     <div className="fixed bottom-0 left-0 z-10 h-[83px] w-full border-[1px] border-kv-gray-300 bg-white">

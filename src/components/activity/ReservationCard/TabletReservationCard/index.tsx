@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import TabletStep2Card from '@/components/ActivityPage/ReservationCard/TabletReservationCard/Step2TabletCard';
+import TabletStep2Card from '@/components/activity/ReservationCard/TabletReservationCard/Step2TabletCard';
 import {
   CardEventHandlerType,
   ReservationStateType,

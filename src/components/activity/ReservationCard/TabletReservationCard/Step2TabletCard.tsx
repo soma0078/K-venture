@@ -1,6 +1,6 @@
-import ReservationButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationButton';
-import ReservationHeader from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationHeader';
-import TimeSelector from '@/components/ActivityPage/ReservationCard/ReservationCommon/TimeSelector';
+import ReservationButton from '@/components/activity/ReservationCard/ReservationCommon/ReservationButton';
+import ReservationHeader from '@/components/activity/ReservationCard/ReservationCommon/ReservationHeader';
+import TimeSelector from '@/components/activity/ReservationCard/ReservationCommon/TimeSelector';
 import DatePicker from '@/components/common/DatePicker/DatePicker';
 import {
   CardEventHandlerType,
@@ -17,7 +17,7 @@ export default function Step2TabletCard({
   reservationState,
 }: TabletStep2CardProps) {
   return (
-    <div className="w-[480px] rounded-xl border-[1px] shadow-md">
+    <div className="absolute right-6 z-10 w-[480px] rounded-xl border-[1px] bg-white shadow-md">
       <ReservationHeader
         title="date"
         onCloseClick={onClick.handleCloseClick}
@@ -30,6 +30,7 @@ export default function Step2TabletCard({
           }}
           variant="inline"
           noneToggle={true}
+          reservationState={reservationState}
           className="text-kv-md font-kv-semibold"
         />
       </div>

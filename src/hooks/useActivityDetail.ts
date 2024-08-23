@@ -10,6 +10,8 @@ export const useActivityDetail = (
     enabled?: boolean;
     staleTime?: number;
     cacheTime?: number;
+    onSuccess?: (data: ActivityResponse) => void;
+    onError?: (error: Error) => void;
   },
 ): UseQueryResult<ActivityResponse, Error> => {
   return useFetchData<ActivityResponse>(

@@ -1,9 +1,9 @@
-import ContentTitle from '@/components/ActivityPage/ReservationCard/ReservationCommon/ContentTitle';
-import ParticipantCounter from '@/components/ActivityPage/ReservationCard/ReservationCommon/ParticipantCounter';
-import PriceDisplay from '@/components/ActivityPage/ReservationCard/ReservationCommon/PriceDisplay';
-import ReservationButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/ReservationButton';
-import SelectDateTextButton from '@/components/ActivityPage/ReservationCard/ReservationCommon/SelectDateTextButton';
-import TotalSummary from '@/components/ActivityPage/ReservationCard/ReservationCommon/TotalSummary';
+import ContentTitle from '@/components/activity/ReservationCard/ReservationCommon/ContentTitle';
+import ParticipantCounter from '@/components/activity/ReservationCard/ReservationCommon/ParticipantCounter';
+import PriceDisplay from '@/components/activity/ReservationCard/ReservationCommon/PriceDisplay';
+import ReservationButton from '@/components/activity/ReservationCard/ReservationCommon/ReservationButton';
+import SelectDateTextButton from '@/components/activity/ReservationCard/ReservationCommon/SelectDateTextButton';
+import TotalSummary from '@/components/activity/ReservationCard/ReservationCommon/TotalSummary';
 import {
   CardEventHandlerType,
   ReservationStateType,
