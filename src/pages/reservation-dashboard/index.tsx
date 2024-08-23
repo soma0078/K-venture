@@ -1,7 +1,9 @@
 import { Calendar } from 'react-calendar';
 
 import DailyReservationModal from '@/components/ReservationDashboardPage/DailyReservationModal';
+import NoReservationsState from '@/components/ReservationDashboardPage/NoReservationsState';
 import ReservationDashboardDropdown from '@/components/ReservationDashboardPage/ReservationDashboardDropdown';
+import { ReservationDashboardHeader } from '@/components/ReservationDashboardPage/ReservationDashboardHeader';
 import useDropdown from '@/hooks/useDropdown';
 import useReservationCalendar from '@/hooks/useReservationCalendar';
 import useReservationDashboardData from '@/hooks/useReservationDashboardData';
@@ -27,11 +29,11 @@ export default function ReservationDashboard() {
     reservationStatus,
   } = useReservationCalendar({ onOpen: handleOpenClick });
 
+  if (availableActivities.length === 0) return <NoReservationsState />;
+
   return (
-    <div className="flex min-w-[342px] flex-col">
-      <div className="mb-[32px]">
-        <h1 className="text-kv-3xl font-kv-bold">예약 현황</h1>
-      </div>
+    <div className="reservation-dashboard-container">
+      <ReservationDashboardHeader />
       <div className="mb-[24px] h-[56px]">
         <ReservationDashboardDropdown
           label="체험명"

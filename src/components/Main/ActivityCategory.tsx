@@ -3,13 +3,12 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 
 import { useAtom } from 'jotai';
-import { EffectFade, Navigation, Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { activityListOptions } from '@/state/activityListAtom';
 import { MainPageOptionTypes } from '@/types/get/activityTypes';
 
-import ActiveCategorySlide from './ActiveCategorySlide';
 const categories: MainPageOptionTypes = {
   all: '전체',
   culture: '문화 · 예술',

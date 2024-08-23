@@ -350,6 +350,12 @@
   }
 }
 
+/* 예약 현황 페이지 */
+@layer components {
+  .reservation-dashboard-container {
+    @apply flex min-w-[342px] flex-col;
+  }
+}
 /* 예약 현황의 달력 */
 @layer components {
   /* 달력 최상단 컨테이너 */
