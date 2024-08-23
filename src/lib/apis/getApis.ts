@@ -1,9 +1,12 @@
-import { number } from 'yup';
-
 import instance from '@/lib/apis/axios';
 import { ActivityResponse as ActivityDetailResponse } from '@/types/activityDetailPageTypes';
 import { ActivityReviewsResponse } from '@/types/activityReviewTypes';
 import { ActivityResponse } from '@/types/activityTypes';
+import {
+  getActivityListParams,
+  getActivityListResponse,
+  MainPageOptionTypes,
+} from '@/types/get/activityTypes';
 import {
   ReservationDetailsResponse,
   ReservationStatusResponse,
@@ -57,6 +60,22 @@ export const getActivity = async (
   const response = await instance.get<ActivityResponse>(
     `/activities/${activityId}`,
   );
+  return { data: response.data };
+};
+
+export const getActivityList = async ({
+  method,
+  cursorId,
+  category,
+  keyword,
+  sort,
+  page,
+  size,
+}: MainPageOptionTypes): Promise<{ data: getActivityListResponse }> => {
+  const response = await instance.get<getActivityListResponse>(`/activities`, {
+    params: { method, cursorId, category, keyword, sort, page, size },
+  });
+
   return { data: response.data };
 };
 

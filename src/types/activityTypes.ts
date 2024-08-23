@@ -57,3 +57,6 @@ export interface SubImageUrl {
   id: number;
   imageUrl: string;
 }
+
+export interface ActivityListItem
+  extends Omit<ActivityResponse, 'subImages' | 'schedules'> {}
