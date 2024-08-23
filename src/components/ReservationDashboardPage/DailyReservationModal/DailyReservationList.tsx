@@ -3,6 +3,7 @@ import React from 'react';
 
 import Button from '@/components/common/Button';
 import InfiniteScrollHint from '@/components/common/InfiniteScrollHint';
+import Loading from '@/components/common/Loading';
 import useDailyReservationListInfinite from '@/hooks/useDailyReservationListInfinite';
 import { usePatchReservationStatus } from '@/hooks/useUpdateReservationStatus';
 import { dailyReservationModalAtom } from '@/state/reservationDashboardAtom';
@@ -114,7 +115,7 @@ export default function DailyReservationList() {
       </div>
 
       {isFetchingNextPage ? (
-        <div className="align-center">Loading...</div>
+        <Loading />
       ) : (
         hasNextPage && <InfiniteScrollHint hasNextPage={hasNextPage} />
       )}

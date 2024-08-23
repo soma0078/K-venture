@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import MyReservationCard from '@/components/common/ActivityCard/MyReservationCard';
 import SortDropDown from '@/components/common/Dropdown/SortDropdown';
 import EmptyState from '@/components/common/EmptyState';
+import Loading from '@/components/common/Loading';
 import { Modal } from '@/components/common/Modal';
 import useInfiniteScrollReservation from '@/hooks/useInfiniteScrollReservation';
 import useModal from '@/hooks/useModal';
@@ -101,9 +102,9 @@ export default function ReservationList() {
               onCancelClick={() => handleCancelClick(reservation.id)}
             />
           ))}
+          {loading && <Loading />}
         </div>
       )}
-      {loading && <div>Loading more...</div>}
       <Modal {...cancelModalProps} />
       <Modal {...reviewModalProps} reservation={selectedReservation} />
     </div>

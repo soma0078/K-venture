@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
+import Loading from '@/components/common/Loading';
 import NotificationModal from '@/components/myNotificatons/NotificationModal';
 import useFetchData from '@/hooks/useFetchData';
 import useResponsive from '@/hooks/useResponsive';
@@ -55,7 +56,11 @@ function Header() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="absolute left-[100px] top-[25px]">
+        <Loading />
+      </div>
+    );
   }
   if (isError) {
     return <div>Err or loading user data: {error.message}</div>;

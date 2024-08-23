@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import PenIcon from '@/assets/icons/icon_pen.svg';
+import Loading from '@/components/common/Loading';
 import { Modal, useModal } from '@/components/common/Modal';
 import { DEFAULT_PROFILE_IMAGE } from '@/constants/defaultAssets';
 import useFetchData from '@/hooks/useFetchData';
@@ -92,7 +93,7 @@ export default function EditProfileImage() {
 
         {isLoading && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-white bg-opacity-50">
-            로딩중...
+            <Loading />
           </div>
         )}
       </form>

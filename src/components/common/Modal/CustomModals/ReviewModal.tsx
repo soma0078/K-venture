@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import CloseIcon from '@/assets/icons/icon_x_lg.svg';
 import Button from '@/components/common/Button';
+import Loading from '@/components/common/Loading';
 import StarRating from '@/components/MyReservationsPage/StarRating';
 import { getActivity } from '@/lib/apis/getApis';
 import { postReview } from '@/lib/apis/postApis';
@@ -68,9 +69,7 @@ export default function ReviewModal({
     return (
       <div className="review-modal-container">
         <div className="mt-[70px] flex h-full w-full flex-col items-center justify-center p-4 pc:mt-0 pc:h-[616px] pc:w-[432px] pc:p-0 tablet:mt-0 tablet:h-[616px] tablet:w-[432px] tablet:p-0">
-          <h2 className="font-kv-bold text-kv-gray-600 kv-text-xl">
-            로딩 중...
-          </h2>
+          <Loading width={60} height={60} />
         </div>
       </div>
     );
