@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import MyActivityCard from '@/components/common/ActivityCard/MyActivityCard';
 import Button from '@/components/common/Button';
+import EmptyState from '@/components/common/EmptyState';
 import { Modal } from '@/components/common/Modal';
 import useInfiniteScrollActivity from '@/hooks/useInfiniteScrollActivity';
 import useModal from '@/hooks/useModal';
@@ -48,16 +49,19 @@ export default function MyActivityList() {
           체험 등록하기
         </Button>
       </div>
-
-      <div>
-        {activities.map((activity) => (
-          <MyActivityCard
-            key={activity.id}
-            activity={activity}
-            onDelete={() => handleDeleteButtonClick(activity.id)}
-          />
-        ))}
-      </div>
+      {activities.length === 0 && !loading ? (
+        <EmptyState message="아직 등록한 체험이 없어요" />
+      ) : (
+        <div>
+          {activities.map((activity) => (
+            <MyActivityCard
+              key={activity.id}
+              activity={activity}
+              onDelete={() => handleDeleteButtonClick(activity.id)}
+            />
+          ))}
+        </div>
+      )}
       {loading && <div>Loading more activities...</div>}
       <Modal {...deleteModalProps} />
       <Modal {...errorModalProps} />

@@ -21,6 +21,11 @@ export default function ReviewModal({
   const [error, setError] = useState<string | null>(null);
   const [activityExists, setActivityExists] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
+  const [src, setSrc] = useState(reservation.activity.bannerImageUrl);
+
+  const handleError = () => {
+    setSrc('/assets/images/default_img.png');
+  };
 
   useEffect(() => {
     const fetchActivity = async () => {
@@ -62,7 +67,7 @@ export default function ReviewModal({
   if (loading) {
     return (
       <div className="review-modal-container">
-        <div className="flex h-[686px] w-[432px] flex-col items-center justify-center">
+        <div className="mt-[70px] flex h-full w-full flex-col items-center justify-center p-4 pc:mt-0 pc:h-[616px] pc:w-[432px] pc:p-0 tablet:mt-0 tablet:h-[616px] tablet:w-[432px] tablet:p-0">
           <h2 className="font-kv-bold text-kv-gray-600 kv-text-xl">
             로딩 중...
           </h2>
@@ -74,7 +79,7 @@ export default function ReviewModal({
   if (!activityExists) {
     return (
       <div className="review-modal-container">
-        <div className="flex h-[686px] w-[432px] flex-col items-center justify-center">
+        <div className="mt-[70px] flex h-full w-full flex-col items-center justify-center p-4 pc:mt-0 pc:h-[616px] pc:w-[432px] pc:p-0 tablet:mt-0 tablet:h-[616px] tablet:w-[432px] tablet:p-0">
           <h2 className="mb-4 font-kv-bold kv-text-2xl">체험을 찾을 수 없음</h2>
           <p className="mb-10 mt-3 text-center font-kv-regular kv-text-md">
             이 체험은 삭제되었거나 더 이상 존재하지 않아 리뷰를 남길 수
@@ -94,7 +99,7 @@ export default function ReviewModal({
 
   return (
     <div className="review-modal-container">
-      <div className="h-[686px] w-[432px]">
+      <div className="mt-[70px] h-full w-full p-4 pc:mt-0 pc:h-[616px] pc:w-[432px] pc:p-0 tablet:mt-0 tablet:h-[616px] tablet:w-[432px] tablet:p-0">
         <div className="flex h-10 w-full items-center justify-between">
           <h2 className="font-kv-bold kv-text-2xl">후기 작성</h2>
           <div className="h-7 w-7 cursor-pointer" onClick={() => onClose()}>
@@ -102,27 +107,29 @@ export default function ReviewModal({
           </div>
         </div>
 
-        <div className="mt-[41px] flex h-[605px] flex-col justify-between">
-          <div className="flex h-[126px] w-full items-center">
-            <div className="relative h-[126px] w-[126px] rounded-[12px]">
+        <div className="mt-[35px] flex h-[535px] flex-col justify-between">
+          <div className="flex h-[100px] w-full items-center pc:h-[126px] tablet:h-[126px]">
+            <div className="relative h-[100px] w-[100px] flex-shrink-0 rounded-[12px] pc:h-[126px] pc:w-[126px] tablet:h-[126px] tablet:w-[126px]">
               <Image
-                src={reservation.activity.bannerImageUrl}
+                src={src}
                 alt={reservation.activity.title}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-[12px]"
+                onError={handleError}
               />
             </div>
-            <div className="ml-6 flex h-full w-[271px] flex-col justify-between">
-              <h3 className="activity-card-title">
+
+            <div className="ml-6 flex h-full min-w-0 flex-1 flex-col justify-between">
+              <h3 className="w-full max-w-full truncate font-kv-bold text-kv-black kv-text-md pc:w-[271px] pc:kv-text-xl tablet:w-[271px] tablet:kv-text-2lg">
                 {reservation.activity.title}
               </h3>
               <p className="font-kv-regular text-kv-gray-700 kv-text-xs pc:kv-text-lg tablet:kv-text-md">
                 {reservation.date} ・ {reservation.startTime} -{' '}
                 {reservation.endTime}・ {reservation.headCount}명
               </p>
-              <div className="h-[1px] w-[282px] bg-kv-black opacity-10"></div>
-              <p className="font-kv-bold kv-text-3xl">
+              <div className="h-[1px] w-full bg-kv-black opacity-10"></div>
+              <p className="font-kv-bold kv-text-xl pc:kv-text-3xl tablet:kv-text-3xl">
                 ₩{reservation.totalPrice.toLocaleString()}
               </p>
             </div>
@@ -131,7 +138,7 @@ export default function ReviewModal({
           <StarRating rating={rating} onRatingChange={setRating} />
 
           <textarea
-            className="h-[240px] w-full resize-none rounded border border-kv-gray-79 p-4 focus:border-2 focus:border-kv-primary-blue focus:outline-none"
+            className="h-[200px] w-full resize-none rounded border border-kv-gray-79 p-4 focus:border-2 focus:border-kv-primary-blue focus:outline-none"
             rows={4}
             placeholder="후기를 작성해주세요"
             value={reviewText}

@@ -26,7 +26,7 @@ function MyActivityCard({ activity, onDelete }: MyActivityCardProps) {
             className="mr-[6px] h-5 w-5 pb-[2px]"
           />
           <span className="text-kv-lg">
-            {activity.rating} ({activity.reviewCount})
+            {activity.rating.toFixed(1)} ({activity.reviewCount})
           </span>
         </div>
         <h3 className="activity-card-title">{activity.title}</h3>
