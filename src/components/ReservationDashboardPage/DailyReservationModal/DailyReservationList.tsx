@@ -3,6 +3,7 @@ import React from 'react';
 
 import Button from '@/components/common/Button';
 import InfiniteScrollHint from '@/components/common/InfiniteScrollHint';
+import Loading from '@/components/common/Loading';
 import useDailyReservationListInfinite from '@/hooks/useDailyReservationListInfinite';
 import { usePatchReservationStatus } from '@/hooks/useUpdateReservationStatus';
 import { dailyReservationModalAtom } from '@/state/reservationDashboardAtom';
@@ -13,7 +14,7 @@ export default function DailyReservationList() {
     dailyReservationModalAtom,
   );
   const patchReservationStatus = usePatchReservationStatus();
-  const { reservationList, ref, hasNextPage, isFetchingNextPage } =
+  const { reservationList, ref, hasNextPage, isFetchingNextPage, refetch } =
     useDailyReservationListInfinite();
 
   const handleReservationActionClick = ({
@@ -35,11 +36,15 @@ export default function DailyReservationList() {
       activityId,
     };
 
-    patchReservationStatus.mutate(params);
+    patchReservationStatus.mutate(params, {
+      onSuccess: () => {
+        refetch();
+      },
+    });
   };
 
   return (
-    <div className="mx-auto mt-[27px] h-[294px] w-[332px]">
+    <div className="mx-auto mt-[27px] h-[294px] w-full min-w-[332px] px-[16px]">
       <p className="daily-modal-sub-title">예약 내역</p>
       <div className="h-[248px] overflow-auto scrollbar-none-custom">
         {reservationList?.pages.map((page, pageIndex) => (
@@ -51,7 +56,7 @@ export default function DailyReservationList() {
                   index === page.data.reservations.length - 1;
                 return (
                   <div
-                    className="mb-[16px] flex h-[116px] w-[343px] flex-col gap-[6px] rounded border px-[16px] pt-[16px]"
+                    className="mb-[16px] flex h-[116px] w-full flex-col gap-[6px] rounded border px-[16px] pt-[16px]"
                     key={index}
                     ref={isLastItem ? ref : undefined}
                   >
@@ -110,7 +115,7 @@ export default function DailyReservationList() {
       </div>
 
       {isFetchingNextPage ? (
-        <div className="align-center">Loading...</div>
+        <Loading />
       ) : (
         hasNextPage && <InfiniteScrollHint hasNextPage={hasNextPage} />
       )}

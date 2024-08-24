@@ -59,3 +59,8 @@ export interface ReservationRequest {
   scheduleId: number;
   headCount: number;
 }
+
+export interface CreateReservationErrorType {
+  status: number;
+  message: string;
+}

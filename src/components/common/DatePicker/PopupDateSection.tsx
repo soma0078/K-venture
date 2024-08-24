@@ -2,19 +2,23 @@ import classNames from 'classnames';
 import { useRef } from 'react';
 import DatePicker from 'react-datepicker';
 
+import { BookingDot } from '@/components/common/DatePicker/BookingDot';
 import CalendarInput from '@/components/common/DatePicker/CalendarInput';
 import {
   POPUP_DATE_SECTION_PLACEHOLDER_TEXT,
   SELECTED_DATE_FORMAT,
 } from '@/constants/datePickerConstants';
 import useCalendar from '@/hooks/useCalender';
+import { ReservationStateType } from '@/types/activityDetailPageTypes';
 
 export default function PopupDateSection({
   onClick,
   className,
+  reservationState,
 }: {
   onClick: (value: string) => void;
   className?: string;
+  reservationState?: ReservationStateType;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { selectedDate, today, handleDateClick } = useCalendar(onClick);
@@ -22,6 +26,7 @@ export default function PopupDateSection({
   return (
     <div className="custom-datepicker">
       <DatePicker
+        showPopperArrow={false}
         placeholderText={POPUP_DATE_SECTION_PLACEHOLDER_TEXT}
         selected={selectedDate}
         minDate={today}
@@ -39,6 +44,13 @@ export default function PopupDateSection({
             )}
           />
         }
+        renderDayContents={(day, date) => (
+          <BookingDot
+            day={day}
+            date={date}
+            reservationState={reservationState}
+          />
+        )}
       />
     </div>
   );

@@ -1,4 +1,5 @@
 import StartIcon from '@/assets/icons/icon_star.svg';
+import formatRating from '@/lib/utils/formattedRating';
 
 interface ReviewProps {
   reviewCount: number;
@@ -14,8 +15,8 @@ export function ReviewRating({ reviewCount, rating }: ReviewProps) {
   return (
     <div className="flex items-center gap-1">
       <StartIcon />
-      <p>
-        {rating} ({reviewCount.toLocaleString()})
+      <p className="text-kv-lg mobile:text-kv-md">
+        {formatRating(rating)} ({reviewCount.toLocaleString()})
       </p>
     </div>
   );

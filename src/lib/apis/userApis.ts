@@ -17,12 +17,3 @@ export const getUserData = async (): Promise<{ data: User }> => {
     throw error;
   }
 };
-
-export const getUserProfile = async (): Promise<{
-  nickname: string;
-  email: string;
-  profileImageUrl: string;
-}> => {
-  const response = await instance.get('/users/me');
-  return response.data;
-};

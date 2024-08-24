@@ -15,6 +15,8 @@ interface UsePaginationOptions<T> {
   queryFn: (page: number) => Promise<T>;
   pageLimit?: number;
   initialPage?: number;
+  retry?: number;
+  refetchOnWindowFocus?: boolean;
 }
 
 const PAGE_LIMIT = 3;
@@ -30,6 +32,8 @@ export function usePagination<T extends TotalCountResponse>({
   queryFn,
   pageLimit = PAGE_LIMIT,
   initialPage = 1,
+  retry = 1,
+  refetchOnWindowFocus = false,
 }: UsePaginationOptions<T>) {
   const [page, setPage] = useState(initialPage);
   const queryClient = useQueryClient();
@@ -38,6 +42,8 @@ export function usePagination<T extends TotalCountResponse>({
     queryKey: [...queryKey, page],
     queryFn: () => queryFn(page),
     placeholderData: keepPreviousData,
+    retry,
+    refetchOnWindowFocus,
   });
 
   const totalPages = data ? Math.ceil(data.totalCount / pageLimit) : 1;
@@ -56,6 +62,5 @@ export function usePagination<T extends TotalCountResponse>({
     setPage,
     totalPages,
     data,
-    isPlaceholderData,
   };
 }

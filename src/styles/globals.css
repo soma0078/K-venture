@@ -7,7 +7,7 @@
     font-family: theme('fontFamily.pretendard');
   }
   body {
-    @apply bg-[#FAFBFC] text-kv-lg font-kv-regular text-kv-black;
+    @apply overflow-x-hidden bg-[#FAFBFC] text-kv-lg font-kv-regular text-kv-black;
   }
 }
 
@@ -25,11 +25,17 @@
   }
 
   .btn-outline {
-    @apply h-[41px] w-[90px] rounded-[15px] border border-kv-primary-blue-light bg-white px-3 font-kv-medium text-kv-gray-4b kv-text-md hover:bg-kv-gray-100 active:bg-kv-gray-200 pc:h-[53px] pc:w-[127px] pc:px-5 pc:kv-text-2lg tablet:h-[53px] tablet:w-[120px] tablet:px-4 tablet:kv-text-2lg;
+    @apply h-[41px] w-[90px] rounded-[15px] border border-kv-primary-blue-light bg-white px-3 font-kv-medium text-kv-gray-4b kv-text-sm hover:bg-kv-gray-100 active:bg-kv-gray-200 pc:h-[53px] pc:w-[127px] pc:px-5 pc:kv-text-2lg tablet:h-[53px] tablet:w-[120px] tablet:px-4 tablet:kv-text-2lg;
   }
 
   .base-button-default {
     @apply rounded-md py-[11px] text-kv-lg font-kv-bold;
+  }
+  .base-input {
+    @apply relative rounded-md border border-kv-gray-600 px-5 py-4 font-kv-medium outline-none kv-text-lg;
+  }
+  .password-icon {
+    @apply absolute right-5 top-[60px] cursor-pointer;
   }
 }
 
@@ -57,6 +63,18 @@
     @apply flex h-11 items-center rounded border border-kv-gray-79 bg-white px-2.5 text-kv-md pc:h-14 pc:px-4 pc:text-kv-lg tablet:h-14 tablet:px-4 tablet:text-kv-lg;
   }
 
+  .no-spinner {
+    @apply appearance-none;
+  }
+  .no-spinner::-webkit-outer-spin-button,
+  .no-spinner::-webkit-inner-spin-button {
+    @apply m-0 appearance-none;
+  }
+  .no-spinner {
+    @apply appearance-none;
+    -moz-appearance: textfield;
+  }
+
   .schedule-my-act {
     @apply flex gap-5 mobile:gap-1;
   }
@@ -82,8 +100,15 @@
   }
 }
 
-/* date picker custom styles */
+/* 예약 모달의 달력 */
 @layer components {
+  /* 팝업 달력의 위치 */
+  .custom-datepicker .react-datepicker__tab-loop {
+    @apply relative;
+  }
+  .custom-datepicker .react-datepicker-popper {
+    @apply !-top-[3px] right-0;
+  }
   .react-datepicker__header {
     @apply !border-b-0 !bg-white !pb-0;
   }
@@ -117,37 +142,51 @@
   }
 }
 
-/* DayMarker styles */
+/* 인라인 달력 */
 @layer components {
-  .day-marker-today {
-    @apply bg-[#E0E5FF] text-kv-primary-blue;
+  .custom-datepicker .react-datepicker__day--today {
+    @apply rounded-[8px] bg-kv-primary-blue-light text-kv-primary-blue;
   }
-
-  .day-marker-selected {
-    @apply bg-kv-primary-blue text-white;
+  .custom-datepicker .react-datepicker__day--selected {
+    @apply rounded-[8px] bg-kv-primary-blue;
+  }
+  .custom-datepicker
+    .react-datepicker__day--today.react-datepicker__day--selected {
+    @apply text-white;
+  }
+  .custom-datepicker .react-datepicker__day:hover {
+    @apply rounded-[8px];
+  }
+  .custom-datepicker
+    .react-datepicker__day--today.react-datepicker__day:hover.react-datepicker__day--keyboard-selected {
+    @apply text-white;
   }
 }
 
 /* Layout styles */
 @layer components {
+  /* z-index */
+  .kv-layout-root {
+    @apply relative;
+  }
+  .layout-content-wrapper {
+    @apply relative z-0 flex min-h-screen flex-col;
+  }
+  .layout-header-wrapper {
+    @apply fixed left-0 right-0 top-0 z-30;
+  }
+
   .layout-content-container {
     @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
   }
   .footer-link-styles {
-    @apply font-sans text-base font-normal;
+    @apply font-sans font-normal kv-text-lg;
   }
   .header-link-styles {
     @apply cursor-pointer font-kv-medium text-kv-black kv-text-md hover:text-kv-gray-600 active:text-kv-gray-800;
   }
   .layout-content-container {
     @apply mx-4 flex w-full pc:w-[1200px] tablet:mx-6 tablet:w-full;
-  }
-  .layout-container {
-    @apply flex min-h-screen flex-col;
-  }
-
-  .layout-header-wrapper {
-    @apply fixed left-0 right-0 top-0 z-30;
   }
 
   .layout-header-spacer {
@@ -239,11 +278,11 @@
   }
 
   .icon-button-counter-participant-default {
-    @apply size-5 text-kv-primary-blue;
+    @apply size-5 text-kv-gray-4b hover:font-kv-bold;
   }
 
   .text-button-counter-participant-default {
-    @apply text-kv-primary-blue;
+    @apply text-kv-gray-4b;
   }
 
   .container-display-price-default {
@@ -309,10 +348,6 @@
     @apply border-kv-red focus:border-kv-red;
   }
 
-  .profile-input-readonly {
-    @apply cursor-not-allowed border-kv-primary-blue-light focus:border-kv-primary-blue-light;
-  }
-
   .lnb-link {
     @apply flex gap-3.5 rounded-xl fill-current px-5 py-2.5 font-kv-semibold text-kv-gray-600 transition ease-in-out hover:bg-kv-primary-blue-light hover:text-kv-primary-blue;
   }
@@ -322,6 +357,12 @@
   }
 }
 
+/* 예약 현황 페이지 */
+@layer components {
+  .reservation-dashboard-container {
+    @apply flex min-w-[342px] flex-col;
+  }
+}
 /* 예약 현황의 달력 */
 @layer components {
   /* 달력 최상단 컨테이너 */
@@ -437,7 +478,7 @@
   }
   /* 백드롭 */
   .backdrop {
-    @apply fixed left-0 top-0 z-[1] h-full w-full;
+    @apply fixed left-0 top-0 z-10 h-full w-full;
   }
   .daily-modal-list-sub-title {
     @apply mx-[10px] text-kv-lg font-kv-semibold text-kv-gray-600;
@@ -480,7 +521,7 @@
   }
 
   .swiper-container {
-    @apply relative -ml-4 -mr-4 h-[310px] bg-kv-black;
+    @apply relative -ml-4 -mr-4 h-[310px];
   }
 
   .swiper-container .swiper {
@@ -516,7 +557,7 @@
 /* 체험 카드 */
 @layer components {
   .activity-card-title {
-    @apply truncate font-kv-bold text-kv-black kv-text-md pc:kv-text-xl tablet:kv-text-2lg;
+    @apply w-[171px] truncate font-kv-bold text-kv-black kv-text-md pc:w-[491px] pc:kv-text-xl tablet:w-[219px] tablet:kv-text-2lg;
   }
   .activity-card-price {
     @apply font-kv-medium kv-text-lg pc:kv-text-2xl tablet:kv-text-xl;
@@ -545,7 +586,7 @@
 /* 후기 모달 */
 @layer components {
   .review-modal-container {
-    @apply modal-container h-[750px] w-[480px] rounded-[24px] align-center;
+    @apply modal-container h-full w-full rounded-none align-center pc:h-[680px] pc:w-[480px] pc:rounded-[24px] tablet:h-[680px] tablet:w-[480px] tablet:rounded-[24px];
   }
 }
 
@@ -565,5 +606,12 @@
   }
   .notification-ul {
     @apply h-full max-h-[inherit];
+  }
+}
+
+/* GNB */
+@layer components {
+  .gnb-link {
+    @apply border-b border-kv-gray-400 px-10 py-2 text-center text-kv-md font-kv-medium text-kv-gray-700 last:border-none hover:bg-kv-primary-blue-light hover:text-kv-primary-blue active:bg-kv-primary-blue-light active:text-kv-primary-blue;
   }
 }

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 
 import MyReservationCard from '@/components/common/ActivityCard/MyReservationCard';
 import SortDropDown from '@/components/common/Dropdown/SortDropdown';
+import EmptyState from '@/components/common/EmptyState';
+import Loading from '@/components/common/Loading';
 import { Modal } from '@/components/common/Modal';
 import useInfiniteScrollReservation from '@/hooks/useInfiniteScrollReservation';
 import useModal from '@/hooks/useModal';
@@ -72,9 +74,9 @@ export default function ReservationList() {
 
   return (
     <div>
-      <div className="mb-4 flex h-[53px] w-[344px] items-center justify-between pc:w-[792px] tablet:w-[429px]">
+      <div className="mb-4 flex h-[53px] w-full items-center justify-between">
         <h1 className="font-kv-bold kv-text-3xl">예약 내역</h1>
-        <div className="hidden pc:block">
+        <div className="block">
           <SortDropDown
             label="필터"
             options={[
@@ -89,16 +91,7 @@ export default function ReservationList() {
         </div>
       </div>
       {reservations.length === 0 && !loading ? (
-        <div className="mt-20 flex flex-col items-center justify-center">
-          <Image
-            src="/assets/images/empty_img.png"
-            alt="빈 상태 이미지"
-            width={160}
-            height={160}
-            className="mb-4"
-          />
-          <p className="text-kv-gray-500 kv-text-xl">아직 체험이 없어요</p>
-        </div>
+        <EmptyState message="아직 예약한 체험이 없어요" />
       ) : (
         <div>
           {reservations.map((reservation) => (
@@ -109,9 +102,9 @@ export default function ReservationList() {
               onCancelClick={() => handleCancelClick(reservation.id)}
             />
           ))}
+          {loading && <Loading />}
         </div>
       )}
-      {loading && <div>Loading more...</div>}
       <Modal {...cancelModalProps} />
       <Modal {...reviewModalProps} reservation={selectedReservation} />
     </div>

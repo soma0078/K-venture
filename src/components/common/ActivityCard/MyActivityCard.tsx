@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-
 import KebabContainer from '@/components/common/Kebab/KebabContainer';
 import KebabDelete from '@/components/common/Kebab/KebabDelete';
 import KebabLink from '@/components/common/Kebab/KebabLink';
+import formatRating from '@/lib/utils/formattedRating';
 import { MyActivity } from '@/types/get/activityTypes';
 
 import MyCardContainer from './MyCardLayout';
@@ -26,7 +25,7 @@ function MyActivityCard({ activity, onDelete }: MyActivityCardProps) {
             className="mr-[6px] h-5 w-5 pb-[2px]"
           />
           <span className="text-kv-lg">
-            {activity.rating} ({activity.reviewCount})
+            {formatRating(activity.rating)} ({activity.reviewCount})
           </span>
         </div>
         <h3 className="activity-card-title">{activity.title}</h3>
@@ -39,7 +38,9 @@ function MyActivityCard({ activity, onDelete }: MyActivityCardProps) {
           </span>
         </p>
         <KebabContainer>
-          <KebabLink href={`/my-activity/${activity.id}`}>수정하기</KebabLink>
+          <KebabLink href={`/my-activity-edit/${activity.id}`}>
+            수정하기
+          </KebabLink>
           <KebabDelete onClick={onDelete}>삭제하기</KebabDelete>
         </KebabContainer>
       </div>

@@ -1,18 +1,30 @@
 import { getCookie } from 'cookies-next';
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
+import Loading from '@/components/common/Loading';
 import NotificationModal from '@/components/myNotificatons/NotificationModal';
 import useFetchData from '@/hooks/useFetchData';
+import useResponsive from '@/hooks/useResponsive';
 import useScrollLock from '@/hooks/useScrollLock';
 import { getUserData } from '@/lib/apis/userApis';
+import { profileImageAtom } from '@/state/profileImageAtom';
 import { User } from '@/types/userTypes';
 
+import { ProfileMenu } from './ProfileMenu';
+
 function Header() {
+  const [profileImage, setProfileImage] = useAtom(profileImageAtom);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
-  useScrollLock({ isOpen: isNotificationModalOpen });
+  const { isMobile } = useResponsive();
+  useScrollLock({
+    isOpen: isNotificationModalOpen,
+    additionalCondition: isMobile,
+  });
 
   const accessToken = getCookie('accessToken');
   const {
@@ -28,6 +40,12 @@ function Header() {
   });
   const isLoggedIn = isSuccess;
 
+  useEffect(() => {
+    if (user && user.profileImageUrl) {
+      setProfileImage(user.profileImageUrl);
+    }
+  }, [user]);
+
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
@@ -38,11 +56,22 @@ function Header() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="absolute left-[100px] top-[25px]">
+        <Loading />
+      </div>
+    );
   }
   if (isError) {
-    return <div>Error loading user data: {error.message}</div>;
+    return <div>Err or loading user data: {error.message}</div>;
   }
+
+  const handleProfileClick = () => {
+    setIsProfileMenuOpen((prev) => !prev);
+  };
+  const handleProfileMenuClose = () => {
+    setIsProfileMenuOpen(false);
+  };
 
   const handleNotificationClick = () => {
     setIsNotificationModalOpen((prev) => !prev);
@@ -80,12 +109,15 @@ function Header() {
             </button>
             <div className="mx-4 h-4/5 border-[1px] border-l border-kv-gray-300"></div>
             {user && (
-              <Link href="/profile">
+              <button
+                onClick={handleProfileClick}
+                onBlur={handleProfileMenuClose}
+              >
                 <HeaderUserProfile
                   nickname={user.nickname}
-                  profileImageUrl={user.profileImageUrl}
+                  profileImageUrl={profileImage}
                 />
-              </Link>
+              </button>
             )}
           </div>
         ) : (
@@ -103,6 +135,9 @@ function Header() {
         <NotificationModal
           closeNotificationModal={handleNotificationModalClose}
         />
+      )}
+      {isProfileMenuOpen && (
+        <ProfileMenu closeProfileMenu={handleProfileMenuClose} />
       )}
     </header>
   );

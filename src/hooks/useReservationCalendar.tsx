@@ -2,6 +2,8 @@ import { useAtom, useSetAtom } from 'jotai';
 import { ReactNode, useState } from 'react';
 import { CalendarProps, TileArgs } from 'react-calendar';
 
+import useFetchData from '@/hooks/useFetchData';
+import useResponsive from '@/hooks/useResponsive';
 import { getReservationStatus } from '@/lib/apis/getApis';
 import { formatDateToYMD } from '@/lib/utils/formatDate';
 import {
@@ -9,8 +11,6 @@ import {
   dailyReservationModalAtom,
   reservationDashboardQueryParamsAtom,
 } from '@/state/reservationDashboardAtom';
-
-import useFetchData from './useFetchData';
 
 interface useReservationCalendarProps {
   onOpen: () => void;
@@ -74,6 +74,7 @@ export default function useReservationCalendar({
     dailyReservationModalAtom,
   );
   const [calendarChip] = useAtom(calendarChipAtom);
+  const { isMobile } = useResponsive();
 
   const updateStateForDate = (date: Date, status: ValidStatus) => {
     setValue(date);
@@ -90,7 +91,18 @@ export default function useReservationCalendar({
   };
 
   const onDateChange: CalendarProps['onChange'] = (nextValue, { target }) => {
-    if (nextValue instanceof Date && target instanceof HTMLDivElement) {
+    if (!(nextValue instanceof Date)) return;
+
+    if (
+      isMobile &&
+      target instanceof HTMLButtonElement &&
+      (target.querySelector('.reserve-chip') ||
+        target.querySelector('.approve-chip'))
+    ) {
+      handleDateSelection(nextValue, 'pending');
+    }
+
+    if (target instanceof HTMLDivElement) {
       const status = target.dataset.status;
 
       if (status === 'completed') return;

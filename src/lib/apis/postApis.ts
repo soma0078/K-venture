@@ -1,7 +1,5 @@
-import { AxiosError } from 'axios';
 import { getCookie, setCookie } from 'cookies-next';
 
-import { UserProfile } from '@/components/userProfile/EditProfileForm';
 import instance from '@/lib/apis/axios';
 import { ActivityResponse, MyActivityForm } from '@/types/activityTypes';
 import {
@@ -17,6 +15,7 @@ import {
 import { ReviewData } from '@/types/post/reviewTypes';
 import {
   ActivityImageResponse,
+  ProfileImageResponse,
   UploadImageForm,
 } from '@/types/post/uploadImageTypes';
 
@@ -41,17 +40,14 @@ export const postLogin = async (
   return response.data;
 };
 
-// 프로필 이미지 url 생성
-export const postProfileImage = async (file: File) => {
-  const formData = new FormData();
-  formData.append('image', file);
-
-  const res = await instance.post<UserProfile>('/users/me/image', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-  return res.data.profileImageUrl;
+// 프로필 이미지 업로드
+export const postProfileImage = async (formData: UploadImageForm) => {
+  const response = await instance.post<ProfileImageResponse>(
+    '/users/me/image',
+    formData,
+    { headers: { 'Content-Type': 'multipart/form-data' } },
+  );
+  return response.data.profileImageUrl;
 };
 
 // 체험 업로드

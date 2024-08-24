@@ -23,6 +23,7 @@ export default function ScheduleList({
       <ul className="flex flex-col gap-4 pc:gap-[21px]">
         {schedules.map((schedule, idx) => (
           <Schedule
+            key={schedule.id ? schedule.id : `schedule-${idx}`}
             schedule={schedule}
             onClickDelete={() => onClickDelete(idx)}
           />

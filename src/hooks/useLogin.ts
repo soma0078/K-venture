@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 

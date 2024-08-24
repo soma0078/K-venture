@@ -18,7 +18,7 @@ export default function ModalContainer({
   return (
     <>
       <div
-        className="fixed inset-0 z-10 bg-kv-black opacity-70"
+        className="fixed inset-0 z-30 bg-kv-black opacity-70"
         onClick={handleBackdropClick}
       />
       {children()}

@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import * as yup from 'yup';
 
 import Button from '@/components/common/Button';
 import ErrorText from '@/components/common/ErrorText';
@@ -9,31 +8,20 @@ import Label from '@/components/common/Label';
 import Modal from '@/components/common/Modal/Modal';
 import useLogIn from '@/hooks/useLogin';
 import useModal from '@/hooks/useModal';
+import { loginSchema } from '@/lib/utils/authSchema';
 import { LogInForm } from '@/types/AuthTypes';
 
 import PasswordInput from './PasswordInput';
-
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .trim()
-    .matches(
-      /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i,
-      '잘못된 이메일입니다.',
-    )
-    .required('이메일을 입력해주세요'),
-  password: yup
-    .string()
-    .min(8, '8자 이상 입력해주세요')
-    .required('비밀번호를 입력해주세요'),
-});
 
 export default function LoginForm() {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<LogInForm>({ mode: 'onChange', resolver: yupResolver(schema) });
+  } = useForm<LogInForm>({
+    mode: 'onChange',
+    resolver: yupResolver(loginSchema),
+  });
 
   const { modalProps, openModal } = useModal();
 
@@ -83,7 +71,6 @@ export default function LoginForm() {
         </div>
         <Button
           disabled={!isValid || mutation.isPending}
-          type="submit"
           className={`${!isValid || mutation.isPending ? 'bg-kv-gray-600 text-white' : 'bg-kv-primary-blue text-white'}`}
         >
           로그인 하기

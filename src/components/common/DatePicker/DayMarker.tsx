@@ -1,24 +1,22 @@
+import classNames from 'classnames';
 import { isSameDay } from 'date-fns';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface DayMarkerProps {
   dayOfMonth: number;
   date: Date;
-  today: Date;
+  day: Date;
   selectedDate: Date | null;
 }
 
-export default function DayMarker({
-  dayOfMonth,
-  date,
-  today,
-  selectedDate,
-}: DayMarkerProps): JSX.Element {
-  const isToday = isSameDay(date, today);
-  const isSelected = selectedDate && isSameDay(date, selectedDate);
+export default function DayMarker({ day, date }: DayMarkerProps) {
+  const [startDate, setStartDate] = useState(new Date());
+  const hasReservation = isSameDay(startDate, 23);
 
-  const className =
-    `${'w-[34px] h-[32px] justify-center items-center flex rounded-[8px] font-kv-regular'} ${isToday ? 'day-marker-today' : ''} ${isSelected ? 'day-marker-selected' : ''}`.trim();
-
-  return <div className={className}>{dayOfMonth}</div>;
+  const tooltipText = `Tooltip for date: ${date}`;
+  return (
+    <span title={tooltipText}>
+      <span>{hasReservation ? 'v' : `${date}`}</span>
+    </span>
+  );
 }

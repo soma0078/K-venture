@@ -1,4 +1,5 @@
 import CloseIcon from '@/assets/icons/icon_x_lg.svg';
+import Loading from '@/components/common/Loading';
 import useNotificationsInfinite from '@/hooks/useNotificationsInfinite';
 import useResponsive from '@/hooks/useResponsive';
 
@@ -8,7 +9,8 @@ interface NotificationProps {
   closeNotificationModal: () => void;
 }
 
-const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => e.preventDefault();
+export const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) =>
+  e.preventDefault();
 
 export default function NotificationModal({
   closeNotificationModal,
@@ -49,7 +51,7 @@ export default function NotificationModal({
           ) : (
             <p>알림이 없습니다.</p>
           )}
-          {isFetchingNextPage && <div className="align-center">Loading...</div>}
+          {isFetchingNextPage && <Loading />}
         </ul>
       </div>
     </div>
