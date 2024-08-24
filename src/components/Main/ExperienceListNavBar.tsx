@@ -1,6 +1,7 @@
 import { useAtom, useAtomValue } from 'jotai';
 
 import SortDropDown from '@/components/common/Dropdown/SortDropdown';
+import { roChecker } from '@/lib/utils/checkUnicode';
 import { activityListOptions, listTotalCount } from '@/state/activityListAtom';
 
 import ListNavTagList from './ActivityCategory';
@@ -32,8 +33,8 @@ export default function ExperienceListNavBar() {
       ) : (
         <div className="flex flex-col">
           <h2 className="font-kv-regular kv-text-3xl">
-            <span className="font-kv-bold">{options.keyword}</span>로 검색한
-            결과입니다.
+            <span className="font-kv-bold">{options.keyword}</span>
+            {roChecker(options.keyword.toString())} 검색한 결과입니다.
           </h2>
           <h2 className="font-kv-regular kv-text-md">
             총 {totalCount}개의 결과
