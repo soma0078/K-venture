@@ -46,6 +46,7 @@ export default function ActivityPage() {
       cacheTime: 10 * 60 * 1000,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
+      retry: 1,
     },
   );
 
