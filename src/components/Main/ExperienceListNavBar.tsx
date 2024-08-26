@@ -4,7 +4,7 @@ import SortDropDown from '@/components/common/Dropdown/SortDropdown';
 import { roChecker } from '@/lib/utils/checkUnicode';
 import { activityListOptions, listTotalCount } from '@/state/activityListAtom';
 
-import ListNavTagList from './ActivityCategory';
+import ActivityCategory from './ActivityCategory';
 
 const sortObjects: { [key: string]: 'price_asc' | 'price_desc' } = {
   '낮은 순': 'price_asc',
@@ -16,11 +16,11 @@ export default function ExperienceListNavBar() {
   const totalCount = useAtomValue(listTotalCount);
 
   return (
-    <div className="flex w-[100%] justify-between">
+    <div className="flex w-[100%] justify-between py-[14px] pc:min-h-[100px] tablet:min-h-[100px] tablet:py-[20px]">
       {!options.keyword ? (
         <>
-          <ListNavTagList />
-          <span className="z-10">
+          <ActivityCategory />
+          <div className="z-10">
             <SortDropDown
               label="가격"
               options={['낮은 순', '높은 순']}
@@ -28,7 +28,7 @@ export default function ExperienceListNavBar() {
                 setOptions({ ...options, sort: sortObjects[selectedValue] })
               }
             />
-          </span>
+          </div>
         </>
       ) : (
         <div className="flex flex-col">

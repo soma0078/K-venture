@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
@@ -9,6 +7,7 @@ import { useEffect } from 'react';
 import { EffectFade, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import NoList from '@/assets/icons/icon_no_list.svg';
 import useActivityList from '@/hooks/useActivityList';
 import { mostReviewedListAtom } from '@/state/activityListAtom';
 import { MyActivityList } from '@/types/get/activityTypes';
@@ -28,7 +27,7 @@ export default function BestExperienceList() {
       page: 1,
       size: 10,
     });
-    console.log(result.data);
+
     setMostReviewedList(result.data?.activities);
   };
 
@@ -37,34 +36,45 @@ export default function BestExperienceList() {
   }, []);
 
   return (
-    <ul className="relative flex max-h-[454px] max-w-[696px] justify-center rounded-xl">
-      <Swiper
-        loop={true}
-        spaceBetween={50}
-        effect={'fade'}
-        slidesPerView={1}
-        modules={[EffectFade, Navigation]}
-        navigation={{
-          nextEl: '.review-swiper-button-next',
-          prevEl: '.review-swiper-button-prev',
-        }}
-      >
-        {mostReviewedList.map((data) => {
-          return (
-            <SwiperSlide key={`bestItem_${data.id}`}>
-              <BestExperienceCard data={data} />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-      <div className="absolute z-10 hidden gap-x-2 px-2 pc:bottom-[-10px] pc:right-[20px] pc:flex tablet:bottom-[-10px] tablet:right-[40%] tablet:flex">
-        <span className="review-swiper-button-prev flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-white text-kv-primary-blue">
-          &lt;
-        </span>
-        <span className="review-swiper-button-next flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-white text-kv-primary-blue">
-          &gt;
-        </span>
-      </div>
-    </ul>
+    <>
+      {mostReviewedList.length > 0 ? (
+        <ul className="relative flex max-h-[454px] w-[335px] max-w-[696px] justify-center rounded-xl pc:w-[696px] tablet:w-[696px]">
+          <Swiper
+            loop={true}
+            spaceBetween={50}
+            effect={'fade'}
+            slidesPerView={1}
+            modules={[EffectFade, Navigation]}
+            navigation={{
+              nextEl: '.review-swiper-button-next',
+              prevEl: '.review-swiper-button-prev',
+            }}
+          >
+            {mostReviewedList.map((data) => {
+              return (
+                <SwiperSlide key={`bestItem_${data.id}`}>
+                  <BestExperienceCard data={data} />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+          <div className="absolute z-10 hidden gap-x-2 px-2 pc:bottom-[-10px] pc:right-[10%] pc:flex tablet:bottom-[-10px] tablet:right-[40%] tablet:flex">
+            <span className="review-swiper-button-prev flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-white font-kv-bold text-kv-primary-blue">
+              &lt;
+            </span>
+            <span className="review-swiper-button-next flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-white font-kv-bold text-kv-primary-blue">
+              &gt;
+            </span>
+          </div>
+        </ul>
+      ) : (
+        <div className="flex flex-col items-center justify-center px-[40px]">
+          <NoList />
+          <h3 className="word-break text-kv-md font-kv-bold pc:kv-text-3xl tablet:kv-text-3xl">
+            체험 리스트가 존재하지 않습니다
+          </h3>
+        </div>
+      )}
+    </>
   );
 }

@@ -28,8 +28,8 @@ export default function MainBannerSection() {
 
   const { register, handleSubmit, getValues, setValue } = useForm();
   return (
-    <div className="flex w-[100%] flex-col gap-x-3 bg-kv-primary-blue-light px-[20px] py-[20px] pc:flex-row pc:items-center pc:justify-center pc:px-[360px] pc:py-[79px] tablet:flex-col tablet:items-center tablet:justify-center tablet:gap-y-3 tablet:px-[24px] tablet:pb-[60px] tablet:pt-[80px]">
-      <div className="flex max-w-[535px] flex-col items-center justify-center pc:gap-y-[15px]">
+    <div className="flex w-[100%] flex-col items-center gap-x-3 bg-kv-primary-blue-light px-[20px] py-[20px] pc:flex-row pc:items-center pc:justify-center pc:px-[360px] pc:py-[79px] tablet:flex-col tablet:items-center tablet:justify-center tablet:gap-y-3 tablet:px-[24px] tablet:pb-[60px] tablet:pt-[80px]">
+      <div className="flex max-w-[535px] flex-col items-center justify-center pc:items-start pc:gap-y-[15px]">
         <span className="flex w-[190px] break-all text-center text-kv-2xl pc:w-[476px] pc:text-left pc:text-[56px] pc:leading-[64px] tablet:flex tablet:w-[476px] tablet:justify-center tablet:text-center tablet:text-[56px] tablet:leading-[64px]">
           요즘 뜨는 국내 여행 취향에 맞게 즐겨요
         </span>
@@ -56,11 +56,11 @@ export default function MainBannerSection() {
         <div
           className={`flex-col gap-y-2 ${!options.keyword ? 'hidden pc:flex' : 'hidden items-center pc:flex tablet:flex'}`}
         >
-          <span className="kv-text-bold text-kv-black kv-text-lg">
+          <span className="font-kv-bold text-kv-black kv-text-lg">
             # 이런 여행 테마로 검색해보세요!
           </span>
           <ul
-            className={`flex flex-wrap gap-2 ${options.keyword && 'justify-center'}`}
+            className={`flex flex-wrap gap-2 ${options.keyword ? 'justify-center' : 'max-w-[400px]'}`}
           >
             {searchList.slice(0, !options.keyword ? 5 : 7).map((v) => (
               <li
