@@ -262,7 +262,7 @@
   }
 
   .container-counter-participant-default {
-    @apply mt-3 flex w-[327px] flex-col gap-6 pc:gap-[5px] tablet:gap-[5px];
+    @apply mt-3 flex h-full w-[327px] flex-col gap-6 pc:gap-[5px] tablet:gap-[5px];
   }
 
   .title-counter-participant-default {
@@ -586,7 +586,7 @@
 /* 후기 모달 */
 @layer components {
   .review-modal-container {
-    @apply modal-container h-full w-full rounded-none align-center pc:h-[680px] pc:w-[480px] pc:rounded-[24px] tablet:h-[680px] tablet:w-[480px] tablet:rounded-[24px];
+    @apply modal-container flex h-full w-full items-center rounded-none pc:h-[750px] pc:w-[480px] pc:rounded-[24px] tablet:h-[750px] tablet:w-[480px] tablet:rounded-[24px];
   }
 }
 

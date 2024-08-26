@@ -33,7 +33,7 @@ export default function Step1MobileCard({
           //className="text-kv-md font-kv-semibold"
         />
       </div>
-      <div className="w-full max-w-[432px] px-[24px] text-kv-primary-blue">
+      <div className="h-full w-full max-w-[432px] px-[24px] text-kv-primary-blue">
         <TimeSelector onClick={onClick} reservationState={reservationState} />
       </div>
     </>

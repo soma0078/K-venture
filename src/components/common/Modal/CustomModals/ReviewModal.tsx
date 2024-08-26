@@ -98,15 +98,17 @@ export default function ReviewModal({
 
   return (
     <div className="review-modal-container">
-      <div className="mt-[70px] h-full w-full p-4 pc:mt-0 pc:h-[616px] pc:w-[432px] pc:p-0 tablet:mt-0 tablet:h-[616px] tablet:w-[432px] tablet:p-0">
-        <div className="flex h-10 w-full items-center justify-between">
-          <h2 className="font-kv-bold kv-text-2xl">후기 작성</h2>
+      <div className="mt-0 h-full w-full p-4 pc:h-[616px] pc:w-[432px] pc:p-0 tablet:h-[616px] tablet:w-[432px] tablet:p-0">
+        <div className="flex h-10 w-full items-center justify-between pc:mt-[35px] tablet:mt-[35px]">
+          <h2 className="text-kv-2xl font-kv-bold mobile:text-[28px]">
+            후기 작성
+          </h2>
           <div className="h-7 w-7 cursor-pointer" onClick={() => onClose()}>
             <CloseIcon />
           </div>
         </div>
 
-        <div className="mt-[35px] flex h-[535px] flex-col justify-between">
+        <div className="mt-[35px] flex flex-col justify-between">
           <div className="flex h-[100px] w-full items-center pc:h-[126px] tablet:h-[126px]">
             <div className="relative h-[100px] w-[100px] flex-shrink-0 rounded-[12px] pc:h-[126px] pc:w-[126px] tablet:h-[126px] tablet:w-[126px]">
               <Image
@@ -137,7 +139,7 @@ export default function ReviewModal({
           <StarRating rating={rating} onRatingChange={setRating} />
 
           <textarea
-            className="h-[200px] w-full resize-none rounded border border-kv-gray-79 p-4 focus:border-2 focus:border-kv-primary-blue focus:outline-none"
+            className="h-[240px] w-full resize-none rounded border border-kv-gray-79 p-4 focus:border-2 focus:border-kv-primary-blue focus:outline-none mobile:h-[346px]"
             rows={4}
             placeholder="후기를 작성해주세요"
             value={reviewText}
@@ -148,7 +150,7 @@ export default function ReviewModal({
 
           <Button
             type="button"
-            className="btn-blue h-[56px] w-full"
+            className="btn-blue mt-[24px] h-[56px] w-full"
             onClick={handleSubmit}
           >
             작성하기

@@ -142,7 +142,7 @@ export default function ActivityPage() {
           </div>
         </div>
         <div className="relative mt-10">
-          <div className="sticky top-24 z-10 tablet:min-w-[251px]">
+          <div className="sticky top-24 z-30 pc:z-10 tablet:z-10 tablet:min-w-[251px]">
             <ReservationCard />
           </div>
         </div>
