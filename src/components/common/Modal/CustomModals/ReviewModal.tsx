@@ -78,7 +78,7 @@ export default function ReviewModal({
   if (!activityExists) {
     return (
       <div className="review-modal-container">
-        <div className="mt-[70px] flex h-full w-full flex-col items-center justify-center p-4 pc:mt-0 pc:h-[616px] pc:w-[432px] pc:p-0 tablet:mt-0 tablet:h-[616px] tablet:w-[432px] tablet:p-0">
+        <div className="flex h-full w-full flex-col items-center justify-center p-4 pc:h-[686px] pc:w-[432px] pc:p-0 tablet:h-[686px] tablet:w-[432px] tablet:p-0">
           <h2 className="mb-4 font-kv-bold kv-text-2xl">체험을 찾을 수 없음</h2>
           <p className="mb-10 mt-3 text-center font-kv-regular kv-text-md">
             이 체험은 삭제되었거나 더 이상 존재하지 않아 리뷰를 남길 수
@@ -98,7 +98,7 @@ export default function ReviewModal({
 
   return (
     <div className="review-modal-container">
-      <div className="mt-0 h-full w-full p-4 pc:h-[616px] pc:w-[432px] pc:p-0 tablet:h-[616px] tablet:w-[432px] tablet:p-0">
+      <div className="mt-0 h-full w-full p-4 pc:h-[686px] pc:w-[432px] pc:p-0 tablet:h-[686px] tablet:w-[432px] tablet:p-0">
         <div className="flex h-10 w-full items-center justify-between pc:mt-[35px] tablet:mt-[35px]">
           <h2 className="text-kv-2xl font-kv-bold mobile:text-[28px]">
             후기 작성
@@ -108,7 +108,7 @@ export default function ReviewModal({
           </div>
         </div>
 
-        <div className="mt-[35px] flex flex-col justify-between">
+        <div className="mt-[41px] flex h-[648px] flex-col justify-between pc:h-[605px] tablet:h-[605px]">
           <div className="flex h-[100px] w-full items-center pc:h-[126px] tablet:h-[126px]">
             <div className="relative h-[100px] w-[100px] flex-shrink-0 rounded-[12px] pc:h-[126px] pc:w-[126px] tablet:h-[126px] tablet:w-[126px]">
               <Image
@@ -150,7 +150,7 @@ export default function ReviewModal({
 
           <Button
             type="button"
-            className="btn-blue mt-[24px] h-[56px] w-full"
+            className="btn-blue h-[56px] w-full"
             onClick={handleSubmit}
           >
             작성하기

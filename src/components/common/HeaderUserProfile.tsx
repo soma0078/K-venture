@@ -12,9 +12,11 @@ const HeaderUserProfile: React.FC<HeaderUserProfileProps> = ({
       <img
         src={profileImageUrl}
         alt={`${nickname}의 프로필`}
-        className="mr-2.5 h-8 w-8 rounded-full"
+        className="h-8 w-8 rounded-full"
       />
-      <span className="font-medium kv-text-md">{nickname}</span>
+      <span className="ml-2.5 hidden font-medium kv-text-md pc:inline tablet:inline">
+        {nickname}
+      </span>
     </div>
   );
 };

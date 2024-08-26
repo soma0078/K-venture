@@ -13,7 +13,7 @@ export default function StarRating({
   onRatingChange,
 }: StarRatingProps) {
   return (
-    <div className="my-[34px] h-[70px] w-full align-center">
+    <div className="h-[100px] w-full align-center">
       {[...Array(5)].map((_, index) => (
         <span
           key={index}
