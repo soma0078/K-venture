@@ -61,7 +61,7 @@ export default function ReservationDashboardDropdown({
               <button
                 key={id}
                 id={`${id}`}
-                className={`dropdown-menu w-full ${isFirst ? 'rounded-t-md' : ''} ${isLast ? 'rounded-b-md' : 'border-b'}`}
+                className={`dropdown-menu w-full truncate ${isFirst ? 'rounded-t-md' : ''} ${isLast ? 'rounded-b-md' : 'border-b'}`}
                 onMouseDown={(e) => {
                   onClickMenu(title)(e);
                 }}
