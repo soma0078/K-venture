@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import PlusIcon from '@/assets/icons/icon_plus.svg';
+import PlusButtonBlueIcon from '@/assets/icons/icon_plus_blue.svg';
 import DatePicker from '@/components/common/DatePicker/DatePicker';
 import ValueDropdown from '@/components/common/Dropdown/ValueDropdown';
 import { AVAILABLE_TIMES } from '@/constants/myActivityPage';
@@ -89,7 +90,12 @@ export default function ScheduleInput({ onClickButton }: ScheduleInputProps) {
           disabled={!date || !startTime.value || !endTime.value}
           onClick={handleClickButton}
         >
-          <Image src="/assets/icons/icon_plus_blue.svg" alt="날짜 추가" fill />
+          {/* <Image src="/assets/icons/icon_plus_blue.svg" alt="날짜 추가" fill /> */}
+          <PlusButtonBlueIcon
+            width={'100%'}
+            height={'100%'}
+            viewBox={'0 0 56 56'}
+          />
         </button>
       </div>
     </div>

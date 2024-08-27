@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { MouseEventHandler, MutableRefObject } from 'react';
 
+import DropDownIcon from '@/assets/icons/icon_dropdown.svg';
+
 interface ValueDropdownProps {
   value: string;
   placeholder: string;
@@ -49,12 +51,13 @@ export default function ValueDropdown({
         <span>{value || placeholder}</span>
         {/* NOTE: 다른 곳에서 사용시 아이콘 부분은 바꿔야 할 것 같습니다. */}
         <div className="relative -mr-1 size-5 rounded md:size-6 pc:size-6">
-          <Image
+          {/* <Image
             src="/assets/icons/icon_dropdown.svg"
             alt="드롭다운 버튼"
             fill
             className={`${isOpen ? 'rotate-180' : ''}`}
-          />
+          /> */}
+          <DropDownIcon className={`${isOpen ? 'rotate-180' : ''}`} />
         </div>
       </button>
 
