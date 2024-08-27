@@ -50,7 +50,7 @@ export default function Step3TabletCard({
       <ReservationButton
         disabled={!isValidate}
         onClick={() => submitReservation(reservationState)}
-        className={`mx-auto my-[24px] block w-[203px] rounded-[4px] ${isValidate ? 'bg-kv-primary-blue' : 'bg-kv-gray-300'}`}
+        className={`mx-auto my-[24px] block w-[203px] rounded-[4px] ${isValidate ? 'bg-kv-primary-blue hover:bg-kv-primary-blue-hover' : 'bg-kv-gray-300'}`}
       />
       <div className="divider" />
       <TotalSummary

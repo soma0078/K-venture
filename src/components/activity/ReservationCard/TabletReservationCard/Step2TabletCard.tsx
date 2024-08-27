@@ -38,7 +38,7 @@ export default function Step2TabletCard({
         <TimeSelector onClick={onClick} reservationState={reservationState} />
       </div>
       <ReservationButton
-        className="mx-auto block w-[432px]"
+        className="mx-auto block w-[432px] hover:bg-kv-primary-blue-hover"
         onClick={onClick.handleNextStepClick}
       />
     </div>

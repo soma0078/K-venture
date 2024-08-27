@@ -43,11 +43,11 @@ function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
           {RESERVATION_TIMESELECTOR_PLACEHOLDER.noDate}
         </p>
       ) : (
-        <div className="mt-[14px] flex flex-wrap gap-3">
+        <div className="mx-auto mt-[14px] flex w-[248px] flex-wrap gap-3">
           {filteredSchedules.map(({ startTime, endTime, id }) => (
             <Button
               key={id}
-              className={`h-[46px] w-[117px] font-kv-medium ${
+              className={`h-[46px] w-[117px] font-kv-medium hover:bg-kv-gray-200 ${
                 selectedId === id
                   ? 'bg-kv-primary-blue text-white'
                   : 'border border-kv-primary-blue text-kv-primary-blue'

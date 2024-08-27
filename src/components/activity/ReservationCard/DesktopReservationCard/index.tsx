@@ -62,7 +62,7 @@ export default function DesktopReservationCard({
           />
           <ReservationButton
             disabled={!isValidate}
-            className={`mx-auto my-[24px] block w-full rounded-[4px] ${isValidate ? 'bg-kv-primary-blue' : 'bg-kv-gray-300'}`}
+            className={`mx-auto my-[24px] block w-full rounded-[4px] ${isValidate ? 'bg-kv-primary-blue hover:bg-kv-primary-blue-hover' : 'bg-kv-gray-300'}`}
             onClick={handleSubmit}
           />
           <div className="divider" />

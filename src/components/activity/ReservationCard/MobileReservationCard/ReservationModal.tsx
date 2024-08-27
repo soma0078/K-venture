@@ -44,7 +44,7 @@ function ReservationModal({
       )}
       <div className="w-full max-w-[432px] px-[16px]">
         <Button
-          className="my-[16px] h-[56px] w-full rounded-[4px] bg-kv-primary-blue text-white"
+          className="my-[16px] h-[56px] w-full rounded-[4px] bg-kv-primary-blue text-white hover:bg-kv-primary-blue-hover"
           onClick={onClick.handleNextStepClick}
         >
           확인
