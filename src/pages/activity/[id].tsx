@@ -11,6 +11,7 @@ import ReviewList from '@/components/activity/ReviewList';
 import EmptyState from '@/components/common/EmptyState';
 import Pagination from '@/components/common/Pagination';
 import ActivityPageSkeleton from '@/components/skeletons/ActivityPageSkeleton';
+import { DEFAULT_PROFILE_IMAGE } from '@/constants/defaultAssets';
 import useFetchData from '@/hooks/useFetchData';
 import { usePagination } from '@/hooks/usePagination';
 import { getActivity, getActivityReview } from '@/lib/apis/getApis';
@@ -126,8 +127,7 @@ export default function ActivityPage() {
                   reviews={reviewData.reviews}
                   nickname={userData?.nickname || '익명 사용자'}
                   profileImageUrl={
-                    userData?.profileImageUrl ||
-                    '/assets/icons/icon_profile.svg'
+                    userData?.profileImageUrl || DEFAULT_PROFILE_IMAGE
                   }
                 />
                 <Pagination
