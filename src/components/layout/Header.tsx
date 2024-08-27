@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import NotificationIcon from '@/assets/icons/icon_notification.svg';
+import KVentureLogo from '@/assets/icons/logo_md.svg';
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
 import Loading from '@/components/common/Loading';
 import NotificationModal from '@/components/myNotificatons/NotificationModal';
@@ -86,12 +88,7 @@ function Header() {
       <div className="layout-content-container h-[30px] justify-between">
         <Link href="/">
           <div className="mr-10 flex cursor-pointer items-center">
-            <Image
-              src="/assets/icons/logo_md.svg"
-              alt="K-Venture 로고"
-              width={165}
-              height={28}
-            />
+            <KVentureLogo />
           </div>
         </Link>
         {isLoggedIn ? (
@@ -100,12 +97,7 @@ function Header() {
               onClick={handleNotificationClick}
               onBlur={handleNotificationModalClose}
             >
-              <Image
-                src="/assets/icons/icon_notification.svg"
-                alt="알림"
-                width={20}
-                height={20}
-              />
+              <NotificationIcon />
             </button>
             <div className="mx-4 h-4/5 border-[1px] border-l border-kv-gray-300"></div>
             {user && (
