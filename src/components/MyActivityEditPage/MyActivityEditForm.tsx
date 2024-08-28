@@ -68,10 +68,6 @@ export default function MyActivityEditForm({
   });
 
   useEffect(() => {
-    trigger();
-  }, [trigger]);
-
-  useEffect(() => {
     const createFileFromUrl = async (url: string, filename: string) => {
       const response = await fetch(url);
       const data = await response.blob();
