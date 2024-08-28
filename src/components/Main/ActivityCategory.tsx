@@ -76,6 +76,9 @@ export default function ActivityCategory() {
             }
           }}
         >
+          <div
+            className={`absolute bottom-0 left-0 top-0 z-10 w-2 rounded-[30px] bg-gradient-to-r from-black opacity-[0.1] pc:hidden tablet:hidden ${!isPrev && 'hidden'}`}
+          />
           {Object.keys(categories).map((v) => {
             return (
               <SwiperSlide key={v}>
@@ -85,6 +88,7 @@ export default function ActivityCategory() {
                     setOptions({
                       ...options,
                       category: categories[v] === '전체' ? '' : categories[v],
+                      keyword: '',
                       page: 1,
                     });
                   }}
@@ -94,6 +98,9 @@ export default function ActivityCategory() {
               </SwiperSlide>
             );
           })}
+          <div
+            className={`absolute bottom-0 right-0 top-0 z-10 w-2 rounded-[30px] bg-gradient-to-l from-black opacity-[0.1] pc:hidden tablet:hidden ${!isNext && 'hidden'}`}
+          />
         </Swiper>
         <div
           className={`category-swiper-button-next absolute right-[3px] top-[12px] z-10 hidden h-8 w-8 cursor-pointer items-center justify-center rounded-full border-2 border-solid bg-white font-kv-bold text-kv-primary-blue pc:flex tablet:${isNext ? 'flex' : 'hidden'}`}

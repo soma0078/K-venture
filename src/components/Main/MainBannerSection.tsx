@@ -41,7 +41,12 @@ export default function MainBannerSection() {
             {...register('search', {
               onChange: (e) => {
                 if (e.target.value === '')
-                  setOptions({ ...options, keyword: '', page: 1 });
+                  setOptions({
+                    ...options,
+                    keyword: '',
+                    category: '',
+                    page: 1,
+                  });
               },
             })}
             type="search"

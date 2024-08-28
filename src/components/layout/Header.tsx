@@ -1,6 +1,7 @@
 import { getCookie } from 'cookies-next';
 import { useAtom } from 'jotai';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import NotificationIcon from '@/assets/icons/icon_notification.svg';
@@ -23,6 +24,7 @@ function Header() {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
   const { isMobile } = useResponsive();
+
   useScrollLock({
     isOpen: isNotificationModalOpen,
     additionalCondition: isMobile,
@@ -87,7 +89,7 @@ function Header() {
   return (
     <header className="h-[70px] border-b border-gray-300 bg-white p-4 align-center">
       <div className="layout-content-container h-[30px] justify-between">
-        <Link href="/">
+        <Link href="/" onClick={() => redirect('/')}>
           <div className="mr-10 flex cursor-pointer items-center">
             <KVentureLogo />
           </div>

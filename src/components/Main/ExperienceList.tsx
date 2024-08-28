@@ -61,7 +61,7 @@ export default function ExperienceList() {
   }, [options]);
 
   useEffect(() => {
-    setOptions({ ...options, size: size });
+    setOptions({ ...options, size: size, page: 1 });
   }, [size, windowsSize]);
 
   return (

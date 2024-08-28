@@ -17,12 +17,13 @@ export default function BestExperienceCard({ data }: { data: MyActivity }) {
         className="relative flex h-[219px] max-h-[454px] w-[335px] max-w-[696px] flex-col items-center px-0 pc:mx-[50px] pc:h-[410px] pc:w-[640px] tablet:h-[454px] tablet:w-[696px]"
       >
         <div className="absolute flex h-[219px] w-[335px] rounded-[24px] border-none pc:h-[410px] pc:w-[640px] tablet:h-[454px] tablet:w-[696px]">
+          <section className="aspect-square h-[100%] w-[100%] rounded-[24px] bg-gradient-to-t from-black"></section>
           <Image
             fill
             objectFit="cover"
             src={imageError ? DEFAULT_ACTIVITY_IMAGE : bannerImageUrl}
             alt={title}
-            className="absolute aspect-square rounded-[24px]"
+            className="absolute z-[-1] aspect-square rounded-[24px]"
           />
         </div>
         <div className="absolute bottom-0 flex w-[100%] flex-col items-start gap-y-2 px-[20px] py-[20px] pc:gap-y-5 tablet:gap-y-5">
@@ -35,9 +36,8 @@ export default function BestExperienceCard({ data }: { data: MyActivity }) {
                 {rating.toFixed(1)} ({reviewCount})
               </h3>
             )}
-            <h3 className="flex text-white kv-text-xl"></h3>
           </span>
-          <h2 className="kv-text-bold w-[185px] max-w-[300px] overflow-hidden text-ellipsis text-nowrap break-all text-white kv-text-xl pc:w-[300px] pc:kv-text-3xl tablet:w-[300px] tablet:kv-text-3xl">
+          <h2 className="kv-text-bold text-overflow w-[190px] max-w-[350px] text-white kv-text-xl pc:w-[350px] pc:kv-text-3xl tablet:w-[350px] tablet:kv-text-3xl">
             {title}
           </h2>
           <span className="flex gap-x-1 text-white kv-text-md pc:kv-text-xl tablet:kv-text-xl">

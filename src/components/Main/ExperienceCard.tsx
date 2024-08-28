@@ -14,13 +14,13 @@ export default function ExperienceCard({ data }: { data: ActivityListItem }) {
   return (
     <li key={id} className="flex flex-col">
       <Link href={`/activity/${id}`}>
-        <span className="relative flex h-[168px] w-[168px] items-center rounded-[24px] pc:h-[283px] pc:w-[283px] tablet:h-[221px] tablet:w-[221px]">
+        <span className="relative flex h-[168px] w-[168px] items-center rounded-[24px] shadow-[0px_20px_20px_10px_#00000024] pc:h-[283px] pc:w-[283px] tablet:h-[221px] tablet:w-[221px]">
           <Image
             fill
             objectFit="cover"
             src={imageError ? DEFAULT_ACTIVITY_IMAGE : bannerImageUrl}
             alt={title}
-            className="absolute rounded-lg"
+            className="absolute rounded-[24px]"
           />
         </span>
         <span className="flex items-center gap-x-1 py-[10px]">
@@ -28,7 +28,7 @@ export default function ExperienceCard({ data }: { data: ActivityListItem }) {
           {rating > 0 && <h3 className="font-kv-bold">{rating.toFixed(1)}</h3>}
           {reviewCount > 0 && <h3 className="font-kv-bold">({reviewCount})</h3>}
         </span>
-        <span className="flex w-[170px] overflow-hidden text-ellipsis text-nowrap font-kv-bold kv-text-lg pc:w-[280px] tablet:w-[210px]">
+        <span className="text-overflow-oneline flex max-w-[165px] font-kv-bold kv-text-lg pc:w-[280px] pc:max-w-[280px] tablet:w-[210px] tablet:max-w-[280px]">
           {title}
         </span>
         <span className="flex gap-x-1 kv-text-lg">
