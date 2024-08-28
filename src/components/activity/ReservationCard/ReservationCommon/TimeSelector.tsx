@@ -43,7 +43,7 @@ function TimeSelector({ onClick, reservationState }: TimeSelectorProps) {
           {RESERVATION_TIMESELECTOR_PLACEHOLDER.noDate}
         </p>
       ) : (
-        <div className="mx-auto mt-[14px] flex w-[248px] flex-wrap gap-3">
+        <div className="mx-auto mt-[14px] flex max-h-[140px] w-[260px] flex-wrap gap-3 overflow-auto scrollbar-custom">
           {filteredSchedules.map(({ startTime, endTime, id }) => (
             <Button
               key={id}
