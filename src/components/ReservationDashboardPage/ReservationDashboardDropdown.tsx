@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { MouseEventHandler } from 'react';
 
 import DropDownIcon from '@/assets/icons/icon_dropdown.svg';
@@ -44,12 +43,6 @@ export default function ReservationDashboardDropdown({
       >
         <span>{value || placeholder}</span>
         <div className="relative -mr-1 size-5 rounded md:size-6 pc:size-6">
-          {/* <Image
-            src="/assets/icons/icon_dropdown.svg"
-            alt="드롭다운 버튼"
-            fill
-            className={`${isOpen ? 'rotate-180' : ''}`}
-          /> */}
           <DropDownIcon className={`${isOpen ? 'rotate-180' : ''}`} />
         </div>
       </button>

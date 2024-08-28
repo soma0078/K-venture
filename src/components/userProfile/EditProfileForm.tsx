@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -10,11 +11,13 @@ import Modal from '@/components/common/Modal/Modal';
 import useFetchData from '@/hooks/useFetchData';
 import { updateUserData } from '@/lib/apis/patchApis';
 import { getUserData } from '@/lib/apis/userApis';
+import { nicknameAtom } from '@/state/profileAtom';
 import { ProfileFormTypes } from '@/types/userTypes';
 
 export default function EditProfileForm() {
   const queryClient = useQueryClient();
   const { modalProps, openModal } = useModal();
+  const [nickname, setNickname] = useAtom(nicknameAtom);
 
   const { data: userData, isError } = useFetchData(
     ['userProfile'],
@@ -61,6 +64,7 @@ export default function EditProfileForm() {
 
     if (formData.nickname !== userData?.nickname) {
       updateData.nickname = formData.nickname;
+      setNickname(formData.nickname);
     }
 
     if (formData.newPassword) {

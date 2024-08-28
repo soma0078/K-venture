@@ -31,13 +31,7 @@ export default function ImageCard({ image, onClickDelete }: ImageProps) {
         type="button"
         onClick={handleDeleteImage}
       >
-        {/* <Image
-          src="/assets/icons/icon_x_red.svg"
-          alt="이미지 삭제"
-          fill
-          className="rounded-full"
-        /> */}
-        <RedXButtonIcon width={'100%'} height={'100%'} />
+        <RedXButtonIcon />
       </button>
     </div>
   );

@@ -13,16 +13,16 @@ function Footer() {
           <a className="footer-link-style">FAQ</a>
         </div>
         <div className="flex gap-3">
-          <a href="https://facebook.com">
+          <a href="https://facebook.com" target="_blank">
             <FacebookIcon />
           </a>
-          <a href="https://twitter.com">
+          <a href="https://twitter.com" target="_blank">
             <TwitterIcon />
           </a>
-          <a href="https://instagram.com">
+          <a href="https://instagram.com" target="_blank">
             <InstagramIcon />
           </a>
-          <a href="https://youtube.com">
+          <a href="https://youtube.com" target="_blank">
             <YoutubeIcon />
           </a>
         </div>

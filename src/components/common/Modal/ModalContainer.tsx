@@ -1,3 +1,4 @@
+import { onMouseDown } from '@/components/myNotificatons/NotificationModal';
 import useScrollLock from '@/hooks/useScrollLock';
 import { ModalContainerProps } from '@/types/modalTypes';
 
@@ -16,12 +17,12 @@ export default function ModalContainer({
   };
 
   return (
-    <>
+    <div onMouseDown={onMouseDown}>
       <div
         className="fixed inset-0 z-30 bg-kv-black opacity-70"
         onClick={handleBackdropClick}
       />
       {children()}
-    </>
+    </div>
   );
 }

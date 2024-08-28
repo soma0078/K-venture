@@ -11,7 +11,7 @@ import useFetchData from '@/hooks/useFetchData';
 import { updateUserData } from '@/lib/apis/patchApis';
 import { postProfileImage } from '@/lib/apis/postApis';
 import { getUserData } from '@/lib/apis/userApis';
-import { profileImageAtom } from '@/state/profileImageAtom';
+import { profileImageAtom } from '@/state/profileAtom';
 
 export default function EditProfileImage() {
   const queryClient = useQueryClient();
