@@ -8,6 +8,7 @@
   }
   body {
     @apply overflow-x-hidden bg-[#FAFBFC] text-kv-lg font-kv-regular text-kv-black;
+    @apply overflow-x-hidden bg-[#FAFBFC] text-kv-lg font-kv-regular text-kv-black;
   }
 }
 
