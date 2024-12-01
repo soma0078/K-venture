@@ -37,7 +37,17 @@ export function useCardEventHandler(
     },
 
     handleCloseClick: () => {
-      setReservationState(INITIAL_RESERVATION_STATE);
+      setReservationState((prev) => ({
+        ...prev,
+        date: '',
+        startTime: '',
+        endTime: '',
+        price: 0,
+        headCount: 1,
+        step: 1,
+        isToggleModal: false,
+        scheduleId: 0,
+      }));
     },
 
     handleNextStepClick: () => {

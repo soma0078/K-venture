@@ -1,9 +1,14 @@
-import { useAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
+import { INITIAL_DAILY_RESERVATION_MODAL_STATE } from '@/constants/dailyReservationModalConstants';
+import useFetchData from '@/hooks/useFetchData';
+import useResponsive from '@/hooks/useResponsive';
+import useScrollLock from '@/hooks/useScrollLock';
 import { getMyActivities, getReservationDashboard } from '@/lib/apis/getApis';
 import {
   calendarChipAtom,
+  dailyReservationModalAtom,
   reservationDashboardQueryParamsAtom,
 } from '@/state/reservationDashboardAtom';
 import {
@@ -12,16 +17,19 @@ import {
   ReservationDashboardResponse,
 } from '@/types/page/ReservationDashboardPageTypes';
 
-import useFetchData from './useFetchData';
-
 const useReservationDashboardData = () => {
-  const [{ activityId, year, month }] = useAtom(
+  const { activityId, year, month } = useAtomValue(
     reservationDashboardQueryParamsAtom,
   );
-  const [, setCalendarChip] = useAtom(calendarChipAtom);
+  const setCalendarChip = useSetAtom(calendarChipAtom);
   const [availableActivities, setAvailableActivities] = useState<
     AvailableValues[]
   >([]);
+  const [isOpenInfo, setIsOpenInfo] = useState(false);
+  const { isMobile } = useResponsive();
+  const setDailyModalState = useSetAtom(dailyReservationModalAtom);
+
+  useScrollLock({ isOpen: isOpenInfo, additionalCondition: isMobile });
 
   // GET 등록한 체험 전체 데이터
   const { data: myActivitiesData } = useFetchData(
@@ -65,7 +73,21 @@ const useReservationDashboardData = () => {
     }
   }, [reservationDashboardData]);
 
-  return { availableActivities };
+  const handleCloseClick = () => {
+    setIsOpenInfo(false);
+    setDailyModalState((prev) => ({
+      ...prev,
+      date: INITIAL_DAILY_RESERVATION_MODAL_STATE.date,
+      scheduleId: INITIAL_DAILY_RESERVATION_MODAL_STATE.scheduleId,
+      status: INITIAL_DAILY_RESERVATION_MODAL_STATE.status,
+    }));
+  };
+
+  const handleOpenClick = () => {
+    setIsOpenInfo(true);
+  };
+
+  return { availableActivities, isOpenInfo, handleCloseClick, handleOpenClick };
 };
 
 export default useReservationDashboardData;

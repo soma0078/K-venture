@@ -1,14 +1,35 @@
 import { getCookie } from 'cookies-next';
-import Image from 'next/image';
+import { useAtom } from 'jotai';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import NotificationIcon from '@/assets/icons/icon_notification.svg';
+import KVentureLogo from '@/assets/icons/logo_md.svg';
 import HeaderUserProfile from '@/components/common/HeaderUserProfile';
+import Loading from '@/components/common/Loading';
+import NotificationModal from '@/components/myNotificatons/NotificationModal';
 import useFetchData from '@/hooks/useFetchData';
+import useResponsive from '@/hooks/useResponsive';
+import useScrollLock from '@/hooks/useScrollLock';
 import { getUserData } from '@/lib/apis/userApis';
+import { nicknameAtom, profileImageAtom } from '@/state/profileAtom';
 import { User } from '@/types/userTypes';
 
+import { ProfileMenu } from './ProfileMenu';
+
 function Header() {
+  const [nickname, setNickname] = useAtom(nicknameAtom);
+  const [profileImage, setProfileImage] = useAtom(profileImageAtom);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+  const { isMobile } = useResponsive();
+
+  useScrollLock({
+    isOpen: isNotificationModalOpen,
+    additionalCondition: isMobile,
+  });
+
   const accessToken = getCookie('accessToken');
   const {
     data: user,
@@ -23,6 +44,13 @@ function Header() {
   });
   const isLoggedIn = isSuccess;
 
+  useEffect(() => {
+    if (user) {
+      setProfileImage(user.profileImageUrl);
+      setNickname(user.nickname);
+    }
+  }, [user, setProfileImage, setNickname]);
+
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
@@ -33,47 +61,58 @@ function Header() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="absolute left-[100px] top-[25px]">
+        <Loading />
+      </div>
+    );
   }
   if (isError) {
-    return <div>Error loading user data: {error.message}</div>;
+    return <div>Err or loading user data: {error.message}</div>;
   }
 
+  const handleProfileClick = () => {
+    setIsProfileMenuOpen((prev) => !prev);
+  };
+  const handleProfileMenuClose = () => {
+    setIsProfileMenuOpen(false);
+  };
+
   const handleNotificationClick = () => {
-    //알림 컴포넌트 나오는 로직
+    setIsNotificationModalOpen((prev) => !prev);
+  };
+
+  const handleNotificationModalClose = () => {
+    setIsNotificationModalOpen(false);
   };
 
   return (
     <header className="h-[70px] border-b border-gray-300 bg-white p-4 align-center">
       <div className="layout-content-container h-[30px] justify-between">
-        <Link href="/">
+        <Link href="/" onClick={() => redirect('/')}>
           <div className="mr-10 flex cursor-pointer items-center">
-            <Image
-              src="/assets/icons/logo_md.svg"
-              alt="K-Venture 로고"
-              width={165}
-              height={28}
-            />
+            <KVentureLogo />
           </div>
         </Link>
         {isLoggedIn ? (
           <div className="flex h-full items-center">
-            <button className="" onClick={handleNotificationClick}>
-              <Image
-                src="/assets/icons/icon_notification.svg"
-                alt="알림"
-                width={20}
-                height={20}
-              />
+            <button
+              onClick={handleNotificationClick}
+              onBlur={handleNotificationModalClose}
+            >
+              <NotificationIcon />
             </button>
             <div className="mx-4 h-4/5 border-[1px] border-l border-kv-gray-300"></div>
             {user && (
-              <Link href="/profile">
+              <button
+                onClick={handleProfileClick}
+                onBlur={handleProfileMenuClose}
+              >
                 <HeaderUserProfile
-                  nickname={user.nickname}
-                  profileImageUrl={user.profileImageUrl}
+                  nickname={nickname}
+                  profileImageUrl={profileImage}
                 />
-              </Link>
+              </button>
             )}
           </div>
         ) : (
@@ -87,6 +126,14 @@ function Header() {
           </div>
         )}
       </div>
+      {isNotificationModalOpen && (
+        <NotificationModal
+          closeNotificationModal={handleNotificationModalClose}
+        />
+      )}
+      {isProfileMenuOpen && (
+        <ProfileMenu closeProfileMenu={handleProfileMenuClose} />
+      )}
     </header>
   );
 }

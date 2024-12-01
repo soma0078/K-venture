@@ -1,21 +1,116 @@
-import { useAtom } from 'jotai';
-import { ReactNode, useEffect, useState } from 'react';
+import { useAtom, useSetAtom } from 'jotai';
+import { ReactNode, useState } from 'react';
 import { CalendarProps, TileArgs } from 'react-calendar';
 
+import useFetchData from '@/hooks/useFetchData';
+import useResponsive from '@/hooks/useResponsive';
+import { getReservationStatus } from '@/lib/apis/getApis';
 import { formatDateToYMD } from '@/lib/utils/formatDate';
 import {
   calendarChipAtom,
+  dailyReservationModalAtom,
   reservationDashboardQueryParamsAtom,
 } from '@/state/reservationDashboardAtom';
 
-export default function useReservationCalendar() {
+interface useReservationCalendarProps {
+  onOpen: () => void;
+}
+
+type ValidStatus = 'pending' | 'confirmed';
+
+// calendar chip을 구성하는 컴포넌트들
+const CompletedChip = () => (
+  <div className="reservation-chip complete-chip" data-status="completed">
+    완료
+  </div>
+);
+
+const ConfirmedChip = ({ count }: { count: number }) => (
+  <div className="reservation-chip approve-chip" data-status="confirmed">
+    승인 {count}
+  </div>
+);
+
+const PendingChip = ({ count }: { count: number }) => (
+  <div className="reservation-chip reserve-chip" data-status="pending">
+    예약 {count}
+  </div>
+);
+
+const ColorDot = ({ completed }: { completed: number }) => (
+  <div
+    className={`color-dot ${completed === 0 ? 'bg-kv-primary-blue' : 'completeStatus'}`}
+  />
+);
+
+const ReservationChips = ({
+  completed,
+  confirmed,
+  pending,
+}: {
+  completed: number;
+  confirmed: number;
+  pending: number;
+}) => {
+  if (completed !== 0) {
+    return <CompletedChip />;
+  }
+
+  return (
+    <>
+      {confirmed !== 0 && <ConfirmedChip count={confirmed} />}
+      {pending !== 0 && <PendingChip count={pending} />}
+    </>
+  );
+};
+
+export default function useReservationCalendar({
+  onOpen,
+}: useReservationCalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [value, setValue] = useState<CalendarProps['value']>(new Date());
-  const [, setQueryParamsState] = useAtom(reservationDashboardQueryParamsAtom);
+  const setQueryParamsState = useSetAtom(reservationDashboardQueryParamsAtom);
+  const [dailyModalState, setDailyModalState] = useAtom(
+    dailyReservationModalAtom,
+  );
   const [calendarChip] = useAtom(calendarChipAtom);
+  const { isMobile } = useResponsive();
 
-  const onDateChange: CalendarProps['onChange'] = (nextValue) => {
-    setValue(nextValue);
+  const updateStateForDate = (date: Date, status: ValidStatus) => {
+    setValue(date);
+    setDailyModalState((prev) => ({
+      ...prev,
+      date: formatDateToYMD(new Date(date)),
+      status: status || prev.status,
+    }));
+  };
+
+  const handleDateSelection = (date: Date, status: ValidStatus) => {
+    updateStateForDate(date, status);
+    onOpen();
+  };
+
+  const onDateChange: CalendarProps['onChange'] = (nextValue, { target }) => {
+    if (!(nextValue instanceof Date)) return;
+
+    if (
+      isMobile &&
+      target instanceof HTMLButtonElement &&
+      (target.querySelector('.reserve-chip') ||
+        target.querySelector('.approve-chip'))
+    ) {
+      handleDateSelection(nextValue, 'pending');
+    }
+
+    if (target instanceof HTMLDivElement) {
+      const status = target.dataset.status;
+
+      if (status === 'completed') return;
+
+      if (status === 'pending' || status === 'confirmed') {
+        handleDateSelection(nextValue, status);
+      }
+    }
   };
 
   const onMonthChange: CalendarProps['onActiveStartDateChange'] = ({
@@ -57,21 +152,24 @@ export default function useReservationCalendar() {
     const { completed, confirmed, pending } = chipData.reservations;
     return (
       <div className="chip-container">
-        {completed !== 0 && (
-          <div className="reservation-chip complete-chip">완료 {completed}</div>
-        )}
-        {confirmed !== 0 && (
-          <div className="reservation-chip reserve-chip">예약 {confirmed}</div>
-        )}
-        {pending !== 0 && (
-          <div className="reservation-chip approve-chip">승인 {pending}</div>
-        )}
-        <div
-          className={`color-dot ${completed === 0 ? 'bg-kv-primary-blue' : 'bg-kv-gray-900'}`}
+        <ReservationChips
+          completed={completed}
+          confirmed={confirmed}
+          pending={pending}
         />
+        <ColorDot completed={completed} />
       </div>
     );
   };
+
+  const { data: reservationStatus } = useFetchData(
+    ['reservationStatus', dailyModalState.activityId, dailyModalState.date],
+    () =>
+      getReservationStatus(dailyModalState.activityId, dailyModalState.date),
+    {
+      enabled: !!dailyModalState.activityId && !!dailyModalState.date,
+    },
+  );
 
   return {
     tileContent,
@@ -79,5 +177,6 @@ export default function useReservationCalendar() {
     onDateChange,
     onMonthChange,
     value,
+    reservationStatus,
   };
 }

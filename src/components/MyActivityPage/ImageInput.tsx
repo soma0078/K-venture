@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import { ChangeEvent, useRef } from 'react';
+
+import PlusIcon from '@/assets/icons/icon_plus.svg';
 
 interface ImageInputProps {
   disabled: boolean;
@@ -23,10 +24,10 @@ export default function ImageInput({ disabled, onChange }: ImageInputProps) {
 
   return (
     <label
-      className={`${disabled ? 'bg-kv-gray-300 align-center' : 'btn-gray'} size-my-act-img flex-col gap-[30px] rounded-2xl border-[1.5px] border-dashed`}
+      className={`${disabled ? 'cursor-not-allowed bg-kv-gray-300 align-center' : 'btn-gray'} size-my-act-img cursor-pointer flex-col gap-[30px] rounded-2xl border-[1.5px] border-dashed`}
     >
       <div className="relative size-12">
-        <Image src="/assets/icons/icon_plus.svg" alt="이미지 추가" fill />
+        <PlusIcon />
       </div>
       <span className="text-kv-2xl text-kv-gray-4b">이미지 등록</span>
 

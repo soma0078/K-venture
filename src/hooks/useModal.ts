@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 
+import { MyReservation } from '@/types/get/reservationTypes';
 import { ModalCallbacks, ModalType } from '@/types/modalTypes';
 
 /**
@@ -22,6 +23,7 @@ const useModal = () => {
   const [message, setMessage] = useState('');
   const [modalType, setModalType] = useState<ModalType>('alert');
   const [callbacks, setCallbacks] = useState<ModalCallbacks>({});
+  const [reservation, setReservation] = useState<MyReservation | null>(null);
 
   /**
    * 모달을 열고 설정합니다.
@@ -48,10 +50,12 @@ const useModal = () => {
     modalType: ModalType,
     newMessage: string,
     newCallbacks: ModalCallbacks = {},
+    newReservation: MyReservation | null = null,
   ) => {
     setModalType(modalType);
     setMessage(newMessage);
     setCallbacks(newCallbacks);
+    setReservation(newReservation);
     setIsOpen(true);
   };
 
@@ -72,12 +76,19 @@ const useModal = () => {
         }
       }
       setCallbacks({});
+      setReservation(null);
     },
     [callbacks],
   );
 
   return {
-    modalProps: { isOpen, message, type: modalType, onClose: closeModal },
+    modalProps: {
+      isOpen,
+      message,
+      type: modalType,
+      onClose: closeModal,
+      reservation,
+    },
     openModal,
   };
 };

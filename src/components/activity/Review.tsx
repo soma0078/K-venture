@@ -1,27 +1,32 @@
 import StartIcon from '@/assets/icons/icon_star.svg';
-import { ActivityResponse } from '@/types/activityTypes';
+import formatRating from '@/lib/utils/formattedRating';
 
 interface ReviewProps {
-  activityData: ActivityResponse;
+  reviewCount: number;
+  rating: number;
   className?: string;
 }
 
-export function ReviewRating({ activityData }: ReviewProps) {
+interface TotalCountProps {
+  totalCount: number;
+}
+
+export function ReviewRating({ reviewCount, rating }: ReviewProps) {
   return (
     <div className="flex items-center gap-1">
-      <StartIcon alt="별 아이콘" />
-      <p>
-        {activityData.rating} ({activityData.reviewCount.toLocaleString()})
+      <StartIcon />
+      <p className="text-kv-lg mobile:text-kv-md">
+        {formatRating(rating)} ({reviewCount.toLocaleString()})
       </p>
     </div>
   );
 }
 
-export function ReviewCount({ activityData }: ReviewProps) {
+export function ReviewCount({ totalCount }: TotalCountProps) {
   return (
     <div className="flex items-center gap-1">
-      <StartIcon alt="별 아이콘" />
-      <p>{activityData.reviewCount.toLocaleString()}개</p>
+      <StartIcon />
+      <p>{totalCount.toLocaleString()}개 후기</p>
     </div>
   );
 }

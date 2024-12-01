@@ -47,7 +47,7 @@ function SortDropDown({
       </div>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-[90px] origin-top-right rounded-[6px] border border-kv-primary-blue-light bg-white shadow-lg pc:w-[127px] tablet:w-[120px]">
+        <div className="absolute right-0 z-10 mt-2 w-[90px] origin-top-right rounded-[6px] border border-kv-primary-blue-light bg-white shadow-lg pc:w-[127px] tablet:w-[120px]">
           <div>
             {options.map((option, index) => (
               <button

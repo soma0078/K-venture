@@ -11,30 +11,26 @@ export default function KebabContainer({ children }: KebabContainerProps) {
     setIsKebabOpen((prev) => !prev);
   };
 
-  const handleClickOutside = () => {
+  const handleBlur = () => {
     setIsKebabOpen(false);
   };
 
   return (
-    <div className="relative">
+    <div className="relative" tabIndex={0} onBlur={handleBlur}>
       <KebabIcon
-        onClick={handleKebabClick}
         className="cursor-pointer"
         alt="케밥 아이콘"
+        onClick={handleKebabClick}
       />
       {isKebabOpen && (
-        <>
-          <div
-            onClick={handleClickOutside}
-            className="fixed inset-0 z-10"
-          ></div>
-          <div
-            className="absolute right-0 z-10 flex w-40 flex-col overflow-hidden rounded border border-kv-gray-300 bg-white shadow-lg"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {children}
-          </div>
-        </>
+        <div
+          className="absolute right-0 z-10 flex w-40 flex-col overflow-hidden rounded border border-kv-gray-300 bg-white shadow-lg"
+          onMouseDown={(e) => {
+            e.preventDefault();
+          }}
+        >
+          {children}
+        </div>
       )}
     </div>
   );

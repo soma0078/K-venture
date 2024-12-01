@@ -3,7 +3,7 @@ const GRID_CLASSES: { [key: number]: string } = {
   1: 'grid-cols-1',
   2: 'grid-rows-2',
   3: 'custom-grid',
-  4: 'grid-cols-2',
+  4: 'custom-grid-cols-2',
 };
 
 export function getGridCols(imageCount: number): string {

@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { MouseEventHandler, MutableRefObject } from 'react';
 
+import DropDownIcon from '@/assets/icons/icon_dropdown.svg';
+
 interface ValueDropdownProps {
   value: string;
   placeholder: string;
@@ -49,19 +51,20 @@ export default function ValueDropdown({
         <span>{value || placeholder}</span>
         {/* NOTE: 다른 곳에서 사용시 아이콘 부분은 바꿔야 할 것 같습니다. */}
         <div className="relative -mr-1 size-5 rounded md:size-6 pc:size-6">
-          <Image
+          {/* <Image
             src="/assets/icons/icon_dropdown.svg"
             alt="드롭다운 버튼"
             fill
             className={`${isOpen ? 'rotate-180' : ''}`}
-          />
+          /> */}
+          <DropDownIcon className={`${isOpen ? 'rotate-180' : ''}`} />
         </div>
       </button>
 
       {/* 드롭다운 메뉴 */}
       {isOpen && (
         // NOTE: 다른 곳에서 사용시 pos-value-dropdown-menus 부분만 필요에 따라 바꾸면 될 것 같습니다.
-        <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md">
+        <ul className="pos-value-dropdown-menus absolute z-10 w-full flex-col rounded-md shadow-md scrollbar-custom">
           {availableValues.map((value, idx) => {
             const isFirst = idx === 0;
             const isLast = idx === availableValues.length - 1;

@@ -35,3 +35,25 @@ export interface ReservationDashboardResponse {
     pending: number;
   };
 }
+
+// 달력에 표시할 정보 요청에 필요한 params를 전역 상태로 종합
+export interface ReservationDashboardQueryParamsType {
+  activityId: number;
+  year: string;
+  month: string;
+}
+
+// 승인하기, 거절하기 버튼으로 patch 요청 시 필요한 params type
+export interface PatchReservationStatusParamsType {
+  activityId: number;
+  reservationId: string;
+  status: 'confirmed' | 'declined';
+}
+
+export interface DailyReservationModalType {
+  activityId: number;
+  date: string;
+  status: 'pending' | 'confirmed' | 'declined';
+  scheduleId: number;
+  cursorId?: number;
+}

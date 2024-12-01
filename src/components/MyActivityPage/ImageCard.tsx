@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { MouseEventHandler } from 'react';
 
+import RedXButtonIcon from '@/assets/icons/icon_x_red.svg';
+
 interface ImageProps {
   image: File;
   onClickDelete: (file: File) => void;
@@ -29,12 +31,7 @@ export default function ImageCard({ image, onClickDelete }: ImageProps) {
         type="button"
         onClick={handleDeleteImage}
       >
-        <Image
-          src="/assets/icons/icon_x_red.svg"
-          alt="이미지 삭제"
-          fill
-          className="rounded-full"
-        />
+        <RedXButtonIcon />
       </button>
     </div>
   );

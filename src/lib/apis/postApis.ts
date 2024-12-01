@@ -1,15 +1,21 @@
 import { getCookie, setCookie } from 'cookies-next';
 
-import { UserProfile } from '@/components/userProfile/EditProfileForm';
 import instance from '@/lib/apis/axios';
 import { ActivityResponse, MyActivityForm } from '@/types/activityTypes';
-import { LogInForm, LogInResponse } from '@/types/post/loginTypes';
+import {
+  LogInForm,
+  LogInResponse,
+  SignUpForm,
+  SignUpResponse,
+} from '@/types/AuthTypes';
 import {
   ReservationRequest,
   ReservationResponse,
 } from '@/types/post/reservationTypes';
+import { ReviewData } from '@/types/post/reviewTypes';
 import {
   ActivityImageResponse,
+  ProfileImageResponse,
   UploadImageForm,
 } from '@/types/post/uploadImageTypes';
 
@@ -34,17 +40,14 @@ export const postLogin = async (
   return response.data;
 };
 
-// 프로필 이미지 url 생성
-export const postProfileImage = async (file: File) => {
-  const formData = new FormData();
-  formData.append('image', file);
-
-  const res = await instance.post<UserProfile>('/users/me/image', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-  return res.data.profileImageUrl;
+// 프로필 이미지 업로드
+export const postProfileImage = async (formData: UploadImageForm) => {
+  const response = await instance.post<ProfileImageResponse>(
+    '/users/me/image',
+    formData,
+    { headers: { 'Content-Type': 'multipart/form-data' } },
+  );
+  return response.data.profileImageUrl;
 };
 
 // 체험 업로드
@@ -75,5 +78,29 @@ export const createReservation = async (
     `/activities/${activityId}/reservations`,
     data,
   );
+  return response.data;
+};
+
+// 후기 전송
+export const postReview = async (
+  reservationId: number,
+  reviewData: ReviewData,
+) => {
+  const response = await instance.post(
+    `/my-reservations/${reservationId}/reviews`,
+    reviewData,
+  );
+  return response.data;
+};
+
+export const postSignup = async (
+  formData: SignUpForm,
+): Promise<SignUpResponse> => {
+  const { email, nickname, password } = formData;
+  const response = await instance.post<SignUpResponse>(`/users`, {
+    email,
+    nickname,
+    password,
+  });
   return response.data;
 };

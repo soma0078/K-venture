@@ -35,8 +35,7 @@ export default function CustomKebab({ activityId }: { activityId: number }) {
   return (
     <>
       <KebabContainer>
-        {/* TODO 체험 수정 페이지 url 추가 */}
-        <KebabLink href="/">수정하기</KebabLink>
+        <KebabLink href={`/my-activity-edit/${activityId}`}>수정하기</KebabLink>
         <KebabDelete onClick={handleClickDelete}>삭제하기</KebabDelete>
       </KebabContainer>
       <Modal {...modalProps} />

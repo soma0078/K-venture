@@ -21,3 +21,9 @@ export type MyReservation = {
   createdAt: string;
   updatedAt: string;
 };
+
+export interface MyReservationsResponse {
+  reservations: MyReservation[];
+  totalCount: number;
+  cursorId: string | null;
+}
